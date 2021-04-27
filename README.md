@@ -6,6 +6,7 @@
   - [About the Project](#about-the-project)
   - [Project Files](#project-files)
   - [Specifications](#specifications)
+  - [Live Links](#live-links)
 
 ----
 
@@ -27,5 +28,12 @@ TasksTech is pretty much an electrician's online journal
 - [UX Design](https://drive.google.com/drive/folders/16B4_1u8s3MngTyXYi387v6NoYOn3tb8Y?usp=sharing)
 - [Design Document](https://drive.google.com/drive/folders/1APw8AzGDmzVNVCRZXcecpn1BHJr-VgGR?usp=sharing)
 - [Workflow](https://drive.google.com/drive/folders/12cml5C5Mfz71MqepIjhh2t_ChrlMMTB8?usp=sharing)
+
+----
+
+## Live Links
+- [Swagger](https://drive.google.com/drive/folders/17GmBDevN1Z19r1RGDZ0GhSQVZ3n9dcCO?usp=sharing)
+- [Figma Prototype Desktop](https://www.figma.com/proto/x12uBElEZKCWJJ1FTldhtl/Desktop?node-id=6%3A4&scaling=min-zoom)
+- [Figma Prototype Mobile](https://www.figma.com/proto/Y2Hk62GOkVDaVrDzeKtcvd/Android?node-id=6%3A34&scaling=scale-down)
 
 ----
