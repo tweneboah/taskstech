@@ -32,7 +32,7 @@ TasksTech is pretty much an electrician's online journal
 ----
 
 ## Live Links
-- [Swagger](https://drive.google.com/drive/folders/17GmBDevN1Z19r1RGDZ0GhSQVZ3n9dcCO?usp=sharing)
+- [Swagger](http://taskstech2.pythonanywhere.com/swagger/#/)
 - [Figma Prototype Desktop](https://www.figma.com/proto/x12uBElEZKCWJJ1FTldhtl/Desktop?node-id=6%3A4&scaling=min-zoom)
 - [Figma Prototype Mobile](https://www.figma.com/proto/Y2Hk62GOkVDaVrDzeKtcvd/Android?node-id=6%3A34&scaling=scale-down)
 
