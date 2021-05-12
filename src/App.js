@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import SignUp from './components/Forms/SignUp';
-import Login from './components/Forms/Login'
+import TradieLogin from './components/Forms/TradieLogin'
 
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <TradieLogin />
     </div>
   );
 }
