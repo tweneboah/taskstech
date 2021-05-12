@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "4%",
   },
   paper: {
-    marginTop: theme.spacing(20),
+    marginTop: theme.spacing(12),
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
+    padding:"8%",
   },
 
   form: {
