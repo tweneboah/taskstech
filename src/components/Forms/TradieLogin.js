@@ -121,8 +121,9 @@ const TradieLogin = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Enter your Email"
                 name="email"
+                placeholder="youremail@mail.com"
                 value={values.email}
                 onChange={handleChange}
                 autoComplete="email"
@@ -133,12 +134,13 @@ const TradieLogin = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                label="Password"
+                label="Enter your password"
                 type="password"
                 id="password"
+                name="password"
+                placeholder="Enter your password"
+                value={values.password}
+                onChange={handleChange}
                 autoComplete="current-password"
               />
               <div className={classes.links}>
