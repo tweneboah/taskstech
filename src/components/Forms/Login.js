@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = () => {
+const Login = () => {
   const { values, handleChange, handleSubmit } = useForm();
 
   const classes = useStyles();
@@ -101,6 +101,6 @@ const LoginForm = () => {
       </div>
     </Container>
   );
-}
+};
 
-export default ElectriciansLogin;
+export default Login;
