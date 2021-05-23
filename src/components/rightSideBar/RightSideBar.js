@@ -8,11 +8,18 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import EditIcon from "@material-ui/icons/Edit";
+import CreateIcon from "@material-ui/icons/Create";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import SelectAllIcon from "@material-ui/icons/SelectAll";
+import SettingsPowerIcon from "@material-ui/icons/SettingsPower";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import PostAddIcon from "@material-ui/icons/PostAdd";
+import WorkIcon from "@material-ui/icons/Work";
+import { withRouter } from "react-router-dom";
 
 //Rigtht sidebar component
 
-function RightSideBar() {
+function RightSideBar({ history }) {
   // Make use of makeStyle from material UI
   const useStyles = makeStyles({
     list: {
@@ -45,13 +52,41 @@ function RightSideBar() {
 
   // Information for the right side navigation ,The list of the items on the sidebar
   const rightSideData = [
-    "Create New Job",
-    "View All Jobs",
-    "Create New Customer",
-    "View All Customers",
-    "Create New Inventory",
-    "Viewn All Inventory",
-    "Logout",
+    {
+      text: "Create New Job",
+      icon: <CreateIcon />,
+      onClick: () => history.push("/create/job"),
+    },
+    {
+      text: "View All Jobs",
+      icon: <SelectAllIcon />,
+      onClick: () => history.push("/view/jobs"),
+    },
+    {
+      text: "Create New Customer",
+      icon: <PersonAddIcon />,
+      onClick: () => history.push("/create/customer"),
+    },
+    {
+      text: "View All Customers",
+      icon: <PeopleAltIcon />,
+      onClick: () => history.push("/view/custumers"),
+    },
+    {
+      text: "Create New Inventory",
+      icon: <PostAddIcon />,
+      onClick: () => history.push("/create/inventory"),
+    },
+    {
+      text: "Viewn All Inventory",
+      icon: <WorkIcon />,
+      onClick: () => history.push("/view/inventory"),
+    },
+    {
+      text: "Logout",
+      icon: <SettingsPowerIcon />,
+      onClick: () => history.push("/logout"),
+    },
   ];
 
   // The list of the items on the sidebar
@@ -65,11 +100,11 @@ function RightSideBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {rightSideData.map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
+        {/* Destructure the text, icon and onClick from RightSideData*/}
+        {rightSideData.map(({ text, icon, onClick }) => (
+          <ListItem button key={text} onClick={onClick}>
+            {icon && <ListItemIcon>{icon}</ListItemIcon>}
+
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -97,4 +132,4 @@ function RightSideBar() {
   );
 }
 
-export default RightSideBar;
+export default withRouter(RightSideBar);
