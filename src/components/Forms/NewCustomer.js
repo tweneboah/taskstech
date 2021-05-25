@@ -124,7 +124,7 @@ export const NewCustomer = () => {
                         SelectProps={{
                             native: true,
                         }}
-                        helperText="Please select your currency"
+                        helperText="Please select your State"
                         variant="outlined"
                     >
                         {states.map((option) => (
