@@ -15,8 +15,9 @@ import FormNav from '../Navigation/FormNav';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    height: '20vh',
-    marginBottom: '8%'
+    height: '25vh',
+    marginBottom: '15%',
+    marginTop: '15%'
   },
   job: {
     margin: 12
@@ -52,12 +53,13 @@ const CreateJob = () => {
             </Typography>
             </CardContent>
           </CardActionArea>
+
           <CardActions>
             <Button size="small" color="primary">
-              Yes
+              <a href="#">Yes</a>
             </Button>
             <Button size="small" color="primary">
-              <a href="../Forms/NewCustomer.js">No</a>
+              <a href="#">No</a>
             </Button>
           </CardActions>
         </Card>
@@ -76,6 +78,15 @@ const CreateJob = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
+
+          <CardActions>
+            <Button size="small" color="primary">
+              <a href="#">Yes</a>
+            </Button>
+            <Button size="small" color="primary">
+              <a href="#">No</a>
+            </Button>
+          </CardActions>
 
         </Card>
       </div>
