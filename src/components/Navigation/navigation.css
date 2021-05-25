@@ -1,0 +1,9 @@
+
+@media screen and (max-width: 600px) {
+  [class~='form-nav'] {
+    margin-top: 20%;
+    margin-bottom: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
