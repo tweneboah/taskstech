@@ -13,17 +13,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import useForm from './useForm';
 import validate from './validateInfo'
+import Logo from "./Logo";
+
 
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-  },
-  image: {
-    backgroundColor: 'linear-gradient(to right bottom, #430089, #82ffa1)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function CustomerSignUp() {
     const {handleChange, values, handleSubmit, errors} = useForm(validate);
 
   const classes = useStyles();
@@ -54,8 +51,8 @@ export default function SignUp() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Logo />
+      <Grid item xs={12} sm={7} md={7} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h4">
             Sign up
@@ -292,10 +289,7 @@ export default function SignUp() {
 
           </Grid>
             
-            
-            {/* <Box mt={5}>
-              <Copyright />
-            </Box> */}
+
           </form>
         </div>
       </Grid>
