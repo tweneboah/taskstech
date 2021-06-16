@@ -9,6 +9,9 @@ import RightSideBar from "./components/rightSideBar/RightSideBar";
 import CustomerSignUp from "./components/Forms/CustomerSignUp";
 import CustomerLogin from "./components/Forms/CustomerLogIn";
 import TradieSignUp from "./components/Forms/TradieSignUp";
+import CustomerProfileForm from "./components/Forms/CustomerProfileForm";
+import TradieProfileForm from "./components/Forms/TradieProfileForm";
+
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route exact path='/customer/login' component={CustomerLogin} />
         <Route exact path='/tradie/signup' component={TradieSignUp} />
         <Route exact path='/tradie/login' component={TradieLogin} />
+        <Route exact path='/customer/profile' component={CustomerProfileForm} />
+        <Route exact path='/tradie/profile' component={TradieProfileForm} />
+
 
       </Switch>
     </div>

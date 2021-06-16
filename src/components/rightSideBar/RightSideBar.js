@@ -87,26 +87,7 @@ function RightSideBar({ history }) {
       icon: <SettingsPowerIcon />,
       onClick: () => history.push("/logout"),
     },
-    {
-      text: "CusLogIn",
-      icon: <SettingsPowerIcon />,
-      onClick: () => history.push("/customer/login"),
-    },
-    {
-      text: "CusSignUp",
-      icon: <SettingsPowerIcon />,
-      onClick: () => history.push("/customer/signup"),
-    },
-    {
-      text: "TradieLogIn",
-      icon: <SettingsPowerIcon />,
-      onClick: () => history.push("/tradie/login"),
-    },   
-     {
-      text: "TradieSignUp",
-      icon: <SettingsPowerIcon />,
-      onClick: () => history.push("/tradie/signup"),
-    },
+  
   ];
 
   // The list of the items on the sidebar

@@ -38,22 +38,12 @@ const useForm = validate => {
     const handleSubmit = e => {
         e.preventDefault();
         axios.post(url, {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            company: values.comapny,
+            first_name: values.firstName,
+            last_name: values.lastName,
             phone: values.phone,
             email: values.email,
-            confirmemail: values.confirmemail,
             password: values.password,
-            confirmpassword: values.confirmpassword,
             address: values.address,
-            state: values.state,
-            postcode: values.postcode,
-            showPassword: false,
-            licence:values.licence,
-            role:values.role,
-            categories:values.categories,
-            description: values.description,
 
         })
         .then(res =>{

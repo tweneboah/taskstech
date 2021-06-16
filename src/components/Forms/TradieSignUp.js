@@ -248,18 +248,10 @@ export default function TradieSignUp() {
                 autoComplete="description"
                 value={values.description}
                 onChange={handleChange}
-                // error={errors.description}
 
               />
-              {/* {errors.postcode && <p className="errormessage">{errors.postcode}</p>} */}
             </Grid>
             
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
           </Grid >
           <Grid container className={classes.buttonContainer}>
               <Grid item xs ={4}>

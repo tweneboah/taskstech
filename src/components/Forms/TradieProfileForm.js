@@ -2,10 +2,8 @@ import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -49,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  export default function CreateNewCustomer() {
+  export default function TradieProfileForm() {
     const {handleChange, values, handleSubmit, errors} = useForm(validate);
     const classes = useStyles();
 
@@ -62,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
         </Grid>
         <Grid item xs={12} sm={8} md={8} component={Paper} elevation={6} square>
             <div className={classes.header}>
-                <h3>Customer Details</h3>
-                <h4>Customer ID: 12345677</h4>
+                <h3>Tradie Details</h3>
+                <h4>Tradie ID: 12345677</h4>
             </div>
           <div className={classes.paper}>
             <form className={classes.form}  onSubmit={handleSubmit}>
@@ -99,14 +97,14 @@ const useStyles = makeStyles((theme) => ({
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="organization"
-                  name="company"
+                  autoComplete="phone"
+                  name="phone"
                   variant="outlined"
                   fullWidth
-                  id="company"
-                  label="Company"
+                  id="phone"
+                  label="Phone No"
                   autoFocus
-                  value={values.company}
+                  value={values.phone}
                   onChange={handleChange}
                 />
               </Grid>
@@ -133,77 +131,88 @@ const useStyles = makeStyles((theme) => ({
               <TextField
                   variant="outlined"
                   fullWidth
-                  id="phone"
-                  label="Phone No"
-                  name="phone"
-                  autoComplete="tel"
-                  value={values.phone}
+                  id="password"
+                  label="Password"
+                  name="password"
+                  autoComplete="passwordl"
+                  value={values.password}
                   onChange={handleChange}
-                  error={errors.phone}
+                  error={errors.password}
   
                 />
-                {errors.phone && <p className="errormessage">{errors.phone}</p>}
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  autoComplete="address"
-                  name="address"
-                  variant="outlined"
-                  fullWidth
-                  id="address"
-                  label="Address"
-                  autoFocus
-                  value={values.address}
-                  onChange={handleChange}
-                  error={errors.address}
-  
-                />
-                {errors.address && <p className="errormessage">{errors.address}</p>}
+                {errors.password && <p className="errormessage">{errors.password}</p>}
               </Grid>
               <Grid item xs={12} sm={6}>
-              <FormControl className={classes.formControl} fullWidth>
-                      <InputLabel shrink id="state">
-                      State
-                      </InputLabel>
-                      <Select
-                      name="state"
-                      variant="outlined"
-                      label="state"
-                      id="state"
-                      value={values.state}
-                      className={classes.select}
-                      onChange={handleChange}
-                  error={errors.state}
-  
-                      >
-                      <MenuItem value={"ACT"}>ACT</MenuItem>
-                      <MenuItem value={"NSW"}>NSW</MenuItem>
-                      <MenuItem value={"NT"}>NT</MenuItem>
-                      <MenuItem value={"QLD"}>QLD</MenuItem>
-                      <MenuItem value={"SA"}>SA</MenuItem>
-                      <MenuItem value={"TAS"}>TAS</MenuItem>
-  
-                      </Select>
-                      {/* <FormHelperText>Label + placeholder</FormHelperText> */}
-                  </FormControl>
-                  {errors.state && <p className="errormessage">{errors.state}</p>}
-              </Grid>
+              <TextField
+                autoComplete="role"
+                name="role"
+                variant="outlined"
+                fullWidth
+                id="role"
+                label="Role"
+                autoFocus
+                value={values.role}
+                onChange={handleChange}
+
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+            <FormControl className={classes.formControl} fullWidth>
+                    <InputLabel shrink id="state">
+                    Categories*
+                    </InputLabel>
+                    <Select
+                    name="categories"
+                    variant="outlined"
+                    label="categories"
+                    id="categories"
+                    value={values.categories}
+                    className={classes.select}
+                    onChange={handleChange}
+                error={errors.categories}
+
+                    >
+                    <MenuItem value={"electrical"}>Electrical</MenuItem>
+                    <MenuItem value={""}>Installer</MenuItem>
+                    <MenuItem value={""}></MenuItem>
+
+                    </Select>
+                    {/* <FormHelperText>Label + placeholder</FormHelperText> */}
+                </FormControl>
+                {errors.categories && <p className="errormessage">{errors.categories}</p>}
+            </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="postcode"
+                  autoComplete="LicenceNo"
                   variant="outlined"
                   fullWidth
                   id="lastName"
-                  label="Postcode"
-                  name="postcode"
-                  autoComplete="postcode"
-                  value={values.postcode}
+                  label="Licence No"
+                  name="LicenceNo"
+                  autoComplete="LicenceNo"
+                  value={values.LicenceNo}
                   onChange={handleChange}
-                  error={errors.postcode}
+                  error={errors.LicenceNo}
   
                 />
-                {errors.postcode && <p className="errormessage">{errors.postcode}</p>}
+                {errors.LicenceNo && <p className="errormessage">{errors.LicenceNo}</p>}
               </Grid>
+              <Grid item xs={12} sm={12} className={classes.description}>
+              <TextField
+                autoComplete="text"
+                variant="outlined"
+                fullWidth
+                id="Description"
+                label="description"
+                name="description"
+                autoComplete="description"
+                value={values.description}
+                onChange={handleChange}
+                rows={5}
+                multiline={true}
+
+              />
+            </Grid>
               
 
             </Grid >

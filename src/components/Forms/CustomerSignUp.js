@@ -60,11 +60,6 @@ export default function CustomerSignUp() {
           <form className={classes.form}  onSubmit={handleSubmit}>
           <Grid container spacing={3}>
           <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Already have a account? Sign In"}
@@ -236,7 +231,6 @@ export default function CustomerSignUp() {
                     <MenuItem value={"TAS"}>TAS</MenuItem>
 
                     </Select>
-                    {/* <FormHelperText>Label + placeholder</FormHelperText> */}
                 </FormControl>
                 {errors.state && <p className="errormessage">{errors.state}</p>}
             </Grid>
@@ -257,12 +251,6 @@ export default function CustomerSignUp() {
               {errors.postcode && <p className="errormessage">{errors.postcode}</p>}
             </Grid>
             
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
           </Grid >
           <Grid container className={classes.buttonContainer}>
               <Grid item xs ={4}>
