@@ -10,8 +10,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/signup" component={Pages.SignUp} />
-        <Route exact path="/forgetpassword" component={Pages.ForgetPassword} />
-        <Route exact path="/forgetpassword" component={Pages.ForgetPassword} />
+        <Route exact path="/forget_password" component={Pages.ForgetPassword} />
+        <Route exact path="/reset_password/:id" component={Pages.ResetPassword} />
         <Route exact path="/" component={Pages.Login} />
       </Switch>
     </div>

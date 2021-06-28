@@ -91,7 +91,7 @@ export default function LogIn() {
 					</Button>
 					<Grid container>
 						<Grid item xs>
-							<Link component={RouterLink} to="/forgetpassword" variant="body2">
+							<Link component={RouterLink} to="/forget_password" variant="body2">
 								Forgot password?
 							</Link>
 						</Grid>
