@@ -1,20 +1,18 @@
 import "./App.css";
-import SignUp from "./components/Forms/SignUp";
 import { Switch, Route } from "react-router-dom";
-import TradieLogin from "./components/Forms/TradieLogin";
-import NewInventory from "./components/inventory/NewInventory";
 import Header from "./components/Header/Header";
+import * as Pages from "./pages/Pages";
 
-import RightSideBar from "./components/rightSideBar/RightSideBar";
 
 function App() {
   return (
     <div className='App'>
       <Header />
-      <RightSideBar />
       <Switch>
-        <Route exact={true} path='/' component={NewInventory} />
-        <Route exact path='/login' component={TradieLogin} />
+        <Route exact path="/signup" component={Pages.SignUp} />
+        <Route exact path="/forgetpassword" component={Pages.ForgetPassword} />
+        <Route exact path="/forgetpassword" component={Pages.ForgetPassword} />
+        <Route exact path="/" component={Pages.Login} />
       </Switch>
     </div>
   );
