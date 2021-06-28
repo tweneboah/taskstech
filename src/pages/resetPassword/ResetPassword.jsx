@@ -145,7 +145,7 @@ const ResetPassword = () => {
       }
 
       try {
-        const response = await axios.post(`${apiUrl}/${formState.password.value}`, payload);
+        const response = await axios.post(`${apiUrl}/${id}`, payload);
         console.log(response.status)
         const newMsgState = {
           show: true,
@@ -191,20 +191,7 @@ const ResetPassword = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={id}
-            disabled
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
+            type="password"
             id="password"
             label="password"
             name="password"
@@ -212,6 +199,8 @@ const ResetPassword = () => {
             autoFocus
             onChange={handleChange}
             onBlur={handleOnBlur}
+            error={formState.password.touched && formState.password.hasError}
+            helperText={formState.password.error}
           />
 
           {isLoading ? <CircularProgress /> : <Button
@@ -222,7 +211,7 @@ const ResetPassword = () => {
             className={classes.submit}
             onClick={handleSubmit}
           >
-            Send Link
+            Update
           </Button>}
           <Grid container>
             <Link component={RouterLink} to="/" variant="body2">
