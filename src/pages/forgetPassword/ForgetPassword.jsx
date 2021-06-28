@@ -185,6 +185,8 @@ const ForgetPassword = () => {
             autoFocus
             onChange={handleChange}
             onBlur={handleOnBlur}
+            error={formState.email.touched && formState.email.hasError}
+            helperText={formState.email.error}
           />
 
           {isLoading ? <CircularProgress /> : <Button
