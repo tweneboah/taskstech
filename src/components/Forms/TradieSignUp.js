@@ -60,11 +60,6 @@ export default function TradieSignUp() {
           <form className={classes.form}  onSubmit={handleSubmit}>
           <Grid container spacing={3}>
           <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Already have a account? Sign In"}
@@ -210,7 +205,6 @@ export default function TradieSignUp() {
                 // error={errors.role}
 
               />
-              {/* {errors.address && <p className="errormessage">{errors.address}</p>} */}
             </Grid>
             <Grid item xs={12} sm={6}>
             <FormControl className={classes.formControl} fullWidth>
@@ -233,7 +227,6 @@ export default function TradieSignUp() {
                     <MenuItem value={""}></MenuItem>
 
                     </Select>
-                    {/* <FormHelperText>Label + placeholder</FormHelperText> */}
                 </FormControl>
                 {errors.categories && <p className="errormessage">{errors.categories}</p>}
             </Grid>

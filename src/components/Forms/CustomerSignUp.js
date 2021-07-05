@@ -239,7 +239,7 @@ export default function CustomerSignUp() {
                 autoComplete="postcode"
                 variant="outlined"
                 fullWidth
-                id="lastName"
+                id="postcode"
                 label="Postcode"
                 name="postcode"
                 autoComplete="postcode"
