@@ -21,7 +21,7 @@ const FormNav = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={8}>
+      <Grid container /* spacing={8} */>
 
 
         <Grid item xs={6}>
