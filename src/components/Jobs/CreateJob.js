@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
 import FormNav from '../Navigation/FormNav';
-import { getStatus } from '../../actions/action';
+import { getStatus, createJob } from '../../actions/action';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,21 +25,35 @@ const CreateJob = () => {
     const [tradespersonId, setTradespersonId] = React.useState(0);
     const [customerId, setCustomerId] = React.useState(0);
     const [jobStatus, setJobStatus] = React.useState('');
+    const [jobStatusId, setJobStatusId] = React.useState('');
 
     const status = useSelector((state) => state.status);
     const dispatch = useDispatch();
-    
+
     const handleSubmit = event => {
         event.preventDefault();
     };
-    
+
+    let jobObject = {
+        name: jobName,
+        description: description,
+        job_status_id: jobStatusId,
+        tradesperson_id: tradespersonId,
+        customer_id: customerId
+    }
+
     useEffect(() => {
         dispatch(getStatus())
     }, []);
 
     const handleDropdownChange = event => {
         event.preventDefault();
+        const index = event.target.selectedIndex;
+        const el = event.target.childNodes[index]
+        const option = el.getAttribute('id');
+
         setJobStatus(event.target.value)
+        setJobStatusId(option)
     };
 
 
@@ -87,7 +101,7 @@ const CreateJob = () => {
                         variant="outlined"
                     >
                         {status.map((option, key) => (
-                            <option key={key} value={option.name}>
+                            <option key={key} value={option.name} id={option.id}>
                                 {option.name}
                             </option>
                         ))}
@@ -112,7 +126,11 @@ const CreateJob = () => {
                     />
                 </div>
                 <div id='buttons'>
-                    <Button variant="contained" color="primary">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => dispatch(createJob(jobObject))}
+                    >
                         Create
                     </Button>
                 </div>
