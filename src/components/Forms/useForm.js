@@ -2,19 +2,13 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 
 
-const url = "https://taskstech2.pythonanywhere.com/api/v1/users/customer"
-const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwiZXhwIjoxNjI2MDc3NzkxfQ.ZWoiT4yq4A3DXCj_lHg62rovvT48yNW2ODjyP9uGIi4"
+const url = "https://taskstech2.pythonanywhere.com/api/v1/tokens"
+const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwiZXhwIjoxNjI2Nzg4NTAwfQ.6XUo3d54NvSTOVsu3jt-FbGCbRWPDG4xNDW-CPSqMhQ"
 
+const config = {
+    headers: { Authorization: `Bearer ${accessToken}` }
+};
 
-axios.interceptors.request.use(
-    config =>{
-        config.headers.authorization = `Bearer ${accessToken}`;
-        return config
-    },
-    error =>{
-        return Promise.reject(error);
-    }
-);
 
 const useForm = validate => {
 
@@ -50,19 +44,19 @@ const useForm = validate => {
         });
     }
 
-     const createCustomer = () =>{
+     const loginCustomer = () =>{
         try {
              axios.post(url, {
-                first_name: values.firstName,
-                last_name: values.lastName,
-                phone: values.phone,
+                // first_name: values.firstName,
+                // last_name: values.lastName,
+                // phone: values.phone,
                 email: values.email,
                 password: values.password,
-                address: values.address,
-            })
+                // address: values.address,
+            }, config)
             .then(res =>{
-                console.log(res.values)
                 console.log(res)
+
             })
         } catch(error){
             console.log(error.message)
@@ -70,11 +64,11 @@ const useForm = validate => {
     }
     const handleSubmit = e => {
         e.preventDefault();
-        createCustomer();
+        loginCustomer();
         setErrors(validate(values));
     };
 
-    return {handleChange, values, handleSubmit, errors, createCustomer};
+    return {handleChange, values, handleSubmit, errors};
 };
 
 export default useForm;
