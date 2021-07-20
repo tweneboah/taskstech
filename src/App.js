@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import TradieLogin from "./components/Forms/TradieLogin";
 import NewInventory from "./components/inventory/NewInventory";
 import CreateJob from "./components/Jobs/CreateJob";
-import JobWorkflow from "./components/Jobs/JobWorkflow";
 import Header from "./components/Header/Header";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 import { Provider } from 'react-redux';
