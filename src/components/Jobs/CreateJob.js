@@ -24,10 +24,12 @@ const CreateJob = () => {
     const [description, setDescription] = React.useState('');
     const [tradespersonId, setTradespersonId] = React.useState(0);
     const [customerId, setCustomerId] = React.useState(0);
-    const [jobStatus, setJobStatus] = React.useState('');
-    const [jobStatusId, setJobStatusId] = React.useState('');
+    const [inventoryId, setInventory] = React.useState([]);
+    const [jobStatus, setJobStatus] = React.useState('Not yet started');
+    const [jobStatusId, setJobStatusId] = React.useState(1);
 
     const status = useSelector((state) => state.status);
+
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
@@ -39,11 +41,12 @@ const CreateJob = () => {
         description: description,
         job_status_id: jobStatusId,
         tradesperson_id: tradespersonId,
-        customer_id: customerId
+        customer_id: customerId,
+        inventory_id: inventoryId
     }
 
     useEffect(() => {
-        dispatch(getStatus())
+        dispatch(getStatus());
     }, []);
 
     const handleDropdownChange = event => {

@@ -1,7 +1,6 @@
 import * as actions from '../actions/actionTypes';
-import initialState from '../store/initialState';
 
-function jobsReducer(state = initialState, action) {
+function jobsReducer(state = {}, action) {
     switch (action.type) {
         case actions.ADD_JOB:
             return [
