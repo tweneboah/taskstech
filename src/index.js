@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import NewInventory from "./components/inventory/NewInventory";
-import TradieLogin from "./components/Forms/TradieLogin";
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 ReactDOM.render(
-  <div>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </div>,
+  </Provider>,
   document.getElementById("root")
 );
 
