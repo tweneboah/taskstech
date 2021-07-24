@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import useForm from './useForm';
 import validate from './validateInfo'
-import getTokens from "../helper/getToken"
+// import getTokens from "../helper/getToken"
 
 
 
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   export default function TradieProfileForm() {
     const {handleChange, values, handleSubmit, errors} = useForm(validate);
     const classes = useStyles();
-    
+
 
   
     return (
@@ -192,7 +192,6 @@ const useStyles = makeStyles((theme) => ({
                   id="lastName"
                   label="Licence No"
                   name="LicenceNo"
-                  autoComplete="LicenceNo"
                   value={values.LicenceNo}
                   onChange={handleChange}
                   error={errors.LicenceNo}
@@ -208,7 +207,6 @@ const useStyles = makeStyles((theme) => ({
                 id="Description"
                 label="description"
                 name="description"
-                autoComplete="description"
                 value={values.description}
                 onChange={handleChange}
                 rows={5}

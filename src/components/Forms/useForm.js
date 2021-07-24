@@ -1,18 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import axios from "axios";
 
 
 
 const url = "https://taskstech2.pythonanywhere.com/api/v1"
-const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MywiZXhwIjoxNjI3Mzk4NTg2fQ.zejOYCvFfTHYKO4-FYW0I2F2cp4QlCR_Nn7AcWmFc0k"
+// const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MywiZXhwIjoxNjI3Mzk4NTg2fQ.zejOYCvFfTHYKO4-FYW0I2F2cp4QlCR_Nn7AcWmFc0k"
 
-const config = {
-    // headers: { Authorization: `Bearer ${accessToken}` }
-    auth: {
-        username: 'trade2@abc.com',
-        password: 'abc'
-      },
-};
 
 
 const useForm = validate => {
@@ -36,9 +29,6 @@ const useForm = validate => {
     });
     const [errors, setErrors] = useState({});
 
-    useEffect(() => {
-        console.log(values)
-    }, [])
 
     const handleChange = e => {
         const {name, value} = e.target;

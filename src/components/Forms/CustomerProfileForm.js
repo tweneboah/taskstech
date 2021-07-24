@@ -194,7 +194,6 @@ const useStyles = makeStyles((theme) => ({
                   id="lastName"
                   label="Postcode"
                   name="postcode"
-                  autoComplete="postcode"
                   value={values.postcode}
                   onChange={handleChange}
                   error={errors.postcode}

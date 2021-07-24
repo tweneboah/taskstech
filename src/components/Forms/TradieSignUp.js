@@ -148,7 +148,6 @@ export default function TradieSignUp() {
                 id="confirmemail"
                 label="Confirm Email*"
                 name="confirmemail"
-                autoComplete="email"
                 value={values.confirmemail}
                 onChange={handleChange}
                 error={errors.confirmemail}
@@ -183,7 +182,6 @@ export default function TradieSignUp() {
                 id="confirmpassword"
                 label="Confirm Password*"
                 name="confirmpassword"
-                autoComplete="password"
                 value={values.confirmpassword}
                 onChange={handleChange}
                 error={errors.confirmpassword}
@@ -238,7 +236,6 @@ export default function TradieSignUp() {
                 id="Description"
                 label="description"
                 name="description"
-                autoComplete="description"
                 value={values.description}
                 onChange={handleChange}
 

@@ -148,7 +148,6 @@ export default function CustomerSignUp() {
                 id="confirmemail"
                 label="Confirm Email"
                 name="confirmemail"
-                autoComplete="email"
                 value={values.confirmemail}
                 onChange={handleChange}
                 error={errors.confirmemail}
@@ -183,7 +182,6 @@ export default function CustomerSignUp() {
                 id="confirmpassword"
                 label="Confirm Password"
                 name="confirmpassword"
-                autoComplete="password"
                 value={values.confirmpassword}
                 onChange={handleChange}
                 error={errors.confirmpassword}
@@ -242,7 +240,6 @@ export default function CustomerSignUp() {
                 id="postcode"
                 label="Postcode"
                 name="postcode"
-                autoComplete="postcode"
                 value={values.postcode}
                 onChange={handleChange}
                 error={errors.postcode}
