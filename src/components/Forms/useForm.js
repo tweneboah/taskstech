@@ -2,11 +2,16 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 
 
-const url = "https://taskstech2.pythonanywhere.com/api/v1/tokens"
-const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMiwiZXhwIjoxNjI2Nzg4NTAwfQ.6XUo3d54NvSTOVsu3jt-FbGCbRWPDG4xNDW-CPSqMhQ"
+
+const url = "https://taskstech2.pythonanywhere.com/api/v1"
+const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MywiZXhwIjoxNjI3Mzk4NTg2fQ.zejOYCvFfTHYKO4-FYW0I2F2cp4QlCR_Nn7AcWmFc0k"
 
 const config = {
-    headers: { Authorization: `Bearer ${accessToken}` }
+    // headers: { Authorization: `Bearer ${accessToken}` }
+    auth: {
+        username: 'trade2@abc.com',
+        password: 'abc'
+      },
 };
 
 
@@ -25,15 +30,14 @@ const useForm = validate => {
         state: '',
         postcode: '',
         showPassword: false,
+        id:"",
+        isLogin:false,
 
     });
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
         console.log(values)
-        return () => {
-
-        }
     }, [])
 
     const handleChange = e => {
@@ -44,19 +48,22 @@ const useForm = validate => {
         });
     }
 
-     const loginCustomer = () =>{
+     const loginTradePerson = () =>{
         try {
-             axios.post(url, {
-                // first_name: values.firstName,
-                // last_name: values.lastName,
-                // phone: values.phone,
-                email: values.email,
-                password: values.password,
-                // address: values.address,
-            }, config)
+            console.log(values.email, values.password)
+              axios.post(url+`/tokens`, {},
+            {auth: {
+                // username: values.email,
+                // password: values.password,
+                username: "trade2@abc.com",
+                password: "abc"
+              }},)
             .then(res =>{
                 console.log(res)
-
+                console.log(res.data.token)
+                localStorage.setItem("token", res.data.token)
+                setValues({isLogin:true})
+                console.log(values.isLogin)
             })
         } catch(error){
             console.log(error.message)
@@ -64,7 +71,7 @@ const useForm = validate => {
     }
     const handleSubmit = e => {
         e.preventDefault();
-        loginCustomer();
+        loginTradePerson();
         setErrors(validate(values));
     };
 
