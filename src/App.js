@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 import SignUp from "./components/Forms/SignUp";
 import { Switch, Route } from "react-router-dom";
