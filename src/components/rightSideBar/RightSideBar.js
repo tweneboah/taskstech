@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -15,11 +15,12 @@ import SettingsPowerIcon from "@material-ui/icons/SettingsPower";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import WorkIcon from "@material-ui/icons/Work";
-import { withRouter } from "react-router-dom";
+import { withRouter,  useHistory } from "react-router-dom";
 
 //Rigtht sidebar component
 
-function RightSideBar({ history }) {
+function RightSideBar() {
+  let history = useHistory();
   // Make use of makeStyle from material UI
   const useStyles = makeStyles({
     list: {
@@ -31,9 +32,8 @@ function RightSideBar({ history }) {
   });
 
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     left: false,
-
     right: false,
   });
 
