@@ -1,12 +1,8 @@
 import {useState} from 'react';
 import axios from "axios";
 
-
-
 const url = "https://taskstech2.pythonanywhere.com/api/v1"
 // const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MywiZXhwIjoxNjI3Mzk4NTg2fQ.zejOYCvFfTHYKO4-FYW0I2F2cp4QlCR_Nn7AcWmFc0k"
-
-
 
 const useForm = validate => {
 
@@ -22,9 +18,10 @@ const useForm = validate => {
         address: '',
         state: '',
         postcode: '',
-        showPassword: false,
         id:"",
         isLogin:false,
+        token:"",
+        description:"",
 
     });
     const [errors, setErrors] = useState({});
@@ -40,25 +37,20 @@ const useForm = validate => {
 
      const loginTradePerson = () =>{
         try {
-            console.log(values.email, values.password)
               axios.post(url+`/tokens`, {},
             {auth: {
-                // username: values.email,
-                // password: values.password,
-                username: "trade2@abc.com",
-                password: "abc"
+                username: values.email,
+                password: values.password,
               }},)
             .then(res =>{
-                console.log(res)
-                console.log(res.data.token)
                 localStorage.setItem("token", res.data.token)
                 setValues({isLogin:true})
-                console.log(values.isLogin)
             })
         } catch(error){
             console.log(error.message)
         }
     }
+
     const handleSubmit = e => {
         e.preventDefault();
         loginTradePerson();

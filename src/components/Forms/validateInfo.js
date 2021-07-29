@@ -2,11 +2,11 @@ export default function validateInfo(values) {
     let errors = {}
 
         //First Name Validation
-    if(!values.firstName.trim()){
+    if(!values.firstName){
         errors.firstName = 'First Name required';
     }
         //Last Name Validation
-    if(!values.lastName.trim()){
+    if(!values.lastName){
         errors.lastName = 'Last Name required';
     }
 

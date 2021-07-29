@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
                   autoFocus
                   value={values.email}
                   onChange={handleChange}
-                  error={errors.email}
+                  // error={errors.email}
   
                 />
                 {errors.email && <p className="errormessage">{errors.email}</p>}
