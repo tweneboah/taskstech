@@ -51,9 +51,29 @@ const useForm = validate => {
         }
     }
 
+    const signUpTradePerson = () =>{
+        const traderSignUpData = {
+            email:values.email,
+            password:values.password,
+            first_name:values.firstName,
+            last_name:values.lastName,
+            description:values.description,
+            phone:values.phone
+        }
+        try {
+              axios.post(url+`/users/tradesperson`, traderSignUpData)
+            .then(res =>{
+                console.log(res)
+            })
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
-        loginTradePerson();
+        // loginTradePerson();
+        signUpTradePerson();
         setErrors(validate(values));
     };
 
