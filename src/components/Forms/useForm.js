@@ -70,10 +70,36 @@ const useForm = validate => {
         }
     }
 
+    const updateTradePerson = () =>{
+        // const token = localStorage.getItem('token')
+        const traderSignUpData = {
+            email:values.email,
+            password:values.password,
+            first_name:values.firstName,
+            last_name:values.lastName,
+            description:values.description,
+            phone:values.phone
+        }
+        try {
+            //   axios.put(url+`/users/tradeperson/${values.id}`, traderSignUpData, {
+            //       headers:{authorazation:`Bearer ${token}`}
+            //   })
+              axios.put(url+`/users/tradesperson/46`, traderSignUpData, {
+                headers:{"Authorization":`Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NiwiZXhwIjoxNjI4MTQ4NTEzfQ.kBGQKMo2uPS2kyN_8xxTJ2quE7CteI_-Ok1sHu-fGVo`}
+            })
+            .then(res =>{
+                console.log(res)
+            })
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         // loginTradePerson();
-        signUpTradePerson();
+        // signUpTradePerson();
+        updateTradePerson();
         setErrors(validate(values));
     };
 
