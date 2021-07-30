@@ -7,8 +7,6 @@ function jobsReducer(state = {}, action) {
                 ...state,
                 action.payload
             ];
-        case actions.GET_JOB_STATUS:
-            return action.payload
         default:
             return state;
     }
