@@ -1,2 +1,3 @@
-export const ADD_JOB = 'ADD_JOB';
+export const CREATE_JOB = 'CREATE_JOB';
+export const GET_JOB_STATUS_STARTED = 'GET_JOB_STATUS_STARTED';
 export const GET_JOB_STATUS = 'GET_JOB_STATUS';

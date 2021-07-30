@@ -28,7 +28,7 @@ const CreateJob = () => {
     const [jobStatus, setJobStatus] = React.useState('Not yet started');
     const [jobStatusId, setJobStatusId] = React.useState(1);
 
-    const status = useSelector((state) => state.status);
+    const status = useSelector((state) => state.status.job);
 
     const dispatch = useDispatch();
 
@@ -104,10 +104,10 @@ const CreateJob = () => {
                         variant="outlined"
                     >
                         {status.map((option, key) => (
-                            <option key={key} value={option.name} id={option.id}>
-                                {option.name}
-                            </option>
-                        ))}
+                                <option key={key} value={option.name} id={option.id}>
+                                    {option.name}
+                                </option>
+                            ))}
                     </TextField>
 
                     <TextField
