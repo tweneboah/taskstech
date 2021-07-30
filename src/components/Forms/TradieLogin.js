@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TradieLogin = () => {
-  const { handleChange, values, handleSubmit, errors } = useForm(validate);
+  const { handleChange, values, handleSubmit } = useForm(validate);
 
   const classes = useStyles();
 

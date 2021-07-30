@@ -1,10 +1,9 @@
+import React from 'react';
 import "./App.css";
-import SignUp from "./components/Forms/SignUp";
 import { Switch, Route } from "react-router-dom";
 import TradieLogin from "./components/Forms/TradieLogin";
 import NewInventory from "./components/inventory/NewInventory";
 import Header from "./components/Header/Header";
-
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 
 function App() {
