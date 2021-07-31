@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   }));
   
   export default function TradieProfileForm() {
-    const {handleChange, values, handleSubmit, errors} = useForm(validate);
+    const {handleChange, values, updateSubmit, errors} = useForm(validate);
     const classes = useStyles();
 
 
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
                 <h4>Tradie ID: 12345677</h4>
             </div>
           <div className={classes.paper}>
-            <form className={classes.form}  onSubmit={handleSubmit}>
+            <form className={classes.form}  onSubmit={updateSubmit}>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
                 <TextField

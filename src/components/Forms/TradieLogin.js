@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TradieLogin = () => {
-  const { handleChange, values, handleSubmit} = useForm(validate);
+  const { handleChange, values, loginSubmit} = useForm(validate);
 
   const classes = useStyles();
 
@@ -81,7 +81,7 @@ const TradieLogin = () => {
               Login to TasksTech
             </Typography>
             <p>*Required</p>
-            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <form className={classes.form} noValidate onSubmit={loginSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"

@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TradieSignUp() {
-    const {handleChange, values, handleSubmit, errors} = useForm(validate);
+    const {handleChange, values, signUpSubmit, errors} = useForm(validate);
 
   const classes = useStyles();
 
@@ -57,7 +57,7 @@ export default function TradieSignUp() {
           <Typography component="h1" variant="h4">
             Tradies Sign up
           </Typography>
-          <form className={classes.form}  onSubmit={handleSubmit}>
+          <form className={classes.form}  onSubmit={signUpSubmit}>
           <Grid container spacing={3}>
           <Grid container>
               <Grid item>
