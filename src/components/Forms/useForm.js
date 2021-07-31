@@ -92,15 +92,23 @@ const useForm = validate => {
         }
     }
 
-    const handleSubmit = e => {
+    const signUpSubmit = e => {
         e.preventDefault();
-        // loginTradePerson();
-        // signUpTradePerson();
+        signUpTradePerson();
+        setErrors(validate(values));
+    };
+    const loginSubmit = e => {
+        e.preventDefault();
+        loginTradePerson();
+        setErrors(validate(values));
+    };
+    const updateSubmit = e => {
+        e.preventDefault();
         updateTradePerson();
         setErrors(validate(values));
     };
 
-    return {handleChange, values, handleSubmit, errors};
+    return {handleChange, values, signUpSubmit, loginSubmit, updateSubmit, errors};
 };
 
 export default useForm;
