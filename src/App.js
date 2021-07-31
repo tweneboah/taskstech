@@ -1,10 +1,9 @@
+import React from 'react';
 import "./App.css";
-import SignUp from "./components/Forms/CustomerSignUp";
 import { Switch, Route } from "react-router-dom";
 import TradieLogin from "./components/Forms/TradieLogin";
 // import NewInventory from "./components/inventory/NewInventory";
 import Header from "./components/Header/Header";
-
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 import CustomerSignUp from "./components/Forms/CustomerSignUp";
 import CustomerLogin from "./components/Forms/CustomerLogIn";

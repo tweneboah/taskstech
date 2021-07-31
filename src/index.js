@@ -2,11 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter} from "react-router-dom";
-
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import NewInventory from "./components/inventory/NewInventory";
-// import TradieLogin from "./components/Forms/TradieLogin";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <div>
