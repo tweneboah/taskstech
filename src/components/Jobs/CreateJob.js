@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import SimpleBackdrop from '../Loading/SimpleBackdrop';
 
 import FormNav from '../Navigation/FormNav';
 import { getStatus, createJob } from '../../actions/action';
@@ -30,10 +31,14 @@ const CreateJob = () => {
 
     const status = useSelector((state) => state.status.job);
 
+    const loading = useSelector((state) => state.job.loading);
+
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
+        dispatch(createJob(jobObject));
+        
     };
 
     let jobObject = {
@@ -132,12 +137,13 @@ const CreateJob = () => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => dispatch(createJob(jobObject))}
+                        onClick={handleSubmit}
                     >
                         Create
                     </Button>
                 </div>
             </form>
+            <SimpleBackdrop loading={loading} />
         </React.Fragment>
     );
 }
