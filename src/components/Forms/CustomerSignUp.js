@@ -13,7 +13,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import useForm from "./useForm";
 import validate from "./validateInfo";
-import Logo from "./Logo";
 
 const useStyles = makeStyles((theme) => ({
     root: {

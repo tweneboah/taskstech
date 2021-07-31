@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   image: {
     display: "flex",
     alignItems: "center",
