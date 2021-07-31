@@ -2,7 +2,6 @@ import {useState} from 'react';
 import axios from "axios";
 
 const url = "https://taskstech2.pythonanywhere.com/api/v1"
-// const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MywiZXhwIjoxNjI3Mzk4NTg2fQ.zejOYCvFfTHYKO4-FYW0I2F2cp4QlCR_Nn7AcWmFc0k"
 
 const useForm = validate => {
 
@@ -71,7 +70,7 @@ const useForm = validate => {
     }
 
     const updateTradePerson = () =>{
-        // const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         const traderSignUpData = {
             email:values.email,
             password:values.password,
@@ -81,12 +80,10 @@ const useForm = validate => {
             phone:values.phone
         }
         try {
-            //   axios.put(url+`/users/tradeperson/${values.id}`, traderSignUpData, {
-            //       headers:{authorazation:`Bearer ${token}`}
-            //   })
-              axios.put(url+`/users/tradesperson/46`, traderSignUpData, {
-                headers:{"Authorization":`Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0NiwiZXhwIjoxNjI4MTQ4NTEzfQ.kBGQKMo2uPS2kyN_8xxTJ2quE7CteI_-Ok1sHu-fGVo`}
-            })
+              axios.put(url+`/users/tradeperson/${values.id}`, traderSignUpData, {
+                  headers:{authorazation:`Bearer ${token}`}
+              })
+            
             .then(res =>{
                 console.log(res)
             })
