@@ -1,6 +1,37 @@
 {
   "name": "taskstech",
   "version": "0.1.0",
+  "author": {
+		"name": "Code Sydney",
+		"url": "http://www.code.sydney",
+		"github": "https://github.com/codesydney"
+	},
+  "contributors": [
+		{
+			"name": "Gift Akari",
+			"url": "https://github.com/giftakari"
+		},
+		{
+			"name": "Stephen Corral",
+			"url": "https://github.com/ettienekorayyi"
+		},
+		{
+			"name": "Kimchi Rice",
+			"url": "https://github.com/kimchirice"
+		},
+		{
+			"name": "Zoe Shi",
+			"url": "https://github.com/githubzoe"
+		},
+		{
+			"name": "Fumihito Takanami",
+			"url": "https://github.com/Fumicode01"
+		},
+		{
+			"name": "Engramar Bollas",
+			"url": "https://github.com/engramar"
+		}
+  ],
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -22,7 +53,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+	"lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +73,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+	  "eslint": "^7.31.0",
+	  "eslint-config-prettier": "^8.3.0",
+	  "eslint-plugin-react": "^7.24.0",
+	  "prettier": "2.3.2"
   }
 }
