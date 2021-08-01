@@ -1,112 +1,151 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import SimpleBackdrop from '../Loading/SimpleBackdrop';
 
-import './jobs.css';
 import FormNav from '../Navigation/FormNav';
+import { getStatus, createJob } from '../../actions/action';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-    height: '25vh',
-    marginBottom: '15%',
-    marginTop: '15%'
-  },
-  job: {
-    margin: 12
-  },
-  content: {
-    display: 'flex',
-    marginTop: 12,
-    marginLeft: 20,
-    textAlign: 'left'
-  }
-});
-
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '80vw',
+        },
+    },
+}));
 
 
 const CreateJob = () => {
-  const classes = useStyles();
+    const classes = useStyles();
+    const [jobName, setJobName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [tradespersonId, setTradespersonId] = React.useState(0);
+    const [customerId, setCustomerId] = React.useState(0);
+    const [inventoryId, setInventory] = React.useState([]);
+    const [jobStatus, setJobStatus] = React.useState('Not yet started');
+    const [jobStatusId, setJobStatusId] = React.useState(1);
 
-  return (
-    <React.Fragment>
-      <FormNav />
-      <div className={classes.job}>
-        <Typography gutterBottom variant="h5" component="h2">
-          Create New Job
-        </Typography>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardContent>
-              <Typography className={classes.content} variant="body2" color="textSecondary" component="p">
-                STEP 1/3 - CUSTOMER
-              </Typography>
-              <Typography className={classes.content} variant="body2" color="textSecondary" component="h2">
-                EXISTING CUSTOMER?
-            </Typography>
-            </CardContent>
-          </CardActionArea>
+    const status = useSelector((state) => state.status.job);
 
-          <CardActions>
-            <Button size="small" color="primary">
-              <a href="#">Yes</a>
-            </Button>
-            <Button size="small" color="primary">
-              <a href="#">No</a>
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
+    const loading = useSelector((state) => state.job.loading);
 
-      <div className={classes.job}>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardContent>
-              <Typography className={classes.content} variant="body2" color="textSecondary" component="p">
-                STEP 2/3 - JOB ASSETS
-              </Typography>
-              <Typography className={classes.content} variant="body2" color="textSecondary" component="p">
-                ASSIGN JOB ASSETS.
-                DO YOU WANT TO CREATE A NEW INVENTORY?
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+    const dispatch = useDispatch();
 
-          <CardActions>
-            <Button size="small" color="primary">
-              <a href="#">Yes</a>
-            </Button>
-            <Button size="small" color="primary">
-              <a href="#">No</a>
-            </Button>
-          </CardActions>
+    const handleSubmit = event => {
+        event.preventDefault();
+        dispatch(createJob(jobObject));
+        
+    };
 
-        </Card>
-      </div>
+    let jobObject = {
+        name: jobName,
+        description: description,
+        job_status_id: jobStatusId,
+        tradesperson_id: tradespersonId,
+        customer_id: customerId,
+        inventory_id: inventoryId
+    }
 
-      <div className={classes.job}>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                STEP 3/3 - CREATE NEW JOB
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+    useEffect(() => {
+        dispatch(getStatus());
+    }, []);
 
-        </Card>
-      </div>
-    </React.Fragment>
-  );
+    const handleDropdownChange = event => {
+        event.preventDefault();
+        const index = event.target.selectedIndex;
+        const el = event.target.childNodes[index]
+        const option = el.getAttribute('id');
 
+        setJobStatus(event.target.value)
+        setJobStatusId(option)
+    };
+
+
+    return (
+        <React.Fragment>
+            <FormNav />
+            <div id='content-heading'>
+                <Typography gutterBottom variant="h5">
+                    Create New Job
+                </Typography>
+                <Typography gutterBottom variant="span">
+                    Please fill the job details
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom>
+                    *Required
+                </Typography>
+
+            </div>
+            <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
+                <div id='fields'>
+                    <TextField
+                        /* error */
+                        required
+                        id="outlined-error-helper-text"
+                        label="Job Name"
+                        variant="outlined"
+                        onChange={e => setJobName(e.target.value)}
+                    />
+                    <TextField
+                        /*error*/
+                        id="outlined-error-helper-text"
+                        label="Description"
+                        variant="outlined"
+                        onChange={e => setDescription(e.target.value)}
+                    />
+                    <TextField
+                        required
+                        id="outlined-select-currency-native"
+                        select
+                        value={jobStatus}
+                        onChange={handleDropdownChange}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        variant="outlined"
+                    >
+                        {status.map((option, key) => (
+                                <option key={key} value={option.name} id={option.id}>
+                                    {option.name}
+                                </option>
+                            ))}
+                    </TextField>
+
+                    <TextField
+                        /*error*/
+                        required
+                        id="outlined-error-helper-text"
+                        label="Tradesperson Id"
+                        variant="outlined"
+                        onChange={e => setTradespersonId(e.target.value)}
+                    />
+
+                    <TextField
+                        /*error*/
+                        required
+                        id="outlined-error-helper-text"
+                        label="Customer Id"
+                        variant="outlined"
+                        onChange={e => setCustomerId(e.target.value)}
+                    />
+                </div>
+                <div id='buttons'>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                    >
+                        Create
+                    </Button>
+                </div>
+            </form>
+            <SimpleBackdrop loading={loading} />
+        </React.Fragment>
+    );
 }
 
 export default CreateJob;
-
