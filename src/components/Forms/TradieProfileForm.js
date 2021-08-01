@@ -5,10 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import useForm from './useForm';
 import validate from './validateInfo'
 // import getTokens from "../helper/getToken"
@@ -125,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
                   autoFocus
                   value={values.email}
                   onChange={handleChange}
+                  disable={true}
                   // error={errors.email}
   
                 />
@@ -144,60 +141,6 @@ const useStyles = makeStyles((theme) => ({
   
                 />
                 {errors.password && <p className="errormessage">{errors.password}</p>}
-              </Grid>
-              <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="role"
-                name="role"
-                variant="outlined"
-                fullWidth
-                id="role"
-                label="Role"
-                autoFocus
-                value={values.role}
-                onChange={handleChange}
-
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <FormControl className={classes.formControl} fullWidth>
-                    <InputLabel shrink id="state">
-                    Categories*
-                    </InputLabel>
-                    <Select
-                    name="categories"
-                    variant="outlined"
-                    label="categories"
-                    id="categories"
-                    value={values.categories}
-                    className={classes.select}
-                    onChange={handleChange}
-                error={errors.categories}
-
-                    >
-                    <MenuItem value={"electrical"}>Electrical</MenuItem>
-                    <MenuItem value={""}>Installer</MenuItem>
-                    <MenuItem value={""}></MenuItem>
-
-                    </Select>
-                    {/* <FormHelperText>Label + placeholder</FormHelperText> */}
-                </FormControl>
-                {errors.categories && <p className="errormessage">{errors.categories}</p>}
-            </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="LicenceNo"
-                  variant="outlined"
-                  fullWidth
-                  id="lastName"
-                  label="Licence No"
-                  name="LicenceNo"
-                  value={values.LicenceNo}
-                  onChange={handleChange}
-                  error={errors.LicenceNo}
-  
-                />
-                {errors.LicenceNo && <p className="errormessage">{errors.LicenceNo}</p>}
               </Grid>
               <Grid item xs={12} sm={12} className={classes.description}>
               <TextField

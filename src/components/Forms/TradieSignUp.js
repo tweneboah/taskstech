@@ -7,10 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import useForm from './useForm';
 import validate from './validateInfo';
 import Logo from "./Logo";
@@ -61,7 +57,7 @@ export default function TradieSignUp() {
           <Grid container spacing={3}>
           <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="login" variant="body2">
                   {"Already have a account? Sign In"}
                 </Link>
               </Grid>
@@ -111,17 +107,7 @@ export default function TradieSignUp() {
               {errors.phone && <p className="errormessage">{errors.phone}</p>}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="organization"
-                name="licence"
-                variant="outlined"
-                fullWidth
-                id="licence"
-                label="Licenc No"
-                autoFocus
-                value={values.licence}
-                onChange={handleChange}
-              />
+
             </Grid>
             
             <Grid item xs={12} sm={6}>
@@ -189,45 +175,7 @@ export default function TradieSignUp() {
               />
               {errors.confirmpassword && <p className="errormessage">{errors.confirmpassword}</p>}
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="role"
-                name="role"
-                variant="outlined"
-                fullWidth
-                id="role"
-                label="Role"
-                autoFocus
-                value={values.role}
-                onChange={handleChange}
-                // error={errors.role}
-
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <FormControl className={classes.formControl} fullWidth>
-                    <InputLabel shrink id="state">
-                    Categories*
-                    </InputLabel>
-                    <Select
-                    name="categories"
-                    variant="outlined"
-                    label="categories"
-                    id="categories"
-                    value={values.categories}
-                    className={classes.select}
-                    onChange={handleChange}
-                error={errors.categories}
-
-                    >
-                    <MenuItem value={"electrical"}>Electrical</MenuItem>
-                    <MenuItem value={""}>Installer</MenuItem>
-                    <MenuItem value={""}></MenuItem>
-
-                    </Select>
-                </FormControl>
-                {errors.categories && <p className="errormessage">{errors.categories}</p>}
-            </Grid>
+            
             <Grid item xs={12} sm={12} className={classes.description}>
               <TextField
                 autoComplete="text"
@@ -238,7 +186,6 @@ export default function TradieSignUp() {
                 name="description"
                 value={values.description}
                 onChange={handleChange}
-
               />
             </Grid>
             

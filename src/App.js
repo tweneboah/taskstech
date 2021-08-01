@@ -15,7 +15,7 @@ function App() {
       <RightSideBar />
       <Switch>
         <Route exact path='/login' component={TradieLogin} />
-        <Route exact path='/tradie/signup' component={TradieSignUp} />
+        <Route exact path='/signup' component={TradieSignUp} />
         <Route exact path='/tradie/profile' component={TradieProfileForm} />
 
 
