@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const url = "https://taskstech2.pythonanywhere.com/api/v1"
 
@@ -20,6 +21,8 @@ const useForm = validate => {
 
     });
     const [errors, setErrors] = useState({});
+    const history = useHistory();
+
 
 
     const handleChange = e => {
@@ -36,10 +39,13 @@ const useForm = validate => {
             {auth: {
                 username: values.email,
                 password: values.password,
-              }},)
+              }}
+              )
             .then(res =>{
                 localStorage.setItem("token", res.data.token)
+                console.log("logedin")
                 setValues({isLogin:true})
+                history.push('/tradie/profile')
             })
         } catch(error){
             console.log(error.message)
@@ -59,6 +65,7 @@ const useForm = validate => {
               axios.post(url+`/users/tradesperson`, traderSignUpData)
             .then(res =>{
                 console.log(res)
+                history.push("/login")
             })
         } catch(error){
             console.log(error.message)
@@ -90,8 +97,8 @@ const useForm = validate => {
 
     const signUpSubmit = e => {
         e.preventDefault();
-        signUpTradePerson();
         setErrors(validate(values));
+        signUpTradePerson();
     };
     const loginSubmit = e => {
         e.preventDefault();

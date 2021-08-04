@@ -108,7 +108,7 @@ const TradieLogin = () => {
                 placeholder="Enter your password"
                 value={values.password}
                 onChange={handleChange}
-                autoComplete="current-password"
+                autoComplete="password"
               />
               <div className={classes.links}>
                 <Link href="#" variant="body2">

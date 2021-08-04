@@ -121,11 +121,8 @@ const useStyles = makeStyles((theme) => ({
                   autoFocus
                   value={values.email}
                   onChange={handleChange}
-                  disable={true}
-                  // error={errors.email}
-  
+                  disabled={true}
                 />
-                {errors.email && <p className="errormessage">{errors.email}</p>}
               </Grid>
               <Grid item xs={12} sm={6}>
               <TextField
