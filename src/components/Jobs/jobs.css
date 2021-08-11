@@ -1,4 +1,10 @@
+
+
 @media screen and (max-width: 600px) {
+  div#content-heading {
+    text-align: center !important;
+  }
+  
   #content-heading {
     display: flex;
     flex-direction: column;
@@ -31,5 +37,9 @@
     color: #fff;
     width: 100%;
     background-color: #4e49f2;
+  }
+
+  .MuiCardContent-root {
+    height: 12vh;
   }
 }
