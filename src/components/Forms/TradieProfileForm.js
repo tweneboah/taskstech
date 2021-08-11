@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, {useEffect}  from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -46,10 +46,15 @@ const useStyles = makeStyles((theme) => ({
   }));
   
   export default function TradieProfileForm() {
-    const {handleChange, values, updateSubmit, errors} = useForm(validate);
+    const {handleChange, values, updateSubmit, getTradieData, errors} = useForm(validate);
     const classes = useStyles();
 
+    
 
+
+    useEffect(() => {
+      getTradieData()
+    },[])
   
     return (
       <Grid container component="main" className={classes.root}>
@@ -135,6 +140,7 @@ const useStyles = makeStyles((theme) => ({
                   value={values.password}
                   onChange={handleChange}
                   error={errors.password}
+                  type="password"
   
                 />
                 {errors.password && <p className="errormessage">{errors.password}</p>}
@@ -170,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
                 </Grid>
                 <Grid item xs ={4}>
                   <Button 
-                  type="submit"
+                  type="cancel"
                   variant="outlined"
                   color="primary"
                   className={classes.submit}

@@ -43,8 +43,11 @@ const useForm = validate => {
               )
             .then(res =>{
                 localStorage.setItem("token", res.data.token)
-                console.log("logedin")
-                setValues({isLogin:true})
+                localStorage.setItem("id", res.data.user_id)
+                setValues({
+                    id:res.data.user_id,
+                    token:res.data.token,
+                })
                 history.push('/tradie/profile')
             })
         } catch(error){
@@ -74,6 +77,8 @@ const useForm = validate => {
 
     const updateTradePerson = () =>{
         const token = localStorage.getItem('token')
+        const id = localStorage.getItem('id')
+
         const traderSignUpData = {
             email:values.email,
             password:values.password,
@@ -83,8 +88,8 @@ const useForm = validate => {
             phone:values.phone
         }
         try {
-              axios.put(url+`/users/tradeperson/${values.id}`, traderSignUpData, {
-                  headers:{authorazation:`Bearer ${token}`}
+              axios.put(url+`/users/tradesperson/${id}`, traderSignUpData, {
+                  headers:{authorization:`Bearer ${token}`}
               })
             
             .then(res =>{
@@ -94,6 +99,28 @@ const useForm = validate => {
             console.log(error.message)
         }
     }
+
+    const getTradieData = () => {
+        const token = localStorage.getItem('token');
+        const id = localStorage.getItem('id')
+        try {
+            axios.get(url+`/users/tradesperson/${id}`, {
+                headers:{authorization:`Bearer ${token}`}
+            })
+          
+          .then(res =>{
+              setValues({
+                  firstName:res.data.first_name,
+                  lastName:res.data.last_name,
+                  email:res.data.email,
+                  phone:res.data.phone,
+                  description:res.data.description,
+              })
+          })
+      } catch(error){
+          console.log(error.message)
+      }
+      }
 
     const signUpSubmit = e => {
         e.preventDefault();
@@ -111,7 +138,7 @@ const useForm = validate => {
         setErrors(validate(values));
     };
 
-    return {handleChange, values, signUpSubmit, loginSubmit, updateSubmit, errors};
+    return {handleChange, values, signUpSubmit, loginSubmit, updateSubmit, getTradieData, errors};
 };
 
 export default useForm;
