@@ -128,21 +128,6 @@ export default function TradieSignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="email"
-                variant="outlined"
-                fullWidth
-                id="confirmemail"
-                label="Confirm Email*"
-                name="confirmemail"
-                value={values.confirmemail}
-                onChange={handleChange}
-                error={errors.confirmemail}
-
-              />
-              {errors.confirmemail && <p className="errormessage">{errors.confirmemail}</p>}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
                 type="password"
                 autoComplete="password"
                 name="password"
@@ -211,11 +196,7 @@ export default function TradieSignUp() {
                 Cancel
                 </Button>
               </Grid>
-
-
           </Grid>
-            
-
           </form>
         </div>
       </Grid>
