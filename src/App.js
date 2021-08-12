@@ -1,8 +1,7 @@
 import React from 'react';
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import TradieLogin from "./components/Forms/TradieLogin";
-import NewInventory from "./components/inventory/NewInventory";
+// import NewInventory from "./components/inventory/NewInventory";
 import CreateJob from "./components/Jobs/CreateJob";
 import Header from "./components/Header/Header";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
