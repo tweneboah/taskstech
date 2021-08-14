@@ -1,13 +1,12 @@
-import React, {useEffect}  from 'react';
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import useForm from './useForm';
-import validate from './validateInfo'
-// import getTokens from "../helper/getToken"
+import { updateTrader, getTraderData} from "../../actions/action";
 
 
 
@@ -46,15 +45,58 @@ const useStyles = makeStyles((theme) => ({
   }));
   
   export default function TradieProfileForm() {
-    const {handleChange, values, updateSubmit, getTradieData, errors} = useForm(validate);
     const classes = useStyles();
+    const dispatch = useDispatch()
+    const trader = useSelector(state => state.trader)
 
-    
+    const [firstname, setFirstname] = useState(""),
+        [lastname, setLastname] = useState(""),
+        [email, setEmail] = useState(""),
+        [phone, setPhone] = useState(""),
+        [description, setDescription] = useState(""),
+        [password, setPassword] = useState("");
 
+    const inputFirstname = useCallback(
+        (event) => {
+            setFirstname(event.target.value);
+        },
+        [setFirstname]
+    );
 
-    useEffect(() => {
-      getTradieData()
-    },[])
+    const inputLastname = useCallback(
+      (event) => {
+          setLastname(event.target.value);
+      },[setLastname]);
+
+    const inputPhone = useCallback(
+        (event) => {
+            setPhone(event.target.value);
+        },[setPhone]);
+
+    const inputEmail = useCallback(
+        (event) => {
+            setEmail(event.target.value);
+        },[setEmail]);
+
+    const inputPassword = useCallback(
+        (event) => {
+            setPassword(event.target.value);
+        },[setPassword]);
+
+        const inputDescription = useCallback(
+          (event) => {
+              setDescription(event.target.value);
+          },[setDescription]);
+
+        useEffect(() => {
+          dispatch(getTraderData())
+          setFirstname(trader.firstname)
+          setLastname(trader.lastname)
+          setEmail(trader.email)
+          setPhone(trader.phone)
+          setDescription(trader.description)
+        }, [trader.description])
+
   
     return (
       <Grid container component="main" className={classes.root}>
@@ -68,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
                 <h4>Tradie ID: 12345677</h4>
             </div>
           <div className={classes.paper}>
-            <form className={classes.form}  onSubmit={updateSubmit}>
+            <div className={classes.form}  >
             <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
                 <TextField
@@ -79,11 +121,9 @@ const useStyles = makeStyles((theme) => ({
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  value={values.firstName}
-                  onChange={handleChange}
-                  error={errors.firstName}
+                  value={firstname}
+                  onChange={inputFirstname}
                 />
-                {errors.firstName && <p className="errormessage">{errors.firstName}</p>}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -93,11 +133,9 @@ const useStyles = makeStyles((theme) => ({
                   label="Last Name"
                   name="lastName"
                   autoComplete="name"
-                  value={values.lastName}
-                  onChange={handleChange}
-                  error={errors.lastName}
+                  value={lastname}
+                  onChange={inputLastname}
                 />
-                {errors.lastName && <p className="errormessage">{errors.lastName}</p>}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -108,8 +146,8 @@ const useStyles = makeStyles((theme) => ({
                   id="phone"
                   label="Phone No"
                   autoFocus
-                  value={values.phone}
-                  onChange={handleChange}
+                  value={phone}
+                  onChange={inputPhone}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -124,8 +162,8 @@ const useStyles = makeStyles((theme) => ({
                   id="email"
                   label="Email"
                   autoFocus
-                  value={values.email}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={inputEmail}
                   disabled={true}
                 />
               </Grid>
@@ -137,13 +175,11 @@ const useStyles = makeStyles((theme) => ({
                   label="Password"
                   name="password"
                   autoComplete="passwordl"
-                  value={values.password}
-                  onChange={handleChange}
-                  error={errors.password}
+                  value={password}
+                  onChange={inputPassword}
                   type="password"
   
                 />
-                {errors.password && <p className="errormessage">{errors.password}</p>}
               </Grid>
               <Grid item xs={12} sm={12} className={classes.description}>
               <TextField
@@ -153,8 +189,8 @@ const useStyles = makeStyles((theme) => ({
                 id="Description"
                 label="description"
                 name="description"
-                value={values.description}
-                onChange={handleChange}
+                value={description}
+                onChange={inputDescription}
                 rows={5}
                 multiline={true}
 
@@ -170,6 +206,7 @@ const useStyles = makeStyles((theme) => ({
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={() => dispatch(updateTrader(firstname, lastname,  email, password, description, phone))}
                   >
                   CONFIRM
                   </Button>
@@ -189,7 +226,7 @@ const useStyles = makeStyles((theme) => ({
             </Grid>
               
   
-            </form>
+            </div>
           </div>
         </Grid>
         <Grid item xs={false} sm={2} md={2}>

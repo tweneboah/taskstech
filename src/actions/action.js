@@ -1,7 +1,9 @@
 import * as actions from './actionTypes';
+// import {useSelector } from 'react-redux'
 import taskstechApi from '../api/taskstechApi';
-import {signInAction, signOutAction} from './traderActions';
+import {signInAction, signOutAction, setTraderData} from './traderActions';
 import {push} from 'connected-react-router';
+// import { getTraderId } from '../selector/userSelector';
 
 
 
@@ -87,15 +89,70 @@ export const signIn = (email, password) => {
           .then(res =>{
               console.log(res)
               localStorage.setItem("token", res.data.token)
+              localStorage.setItem("id", res.data.user_id)
               dispatch(signInAction({
                   isSignedIn:true,
                   id:res.data.user_id,
               }))
+              getTraderData()
               dispatch(push('/tradie/profile'))
           })
       } catch(error){
           console.log(error.message)
       }
+    }
+}
+
+export const getTraderData = () => {
+    return async (dispatch) => {
+    //  const selector = useSelector(state => state.trader)
+    //  const id = getTraderId(selector)
+    const id = localStorage.getItem('id')
+     const token = localStorage.getItem('token');
+     try {
+        taskstechApi.get(`/users/tradesperson/${id}`, {
+            headers:{authorization:`Bearer ${token}`}
+        })
+      .then(res =>{
+          dispatch(setTraderData({
+              firstname:res.data.first_name,
+              lastname:res.data.last_name,
+              email:res.data.email,
+              phone:res.data.phone,
+              description:res.data.description,
+          })
+      )})
+    } catch(error){
+        console.log(error.message)
+    }
+  }
+}
+
+export const updateTrader = (firstname, lastname,  email, password, description, phone) => {
+    return async () => {
+        // const selector = useSelector(state => state)
+        // const id = getTraderId(selector)
+        const id = localStorage.getItem('id')
+        const token = localStorage.getItem('token');
+        const traderSignUpData = {
+            first_name:firstname,
+            last_name:lastname,
+            email:email,
+            password:password,
+            description:description,
+            phone:phone
+        }
+        try {
+            taskstechApi.put(`/users/tradesperson/${id}`, traderSignUpData, {
+                  headers:{authorization:`Bearer ${token}`}
+              })
+            
+            .then(res =>{
+                console.log(res)
+            })
+        } catch(error){
+            console.log(error.message)
+        }
     }
 }
 

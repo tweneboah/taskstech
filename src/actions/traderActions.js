@@ -5,7 +5,7 @@ export const signInAction = (userState) => {
         type:actions.SIGN_IN,
         payload:{
             isSignedIn:true,
-            uid:userState.id,
+            id:userState.id,
         }
     }
 };
@@ -25,3 +25,20 @@ export const signOutAction = () => {
         }
     }
 };
+
+export const setTraderData = (trader) => {
+    console.log(trader)
+    return {
+        type:actions.SET_TRADER_DATA,
+        payload:{
+            firstname:trader.firstname,
+            lastname:trader.lastname,
+            email:trader.email,
+            password:"",
+            phone:trader.phone,
+            description:trader.description,
+            isSignedIn:true,
+            id:trader.id,
+        }
+    }
+}

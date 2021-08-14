@@ -78,7 +78,6 @@ const useForm = validate => {
     const updateTradePerson = () =>{
         const token = localStorage.getItem('token')
         const id = localStorage.getItem('id')
-
         const traderSignUpData = {
             email:values.email,
             password:values.password,

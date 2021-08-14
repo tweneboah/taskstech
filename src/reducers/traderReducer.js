@@ -25,6 +25,11 @@ function traderReducer(state = initialState.trader, action) {
                 ...action.payload,
                 loading: action.loading
             }
+        case actions.SET_TRADER_DATA:
+            return {
+                ...state,
+                ...action.payload,
+            }
         default:
             return state;
     }
