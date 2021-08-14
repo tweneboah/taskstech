@@ -1,7 +1,8 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
-import {signInAction, signOutAction} from './traderActions'
-import { push } from 'connected-react-router'
+import {signInAction, signOutAction} from './traderActions';
+import {push} from 'connected-react-router';
+
 
 
 export const createJob = (job) => async dispatch => {
@@ -90,7 +91,6 @@ export const signIn = (email, password) => {
                   isSignedIn:true,
                   id:res.data.user_id,
               }))
-          }).then(() => {
               dispatch(push('/tradie/profile'))
           })
       } catch(error){

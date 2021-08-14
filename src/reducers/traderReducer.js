@@ -13,7 +13,7 @@ const initialState = {
    }
 };
 
-function tradeReducer(state = initialState.trader, action) {
+function traderReducer(state = initialState.trader, action) {
     switch (action.type) {
         case actions.SIGN_IN:
             return {
@@ -30,4 +30,4 @@ function tradeReducer(state = initialState.trader, action) {
     }
 }
 
-export default tradeReducer;
+export default traderReducer;
