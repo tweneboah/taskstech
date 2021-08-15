@@ -159,11 +159,10 @@ export const updateTrader = (firstname, lastname,  email, password, description,
 
 export const signOut = () => {
     return async (dispatch) => {
-        localStorage.removeItem('token')
-        .then(() => {
             dispatch(signOutAction());
-            dispatch(push('/signin'));
-        })
+            localStorage.removeItem('token')
+            localStorage.removeItem('id')
+            dispatch(push('/login'));
     }
 }
 
