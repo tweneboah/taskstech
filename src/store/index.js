@@ -1,22 +1,17 @@
-import {createStore as reduxCreateStore, combineReducers, applyMiddleware} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
-import { routerMiddleware, connectRouter } from "connected-react-router";
-import jobsReducer from '../reducers/jobsReducer';
-import jobStatusReducer from '../reducers/jobStatusReducer';
-import traderReducer from '../reducers/traderReducer';
+import {routerMiddleware} from "connected-react-router";
+import rootReducer from "../reducers/rootReducer";
 
 
-export default function createStore(history){
-    return reduxCreateStore(
-        combineReducers({
-            router:connectRouter(history),
-            trader:traderReducer,
-            status: jobStatusReducer,
-            job: jobsReducer
-        }),
+export default function configureStore(history){
+    const store = createStore(
+        rootReducer(history),
         applyMiddleware(
             routerMiddleware(history),
             thunk
         )
     )
+    return store
+        
 }

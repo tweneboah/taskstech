@@ -6,9 +6,9 @@ import Auth from './components/Auth'
 import CreateJob from "./components/Jobs/CreateJob";
 import Header from "./components/Header/Header";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
-import TradieSignUp from "./components/Forms/TradieSignUp";
-import TradieLogin from "./components/Forms/TradieLogin";
-import TradieProfileForm from "./components/Forms/TradieProfileForm";
+import TradieSignUp from "./components/Trader/TradieSignUp";
+import TradieLogin from "./components/Trader/TradieLogin";
+import TradieProfileForm from "./components/Trader/TradieProfileForm";
 
 
 function App() {
