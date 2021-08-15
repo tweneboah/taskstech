@@ -27,7 +27,6 @@ export const signOutAction = () => {
 };
 
 export const setTraderData = (trader) => {
-    console.log(trader)
     return {
         type:actions.SET_TRADER_DATA,
         payload:{
