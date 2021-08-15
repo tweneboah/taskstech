@@ -97,6 +97,15 @@ const useStyles = makeStyles((theme) => ({
           setDescription(trader.description)
         }, [trader.description])
 
+        const handleSubmit= () => {
+          if (firstname === "" || lastname === "" ||email === "" || password === "" ){
+              alert ("Please fill in the form.")
+              return false
+          }
+          dispatch(updateTrader(firstname, lastname,  email, password, description, phone))
+          }
+        
+
   
     return (
       <Grid container component="main" className={classes.root}>
@@ -206,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-                  onClick={() => dispatch(updateTrader(firstname, lastname,  email, password, description, phone))}
+                  onClick={() => handleSubmit()}
                   >
                   CONFIRM
                   </Button>

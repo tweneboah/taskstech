@@ -42,15 +42,6 @@ export const getStatus = () => async dispatch => {
 
 export const signUp = (firstname, lastname,  email, password, confirmPassword, description, phone) => {
     return async (dispatch) =>{
-        //Validation
-        if (firstname === "" || lastname === "" ||email === "" || password === "" || confirmPassword === "" ){
-            alert ("Please fill in the form.")
-            return false
-        }
-        if(password !== confirmPassword){
-            alert ("Your password and confirm password do not match.")
-            return false
-        }
         const traderSignUpData = {
             email:email,
             password:password,
@@ -74,11 +65,6 @@ export const signUp = (firstname, lastname,  email, password, confirmPassword, d
 
 export const signIn = (email, password) => {
     return async (dispatch) => {
-         //Validation
-         if (email === "" || password === ""){
-            alert ("Please fill in the form.")
-            return false
-        }
         try {
             taskstechApi.post(`/tokens`, {},
           {auth: {
@@ -132,10 +118,6 @@ export const updateTrader = (firstname, lastname,  email, password, description,
     return async () => {
         // const selector = useSelector(state => state)
         // const id = getTraderId(selector)
-        if (firstname === "" || lastname === "" ||email === "" || password === "" ){
-            alert ("Please fill in the form.")
-            return false
-        }
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token');
         const traderSignUpData = {
@@ -153,6 +135,7 @@ export const updateTrader = (firstname, lastname,  email, password, description,
             
             .then(res =>{
                 console.log(res)
+                alert ("Your Profile has been updated!")
             })
         } catch(error){
             console.log(error.message)

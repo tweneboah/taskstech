@@ -80,6 +80,13 @@ const TradieLogin = () => {
         },
         [setPassword]
     );
+    const handleSubmit = () => {
+        if (email === "" || password === ""){
+            alert ("Please fill in the form.")
+            return false
+        }
+        dispatch(signIn(email, password))
+    }
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -147,7 +154,7 @@ const TradieLogin = () => {
                                 fullWidth
                                 variant="contained"
                                 className={classes.submit}
-                                onClick={()=> dispatch(signIn(email, password))}
+                                onClick={()=> handleSubmit()}
                             >
                                 Next
                             </Button>

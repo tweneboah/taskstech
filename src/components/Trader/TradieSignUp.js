@@ -85,6 +85,17 @@ export default function TradieSignUp() {
               setDescription(event.target.value);
           },[setDescription]);
 
+          const handleSubmit= () => {
+            if (firstname === "" || lastname === "" ||email === "" || password === "" || confirmPassword === "" ){
+                alert ("Please fill in the form.")
+                return false
+            }
+            if(password !== confirmPassword){
+                alert ("Your password and confirm password do not match.")
+                return false
+            }
+            dispatch(signUp(firstname, lastname,  email, password, confirmPassword, description, phone))
+          }
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -216,7 +227,7 @@ export default function TradieSignUp() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
-                                    onClick={() => dispatch(signUp(firstname, lastname,  email, password, confirmPassword, description, phone))}
+                                    onClick={() => handleSubmit()}
                                 >
                                     Sign Up
                                 </Button>
