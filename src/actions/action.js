@@ -43,7 +43,7 @@ export const getStatus = () => async dispatch => {
 export const signUp = (firstname, lastname,  email, password, confirmPassword, description, phone) => {
     return async (dispatch) =>{
         //Validation
-        if (firstname === "" || lastname === "" ||email === "" || password === "" || confirmPassword === ""){
+        if (firstname === "" || lastname === "" ||email === "" || password === "" || confirmPassword === "" ){
             alert ("Please fill in the form.")
             return false
         }
@@ -132,6 +132,10 @@ export const updateTrader = (firstname, lastname,  email, password, description,
     return async () => {
         // const selector = useSelector(state => state)
         // const id = getTraderId(selector)
+        if (firstname === "" || lastname === "" ||email === "" || password === "" ){
+            alert ("Please fill in the form.")
+            return false
+        }
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token');
         const traderSignUpData = {
