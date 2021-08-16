@@ -1,5 +1,9 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
+import {push} from 'connected-react-router';
+
+import {signInAction} from './traderActions';
+
 
 
 export const createJob = (job) => async dispatch => {
@@ -32,3 +36,19 @@ export const getStatus = () => async dispatch => {
     dispatch({ type: actions.GET_JOB_STATUS, payload: response.data.job_status, loading: true});
 }
 */
+
+// Trader Action
+
+
+// Authentication Action
+export const listenAuthState = () => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('token')
+        if(!token) {
+            dispatch(push('/login'))
+        }
+        dispatch(signInAction({
+            isSignedIn:true,
+        }))
+    }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
+import Auth from './components/Auth'
 import TradieLogin from "./components/Forms/TradieLogin";
 import NewInventory from "./components/inventory/NewInventory";
 import CreateJob from "./components/Jobs/CreateJob";
@@ -15,7 +16,10 @@ function App() {
       <Switch>
         <Route exact={true} path='/' component={NewInventory} />
         <Route exact path='/login' component={TradieLogin} />
-        <Route exact path='/create/job' component={CreateJob} />
+
+        <Auth>
+          <Route exact path='/create/job' component={CreateJob} /> 
+        </Auth>
       </Switch>
     </div>
   );
