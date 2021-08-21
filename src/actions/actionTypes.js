@@ -1,5 +1,8 @@
 export const CREATE_JOB_STARTED = 'CREATE_JOB_STARTED';
 export const CREATE_JOB = 'CREATE_JOB';
+export const GET_JOBS_STARTED = 'GET_JOBS_STARTED';
+export const GET_JOBS = 'GET_JOBS';
+
 
 export const GET_JOB_STATUS_STARTED = 'GET_JOB_STATUS_STARTED';
 export const GET_JOB_STATUS = 'GET_JOB_STATUS';

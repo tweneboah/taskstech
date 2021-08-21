@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import SimpleBackdrop from '../Loading/SimpleBackdrop';
+import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 
-import FormNav from '../Navigation/FormNav';
-import { getStatus, createJob } from '../../actions/action';
+import FormNav from '../../Navigation/FormNav';
+import { getStatus, createJob } from '../../../actions/action';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +25,7 @@ const CreateJob = () => {
     const [description, setDescription] = React.useState('');
     const [tradespersonId, setTradespersonId] = React.useState(0);
     const [customerId, setCustomerId] = React.useState(0);
-    const [inventoryId, setInventory] = React.useState([]);
+    //const [inventoryId, setInventory] = React.useState([]);
     const [jobStatus, setJobStatus] = React.useState('Not yet started');
     const [jobStatusId, setJobStatusId] = React.useState(1);
 
@@ -38,7 +38,6 @@ const CreateJob = () => {
     const handleSubmit = event => {
         event.preventDefault();
         dispatch(createJob(jobObject));
-        
     };
 
     let jobObject = {
@@ -46,8 +45,7 @@ const CreateJob = () => {
         description: description,
         job_status_id: jobStatusId,
         tradesperson_id: tradespersonId,
-        customer_id: customerId,
-        inventory_id: inventoryId
+        customer_id: customerId
     }
 
     useEffect(() => {

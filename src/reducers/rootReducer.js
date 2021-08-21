@@ -4,7 +4,7 @@ import jobStatusReducer from '../reducers/jobStatusReducer';
 
 const rootReducer = combineReducers({
     status: jobStatusReducer,
-    job: jobsReducer
+    jobs: jobsReducer
 });
 
 export default rootReducer;
