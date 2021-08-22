@@ -6,3 +6,7 @@
 tr.MuiTableRow-root.MuiTableRow-hover {
     height: 12vh;
 }
+
+@media screen and (max-width: 600px) {
+    .makeStyles-root-4 { width: 100% !important; }
+}

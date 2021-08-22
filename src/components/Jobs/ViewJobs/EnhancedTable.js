@@ -27,23 +27,6 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-// Will pull data from API
-const rows = [
-  createData('Cupcake', 305),
-  createData('Donut', 452),
-  createData('Eclair', 262),
-  createData('Frozen yoghurt', 159),
-  createData('Gingerbread', 356),
-  createData('Honeycomb', 408),
-  createData('Ice cream sandwich', 237),
-  createData('Jelly Bean', 375),
-  createData('KitKat', 518),
-  createData('Lollipop', 392),
-  createData('Marshmallow', 318),
-  createData('Nougat', 360),
-  createData('Oreo', 437),
-];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -220,13 +203,13 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  //useSelector((state) => console.log(state));
   const { jobs } = useSelector((state) => state);
   
   const dispatch = useDispatch();
-  console.log(jobs.payload)
+  //console.log(jobs.payload)
+
   useEffect(() => {
-    dispatch(getJobs());//
+    dispatch(getJobs());
   }, [jobs]);
 
   const handleRequestSort = (event, property) => {
@@ -286,7 +269,6 @@ export default function EnhancedTable() {
             <Table
               className={classes.table}
               aria-labelledby="tableTitle"
-              //size={dense ? 'small' : 'medium'}
               aria-label="enhanced table"
             >
               <EnhancedTableHead
@@ -335,7 +317,7 @@ export default function EnhancedTable() {
                   <TableRow >
                     <TableCell colSpan={6} />
                   </TableRow>
-                )}
+                ) }
               </TableBody>
             </Table>
           </TableContainer>
