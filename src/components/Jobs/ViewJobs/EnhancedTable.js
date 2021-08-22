@@ -27,6 +27,23 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
+// Will pull data from API
+const rows = [
+  createData('Cupcake', 305),
+  createData('Donut', 452),
+  createData('Eclair', 262),
+  createData('Frozen yoghurt', 159),
+  createData('Gingerbread', 356),
+  createData('Honeycomb', 408),
+  createData('Ice cream sandwich', 237),
+  createData('Jelly Bean', 375),
+  createData('KitKat', 518),
+  createData('Lollipop', 392),
+  createData('Marshmallow', 318),
+  createData('Nougat', 360),
+  createData('Oreo', 437),
+];
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;

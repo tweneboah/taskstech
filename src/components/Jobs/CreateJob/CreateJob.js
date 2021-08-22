@@ -31,7 +31,7 @@ const CreateJob = () => {
 
     const status = useSelector((state) => state.status.job);
 
-    const loading = useSelector((state) => state.job.loading);
+    const loading = useSelector((state) => state.jobs.loading);
 
     const dispatch = useDispatch();
 
