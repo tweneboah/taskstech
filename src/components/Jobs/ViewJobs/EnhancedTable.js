@@ -18,7 +18,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
 import './viewjobs.css';
 
 
@@ -246,7 +245,7 @@ export default function EnhancedTable(props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, jobs.payload?.length - page * rowsPerPage); //jobs.payload?
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, jobs.payload?.length - page * rowsPerPage); 
 
   return (
     <React.Fragment >
