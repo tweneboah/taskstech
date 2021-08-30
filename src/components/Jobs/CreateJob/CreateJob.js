@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -21,23 +21,25 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateJob = () => {
     const classes = useStyles();
-    const [jobName, setJobName] = React.useState('');
-    const [description, setDescription] = React.useState('');
-    const [tradespersonId, setTradespersonId] = React.useState(0);
-    const [customerId, setCustomerId] = React.useState(0);
-    //const [inventoryId, setInventory] = React.useState([]);
-    const [jobStatus, setJobStatus] = React.useState('Not yet started');
-    const [jobStatusId, setJobStatusId] = React.useState(1);
+    const [jobName, setJobName] = useState('');
+    const [description, setDescription] = useState('');
+    const [tradespersonId, setTradespersonId] = useState(0);
+    const [customerId, setCustomerId] = useState(0);
+    //const [inventoryId, setInventory] = useState([]);
+    const [jobStatus, setJobStatus] = useState('Not yet started');
+    const [jobStatusId, setJobStatusId] = useState(1);
 
     const status = useSelector((state) => state.status.job);
+    const indicator = useSelector((state) =>  state.jobs.loading); 
 
-    const loading = useSelector((state) => state.jobs.loading);
 
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(createJob(jobObject));
+        console.log(indicator);
+        dispatch(createJob(jobObject, true));
+        console.log(indicator);
     };
 
     let jobObject = {
@@ -50,7 +52,7 @@ const CreateJob = () => {
 
     useEffect(() => {
         dispatch(getStatus());
-    }, []);
+    }, [indicator]);
 
     const handleDropdownChange = event => {
         event.preventDefault();
@@ -107,10 +109,10 @@ const CreateJob = () => {
                         variant="outlined"
                     >
                         {status.map((option, key) => (
-                                <option key={key} value={option.name} id={option.id}>
-                                    {option.name}
-                                </option>
-                            ))}
+                            <option key={key} value={option.name} id={option.id}>
+                                {option.name}
+                            </option>
+                        ))}
                     </TextField>
 
                     <TextField
@@ -141,7 +143,7 @@ const CreateJob = () => {
                     </Button>
                 </div>
             </form>
-            <SimpleBackdrop loading={loading} />
+            <SimpleBackdrop loading={indicator} />
         </React.Fragment>
     );
 }

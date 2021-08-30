@@ -6,24 +6,24 @@ function jobsReducer(state = {}, action) {
         case actions.CREATE_JOB_STARTED:
             return {
                 ...state,
-                loading: action.loading
+                loading: true
             };
         case actions.CREATE_JOB:
             return {
                 ...state,
                 payload: action.payload,
-                loading: action.loading
+                loading: false
             };
         case actions.GET_JOBS_STARTED:
             return {
                 ...state,
-                loading: action.loading
+                loading: true
             };
         case actions.GET_JOBS:
             return {
                 ...state,
                 payload: action.payload,
-                loading: action.loading
+                loading: false
             };
         default:
             return state;

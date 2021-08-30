@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -18,31 +18,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import SimpleBackdrop from '../../Loading/SimpleBackdrop';
-import { useDispatch, useSelector } from 'react-redux';
-import { getJobs } from '../../../actions/action';
+
 import './viewjobs.css';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-// Will pull data from API
-const rows = [
-  createData('Cupcake', 305),
-  createData('Donut', 452),
-  createData('Eclair', 262),
-  createData('Frozen yoghurt', 159),
-  createData('Gingerbread', 356),
-  createData('Honeycomb', 408),
-  createData('Ice cream sandwich', 237),
-  createData('Jelly Bean', 375),
-  createData('KitKat', 518),
-  createData('Lollipop', 392),
-  createData('Marshmallow', 318),
-  createData('Nougat', 360),
-  createData('Oreo', 437),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -88,7 +66,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
+            inputProps={{ 'aria-label': 'select all jobs' }}
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -212,22 +190,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
+  const { jobs } = props;
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const { jobs } = useSelector((state) => state);
-  
-  const dispatch = useDispatch();
-  //console.log(jobs.payload)
-
-  useEffect(() => {
-    dispatch(getJobs());
-  }, [jobs]);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('calories'); //
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -236,8 +206,9 @@ export default function EnhancedTable() {
   };
 
   const handleSelectAllClick = (event) => {
+
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = jobs.payload.map((n) => n.name); //
       setSelected(newSelecteds);
       return;
     }
@@ -275,10 +246,10 @@ export default function EnhancedTable() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, jobs.payload?.length - page * rowsPerPage); //jobs.payload?
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <EnhancedTableToolbar numSelected={selected.length} />
@@ -295,10 +266,10 @@ export default function EnhancedTable() {
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+                rowCount={jobs.payload?.length ?? 0}
               />
               <TableBody>
-                {stableSort(jobs.payload, getComparator(order, orderBy)) //jobs.payload
+                {stableSort(jobs.payload, getComparator(order, orderBy)) 
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.name);
@@ -311,7 +282,7 @@ export default function EnhancedTable() {
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.id}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
@@ -323,10 +294,8 @@ export default function EnhancedTable() {
                         <TableCell component="th" id={labelId} scope="row" padding="none">
                           {row.name}
                         </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
+                        <TableCell align="right">{/* Additional Fields */}</TableCell>
+
                       </TableRow>
                     );
                   })}
@@ -334,22 +303,22 @@ export default function EnhancedTable() {
                   <TableRow >
                     <TableCell colSpan={6} />
                   </TableRow>
-                ) }
+                )}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[5, 10, 15]}
             component="div"
-            count={rows.length}
+            count={jobs.payload?.length ?? 0}
             rowsPerPage={rowsPerPage}
             page={page}
-            onChangePage ={handleChangePage}
+            onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
       </div>
-      <SimpleBackdrop loading={jobs.loading} />
+
     </React.Fragment>
   );
 }

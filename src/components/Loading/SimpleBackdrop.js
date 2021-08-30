@@ -10,14 +10,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleBackdrop({loading}) {
+export default function SimpleBackdrop({loading = false}) {
   const classes = useStyles();
+  //console.log(loading);
   
-  //console.log(`loading: ${loading}`);
-
   return (
     <div>
-     
       <Backdrop className={classes.backdrop} open={loading} >
         <CircularProgress color="inherit" />
       </Backdrop>
