@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useCallback} from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -6,7 +6,9 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
-
+import { createInventory } from "../../actions/action";
+import { useDispatch } from "react-redux";
+// import taskstechApi from '../../api/taskstechApi';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,14 +42,84 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewInventory() {
-  const [serialNos, setSerialNos] = useState([]);
+export default function NewInventory() {
+  const [name, setName] = useState(""),
+            [description, setDescription] = useState(""),
+            [quantity, setQuantity] = useState(""),
+            [supplier, setSupplier] = useState(""),
+            [price, setPrice] = useState(""),
+            [notes, setNotes] = useState(""),
+            [model_no, setModel_no] = useState(""),
+            [serialNos, setSerialNos] = useState([]);
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(serialNos)
-  }, [serialNos])
+  const inputName = useCallback(
+    (event) => {
+        setName(event.target.value);
+    },
+    [setName]
+);
+    const inputDescription = useCallback(
+    (event) => {
+        setDescription(event.target.value);
+    },
+    [setDescription]
+    );
+    const inputQuantity = useCallback(
+        (event) => {
+            setQuantity(event.target.value);
+        },
+        [setQuantity]
+        );
+    const inputSupplier = useCallback(
+    (event) => {
+        setSupplier(event.target.value);
+    },
+    [setSupplier]
+    );
+    const inputPrice = useCallback(
+    (event) => {
+        setPrice(event.target.value);
+    },
+    [setPrice]
+    );
+    const inputNotes = useCallback(
+    (event) => {
+        setNotes(event.target.value);
+    },
+    [setNotes]
+    );
+    const inputModel_no = useCallback(
+    (event) => {
+        setModel_no(event.target.value);
+    },
+    [setModel_no]
+    );
+    
+  let inventoryData = {
+      name:name,
+      description:description,
+      supplier:supplier,
+      price:price,
+      notes:notes,
+      model_no:model_no,
+      inventory_details:serialNos
+  }
+  console.log(inventoryData)
+
+
+
+  const handleSubmit= () => {
+    if (name === "" || price === "" ){
+        alert ("Please fill in the form.")
+        return false
+    }
+    dispatch(createInventory(inventoryData))
+  }
+
+
   return (
     <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -94,8 +166,8 @@ function NewInventory() {
                                     label="Inventory Name"
                                     name="name"
                                     autoComplete="name"
-                                    // value={}
-                                    // onChange={}
+                                    value={name}
+                                    onChange={inputName}
                                 />
                                 
                             </Grid>
@@ -107,11 +179,23 @@ function NewInventory() {
                                     fullWidth
                                     id="description"
                                     label="Description"
-                                    // value={}
-                                    // onChange={}
+                                    value={description}
+                                    onChange={inputDescription}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}></Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="description"
+                                    name="quantity"
+                                    variant="outlined"
+                                    fullWidth
+                                    id="quantity"
+                                    label="Quantity"
+                                    value={quantity}
+                                    type="number"
+                                    onChange={inputQuantity}
+                                />
+                            </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="supplier"
@@ -120,8 +204,8 @@ function NewInventory() {
                                     fullWidth
                                     id="supplier"
                                     label="Supplier"
-                                    // value={}
-                                    // onChange={}
+                                    value={supplier}
+                                    onChange={inputSupplier}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -131,8 +215,8 @@ function NewInventory() {
                                     id="model_no"
                                     label="Model No"
                                     name="model_no"
-                                    // value={}
-                                    // onChange={}
+                                    value={model_no}
+                                    onChange={inputModel_no}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -143,8 +227,9 @@ function NewInventory() {
                                     fullWidth
                                     id="price"
                                     label="Price"
-                                    // value={}
-                                    // onChange={}
+                                    value={price}
+                                    type="number"
+                                    onChange={inputPrice}
                                 />
                             </Grid>
                             <Grid
@@ -160,8 +245,8 @@ function NewInventory() {
                                     id="notes"
                                     label="Notes"
                                     name="notes"
-                                    // value={}
-                                    // onChange={}
+                                    value={notes}
+                                    onChange={inputNotes}
                                     rows={5}
                                     multiline={true}
                                 />
@@ -170,9 +255,9 @@ function NewInventory() {
                                 item
                                 xs={12}
                                 sm={12}
-                                className={classes.notes}
+                                // className={classes.notes}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos}/>
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity}/>
                                 
                             </Grid>
                         </Grid>
@@ -183,6 +268,7 @@ function NewInventory() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={() => handleSubmit()}
                                 >
                                     CONFIRM
                                 </Button>
@@ -193,6 +279,7 @@ function NewInventory() {
                                     variant="outlined"
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={() => handleSubmit()}
                                 >
                                     Cancel
                                 </Button>
@@ -207,4 +294,4 @@ function NewInventory() {
   );
 }
 
-export default NewInventory;
+    

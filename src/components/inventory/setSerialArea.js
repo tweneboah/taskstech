@@ -1,6 +1,6 @@
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, IconButton,  makeStyles } from '@material-ui/core'
-import { CheckCircle, Delete} from '@material-ui/icons'
-import React, {useState, useCallback} from 'react'
+import { CheckCircle, Delete, Edit} from '@material-ui/icons'
+import React, {useState, useCallback, useEffect} from 'react'
 import  TextInput  from './TextInput'
 
 const useStyles = makeStyles({
@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 
 const SetSerialNoArea = (props) => {
     const classes = useStyles();
+    const [index, setIndex] = useState("")
      const [serialNo, setSerialNo] = useState("");
 
     const inputSerialNo = useCallback((event) => {
@@ -22,9 +23,30 @@ const SetSerialNoArea = (props) => {
     },[setSerialNo])
 
     const addSerialNo = (serialNo) => {
-        props.setSerialNos(prevState => [...prevState, {serialNo:serialNo}])
-        setSerialNo("")
+        if (index === props.serialNos.length) {
+            props.setSerialNos(prevState => [...prevState, {serial_no:serialNo}])
+            setIndex(index + 1)
+            setSerialNo("")
+        } else {
+            const newSerialNos = props.serialNos
+            newSerialNos[index] = {serial_no:serialNo}
+            props.setSerialNos(newSerialNos)
+            setIndex(newSerialNos.length)
+            setSerialNo("")
+        }
     };
+
+    useEffect(()=> {
+        const length = props.quantity
+        for (let i=length; i > 0; i--){
+            addSerialNo(index, 0)
+        }
+    },[props.quantity])
+
+    const editSerialNo = (index, serialNo) => {
+        setIndex(index);
+        setSerialNo(serialNo);
+    }
 
     const deleteSerialNo = (deleteIndex) => {
         const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
@@ -45,7 +67,12 @@ const SetSerialNoArea = (props) => {
                         {
                             props.serialNos.map((item, i) => (
                                 <TableRow key={i}>
-                                    <TableCell>{item.serialNo}</TableCell>
+                                    <TableCell>{item.serial_no}</TableCell>
+                                    <TableCell>
+                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.quantity)}>
+                                            <Edit />
+                                        </IconButton>
+                                    </TableCell>
                                     <TableCell>
                                         <IconButton className={classes.iconCell} onClick={() => deleteSerialNo(i)}>
                                             <Delete />
