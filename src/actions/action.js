@@ -1,6 +1,10 @@
 import * as actions from './actionTypes';
 import {push} from 'connected-react-router';
 import taskstechApi from '../api/taskstechApi';
+import {push} from 'connected-react-router';
+
+import {signInAction} from './traderActions';
+
 
 
 export const createJob = (job) => async dispatch => {
@@ -34,19 +38,18 @@ export const getStatus = () => async dispatch => {
 }
 */
 
-export const createInventory = (inventoryData) => {
+// Trader Action
+
+
+// Authentication Action
+export const listenAuthState = () => {
     return async (dispatch) => {
-        const token = localStorage.getItem('token');
-        try {
-            taskstechApi.post(`/inventory`, inventoryData, {
-                  headers:{authorization:`Bearer ${token}`}
-              })
-            .then(res =>{
-                console.log(res)
-                dispatch(push('/inventory/create'))
-            })
-        } catch(error){
-            console.log(error.message)
+        const token = localStorage.getItem('token')
+        if(!token) {
+            dispatch(push('/login'))
         }
+        dispatch(signInAction({
+            isSignedIn:true,
+        }))
     }
 }
