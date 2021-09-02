@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 const SetSerialNoArea = (props) => {
     const classes = useStyles();
-    const [index, setIndex] = useState("")
+    const [index, setIndex] = useState(0)
      const [serialNo, setSerialNo] = useState("");
 
     const inputSerialNo = useCallback((event) => {
@@ -62,7 +62,7 @@ const SetSerialNoArea = (props) => {
                                 <TableRow key={i}>
                                     <TableCell>{item.serial_no}</TableCell>
                                     <TableCell>
-                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.quantity)}>
+                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.serial_no)}>
                                             <Edit />
                                         </IconButton>
                                     </TableCell>
