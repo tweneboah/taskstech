@@ -1,8 +1,8 @@
 import * as actions from './actionTypes';
 import {push} from 'connected-react-router';
 import taskstechApi from '../api/taskstechApi';
-
 import {signInAction} from './traderActions';
+import { fetchInventoryAction} from './inventoryActions'
 
 
 
@@ -66,6 +66,29 @@ export const createInventory = (inventoryData) => {
             .then(res =>{
                 console.log(res)
                 dispatch(push('/inventory/create'))
+            })
+        } catch(error){
+            console.log(error.message)
+        }
+    }
+}
+
+export const fetchInventory = () => {
+    return async (dispatch) => {
+        // const token = localStorage.getItem('token');
+        try {
+            taskstechApi.get(`/inventory`,{
+                  headers:{Authorization:`Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2OCwiZXhwIjoxNjMxMTY1ODQ4fQ.JntqPqfmOBY1lykgY-LdGFcwYr-CLppQKONxBN5LX-8`}
+              })
+            .then(res =>{
+                console.log(res)
+                const items = res.data.items
+                const inventoryList = []
+                items.forEach(item => {
+                    const inventoryItem = item
+                    inventoryList.push(inventoryItem)
+                })
+                dispatch(fetchInventoryAction(inventoryList))
             })
         } catch(error){
             console.log(error.message)

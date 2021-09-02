@@ -7,6 +7,7 @@ import NewInventory from "./components/inventory/NewInventory";
 import CreateJob from "./components/Jobs/CreateJob";
 import Header from "./components/Header/Header";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
+import InventoryList from './components/inventory/InventoryList';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <RightSideBar />
       <Switch>
         <Route exact={true} path='/' component={NewInventory} />
+        <Route exact={true} path='/inventory/list' component={InventoryList} />
         <Route exact path='/login' component={TradieLogin} />
 
         <Auth>
