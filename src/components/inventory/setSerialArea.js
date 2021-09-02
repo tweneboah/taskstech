@@ -1,6 +1,6 @@
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, IconButton,  makeStyles } from '@material-ui/core'
 import { CheckCircle, Delete, Edit} from '@material-ui/icons'
-import React, {useState, useCallback, useEffect} from 'react'
+import React, {useState, useCallback} from 'react'
 import  TextInput  from './TextInput'
 
 const useStyles = makeStyles({
@@ -35,13 +35,6 @@ const SetSerialNoArea = (props) => {
             setSerialNo("")
         }
     };
-
-    useEffect(()=> {
-        const length = props.quantity
-        for (let i=length; i > 0; i--){
-            addSerialNo(index, 0)
-        }
-    },[props.quantity])
 
     const editSerialNo = (index, serialNo) => {
         setIndex(index);
