@@ -78,7 +78,7 @@ export const fetchInventory = () => {
         // const token = localStorage.getItem('token');
         try {
             taskstechApi.get(`/inventory`,{
-                  headers:{Authorization:`Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2OCwiZXhwIjoxNjMxMTY1ODQ4fQ.JntqPqfmOBY1lykgY-LdGFcwYr-CLppQKONxBN5LX-8`}
+                  headers:{Authorization:`Bearer {Token should be get from Swagger} `}
               })
             .then(res =>{
                 console.log(res)
