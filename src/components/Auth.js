@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { listenAuthState } from '../actions/action';
-import { getIsSignedIn } from '../selector/traderSelector';
+import { getIsSignedIn } from '../selector/userSelector';
 
 const Auth = ({children}) => {
     const dispatch = useDispatch();
