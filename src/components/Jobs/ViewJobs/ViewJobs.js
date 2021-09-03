@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import Container from '@material-ui/core/Container';
@@ -11,11 +11,11 @@ import EnhancedTable from './EnhancedTable';
 import Box from '@material-ui/core/Box';
 import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobs } from '../../../actions/action';
+import { getAllJobs } from '../../../actions/action';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
+
     return (
         <div
             role="tabpanel"
@@ -56,14 +56,30 @@ const useStyles = makeStyles((theme) => ({
 export default function FullWidthTabs() {
     const classes = useStyles();
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
-
+    const [value, setValue] = useState(0);
     const { jobs } = useSelector((state) => state);
 
     const dispatch = useDispatch();
 
+    let completedJobs = { payload: [] };
+    let activeJobs = { payload: [] };
+    let temp = jobs.payload ?? [];
+
+    completedJobs = {
+        payload: temp.filter(job => {
+            return job.job_status.name === 'Completed';
+        })
+    };
+
+    activeJobs = {
+        payload: temp.filter(job => {
+            return job.job_status.name === 'In progress';
+        })
+    };
+
+
     useEffect(() => {
-        dispatch(getJobs(jobs?.loading));  
+        dispatch(getAllJobs(jobs?.loading));
     }, []);
 
 
@@ -87,9 +103,9 @@ export default function FullWidthTabs() {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="Active Jobs" {...a11yProps(0)} />
+                    <Tab label="All Jobs" {...a11yProps(0)} />
                     <Tab label="Completed Jobs" {...a11yProps(1)} />
-                    <Tab label="All Jobs" {...a11yProps(2)} />
+                    <Tab label="Active Jobs" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -97,17 +113,23 @@ export default function FullWidthTabs() {
                 index={value}
                 onChangeIndex={handleChangeIndex}
             >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                    <EnhancedTable jobs={jobs} />
+                <TabPanel value={value} index={0} dir={theme.direction} >
+                    <EnhancedTable jobs={jobs} title='All Jobs' />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    Item One
+                    <EnhancedTable
+                        jobs={completedJobs}
+                        title='Completed Jobs'
+                    />
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    Item Two
+                    <EnhancedTable
+                        jobs={activeJobs}
+                        title='Active Jobs'
+                    />
                 </TabPanel>
             </SwipeableViews>
-            <SimpleBackdrop loading={jobs?.loading} />
+            <SimpleBackdrop loading={jobs.loading} />
         </Container>
     );
 }

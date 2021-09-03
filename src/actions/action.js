@@ -14,15 +14,14 @@ export const createJob = (job, loading) => async dispatch => {
         });
 }
 
-export const getJobs = (page = 1, loading = true) => async dispatch => {
+export const getAllJobs = (page = 1, loading = true) => async dispatch => {
     const { data } = await taskstechApi.get(`/job?${page}`);
     
-    dispatch({ type: actions.GET_JOBS_STARTED, loading: loading });
+    dispatch({ type: actions.GET_ALL_JOBS_STARTED, loading: loading });
     
     if(data) {
-        dispatch({ type: actions.GET_JOBS, payload: data.items, loading: false});
+        dispatch({ type: actions.GET_ALL_JOBS, payload: data.items, loading: false});
     }
-    
 }
 
 

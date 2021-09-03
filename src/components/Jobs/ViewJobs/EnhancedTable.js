@@ -124,9 +124,9 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+export const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, title } = props;
 
   return (
     <Toolbar
@@ -140,7 +140,7 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          All Jobs
+          {title}
         </Typography>
       )}
 
@@ -190,7 +190,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EnhancedTable(props) {
-  const { jobs } = props;
+  const { jobs, title } = props;
+  
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories'); //
@@ -203,7 +204,7 @@ export default function EnhancedTable(props) {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
+  //console.log(jobs)
   const handleSelectAllClick = (event) => {
 
     if (event.target.checked) {
@@ -251,7 +252,7 @@ export default function EnhancedTable(props) {
     <React.Fragment >
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar numSelected={selected.length} title={title} />
           <TableContainer>
             <Table
               className={classes.table}
@@ -294,7 +295,6 @@ export default function EnhancedTable(props) {
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{/* Additional Fields */}</TableCell>
-
                       </TableRow>
                     );
                   })}
