@@ -25,7 +25,7 @@ const CreateJob = () => {
     const [description, setDescription] = React.useState('');
     const [tradespersonId, setTradespersonId] = React.useState(0);
     const [customerId, setCustomerId] = React.useState(0);
-    const [inventoryId, setInventory] = React.useState([]);
+    // const [inventoryId, setInventory] = React.useState([]);
     const [jobStatus, setJobStatus] = React.useState('Not yet started');
     const [jobStatusId, setJobStatusId] = React.useState(1);
 
@@ -47,7 +47,7 @@ const CreateJob = () => {
         job_status_id: jobStatusId,
         tradesperson_id: tradespersonId,
         customer_id: customerId,
-        inventory_id: inventoryId
+        // inventory_id: inventoryId
     }
 
     useEffect(() => {
