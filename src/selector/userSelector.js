@@ -6,3 +6,8 @@ export const getIsSignedIn = createSelector(
     [traderSelector],
     state => state.isSignedIn
 );
+
+export const getTraderId = createSelector(
+    [traderSelector],
+    state => state.id
+);

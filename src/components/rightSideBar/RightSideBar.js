@@ -16,10 +16,14 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import WorkIcon from "@material-ui/icons/Work";
 import { withRouter } from "react-router-dom";
+import { useDispatch} from 'react-redux'
+import { signOut } from "../../actions/action";
+
+
 
 //Rigtht sidebar component
 
-function RightSideBar({ history }) {
+function RightSideBar() {
     // Make use of makeStyle from material UI
     const useStyles = makeStyles({
         list: {
@@ -29,7 +33,7 @@ function RightSideBar({ history }) {
             width: "auto",
         },
     });
-
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [state, setState] = useState({
         left: false,
@@ -84,7 +88,7 @@ function RightSideBar({ history }) {
         {
             text: "Logout",
             icon: <SettingsPowerIcon />,
-            onClick: () => history.push("/logout"),
+            onClick: (() => dispatch(signOut())),
         },
     ];
 
