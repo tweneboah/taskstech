@@ -4,6 +4,7 @@ This is for testing the git workflow
 
 ## Advice for Reviewers & Testing Notes
 
+npm install 
 - Explain how your change should be reviewed, and where reviewers should direct their attention.
 - Explain (where relevant) how your change can be tested.
 

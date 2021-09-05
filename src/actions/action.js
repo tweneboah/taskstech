@@ -1,4 +1,6 @@
 import * as actions from './actionTypes';
+import taskstechApi from '../api/taskstechApi';
+import { fetchInventoryAction} from './inventoryActions'
 // import {useSelector } from 'react-redux'
 import taskstechApi from '../api/taskstechApi';
 import {signInAction, signOutAction, setTraderData} from './traderActions';
@@ -37,6 +39,69 @@ export const getStatus = () => async dispatch => {
     dispatch({ type: actions.GET_JOB_STATUS, payload: response.data.job_status, loading: true});
 }
 */
+
+// Trader Action
+
+
+// Authentication Action
+export const listenAuthState = () => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('token')
+        if(!token) {
+            dispatch(push('/login'))
+        }
+        dispatch(signInAction({
+            isSignedIn:true,
+        }))
+    }
+}
+
+
+//Inventory Actions
+
+
+export const fetchInventory = () => {
+    return async (dispatch) => {
+        // const token = localStorage.getItem('token');
+        try {
+            taskstechApi.get(`/inventory`,{
+                  headers:{Authorization:`Bearer {Token should be get from Swagger} `}
+              })
+            .then(res =>{
+                console.log(res)
+                const items = res.data.items
+                const inventoryList = []
+                items.forEach(item => {
+                    const inventoryItem = item
+                    inventoryList.push(inventoryItem)
+                })
+                dispatch(fetchInventoryAction(inventoryList))
+            })
+        } catch(error){
+            console.log(error.message)
+        }
+    }}
+
+
+    export const createInventory = (inventoryData) => {
+        return async (dispatch) => {
+            const token = localStorage.getItem('token');
+            try {
+                taskstechApi.post(`/inventory`, inventoryData, {
+                      headers:{authorization:`Bearer ${token}`}
+                  })
+                .then(res =>{
+                    console.log(res)
+                    dispatch(push('/inventory/create'))
+                })
+            } catch(error){
+                console.log(error.message)
+            }
+        }
+    }
+
+
+
 
 // Traders Actions
 
@@ -150,17 +215,5 @@ export const signOut = () => {
             localStorage.removeItem('token')
             localStorage.removeItem('id')
             dispatch(push('/login'));
-    }
-}
-
-export const listenAuthState = () => {
-    return async (dispatch) => {
-        const token = localStorage.getItem('token')
-        if(!token) {
-            dispatch(push('/login'))
-        }
-        dispatch(signInAction({
-            isSignedIn:true,
-        }))
     }
 }
