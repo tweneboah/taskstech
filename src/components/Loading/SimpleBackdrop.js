@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleBackdrop({loading = false}) {
   const classes = useStyles();
-  //console.log(loading);
   
   return (
     <div>
