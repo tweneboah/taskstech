@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
 import { fetchInventoryAction} from './inventoryActions'
-import taskstechApi from '../api/taskstechApi';
+// import {useSelector } from 'react-redux'
 import {signInAction, signOutAction, setTraderData} from './traderActions';
 import {push} from 'connected-react-router';
 
@@ -59,10 +59,10 @@ export const listenAuthState = () => {
 
 export const fetchInventory = () => {
     return async (dispatch) => {
-        // const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         try {
             taskstechApi.get(`/inventory`,{
-                  headers:{Authorization:`Bearer {Token should be get from Swagger} `}
+                  headers:{Authorization:`Bearer ${token}`}
               })
             .then(res =>{
                 console.log(res)
@@ -143,7 +143,7 @@ export const signIn = (email, password) => {
                   id:res.data.user_id,
               }))
               getTraderData()
-              dispatch(push('/tradie/profile'))
+              dispatch(push('/inventory/list'))
           })
       } catch(error){
           console.log(error.message)
