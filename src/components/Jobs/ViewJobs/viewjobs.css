@@ -1,0 +1,15 @@
+.MuiTableHead-root {
+    display: table-header-group;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+tr.MuiTableRow-root.MuiTableRow-hover {
+    height: 12vh;
+}
+
+
+@media screen and (max-width: 600px) {
+    .makeStyles-root-4 { width: 100% !important; }
+    .MuiContainer-root { width: 100% !important; }
+    span.MuiTab-wrapper { font-size: 12px; }
+}

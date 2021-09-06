@@ -4,40 +4,39 @@ import { fetchInventoryAction} from './inventoryActions'
 // import {useSelector } from 'react-redux'
 import {signInAction, signOutAction, setTraderData} from './traderActions';
 import {push} from 'connected-react-router';
-// import { getTraderId } from '../selector/userSelector';
 
-
-
-export const createJob = (job) => async dispatch => {
-    dispatch({ type: actions.CREATE_JOB_STARTED, loading: true });
+export const createJob = (job, loading) => async dispatch => {
+    dispatch({ type: actions.CREATE_JOB_STARTED, loading: loading });
 
     await taskstechApi
         .post('/job', job)
         .then(() => {
-            dispatch({ type: actions.CREATE_JOB, payload: job, loading: false });
+            dispatch({ type: actions.CREATE_JOB, payload: job,  loading: false });
         }).catch(e => {
             console.log(e)
         });
-        
 }
 
-export const getStatus = () => async dispatch => {
-    const response = await taskstechApi.get('/lists');
-
-    dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true});
-
-    if(response) {
-        dispatch({ type: actions.GET_JOB_STATUS, payload: response.data.job_status, loading: false});
+export const getAllJobs = (page = 1, loading = true) => async dispatch => {
+    const { data } = await taskstechApi.get(`/job?${page}`);
+    
+    dispatch({ type: actions.GET_ALL_JOBS_STARTED, loading: loading });
+    
+    if(data) {
+        dispatch({ type: actions.GET_ALL_JOBS, payload: data.items, loading: false});
     }
 }
 
-/*
-export const getStatus = () => async dispatch => {
-    const response = await taskstechApi.get('/lists');
 
-    dispatch({ type: actions.GET_JOB_STATUS, payload: response.data.job_status, loading: true});
+export const getStatus = () => async dispatch => {
+    const { data } = await taskstechApi.get('/lists');
+
+    dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true });
+    
+    if (data) {
+        dispatch({ type: actions.GET_JOB_STATUS, payload: data.job_status, loading: false });
+    }
 }
-*/
 
 // Trader Action
 
@@ -57,7 +56,6 @@ export const listenAuthState = () => {
 
 
 //Inventory Actions
-
 
 export const fetchInventory = () => {
     return async (dispatch) => {
