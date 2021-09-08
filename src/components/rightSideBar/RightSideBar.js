@@ -23,7 +23,7 @@ import { signOut } from "../../actions/action";
 
 //Rigtht sidebar component
 
-function RightSideBar() {
+function RightSideBar({history}) {
     // Make use of makeStyle from material UI
     const useStyles = makeStyles({
         list: {
@@ -104,6 +104,7 @@ function RightSideBar() {
         >
             <List>
                 {/* Destructure the text, icon and onClick from RightSideData*/}
+               
                 {rightSideData.map(({ text, icon, onClick }) => (
                     <ListItem button key={text} onClick={onClick}>
                         {icon && <ListItemIcon>{icon}</ListItemIcon>}

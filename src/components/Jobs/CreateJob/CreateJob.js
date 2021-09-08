@@ -5,15 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleBackdrop from '../../Loading/SimpleBackdrop';
+import Container from '@material-ui/core/Container';
 
-import FormNav from '../../Navigation/FormNav';
+//import FormNav from '../../Navigation/FormNav';
 import { getStatus, createJob } from '../../../actions/action';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
-            width: '80vw',
+            width: '80vw !important',
         },
     },
 }));
@@ -30,16 +31,14 @@ const CreateJob = () => {
     const [jobStatusId, setJobStatusId] = useState(1);
 
     const status = useSelector((state) => state.status.job);
-    const indicator = useSelector((state) =>  state.jobs.loading); 
-
+    const indicator = useSelector((state) => state.job.loading); // state.jobs.loading
+    useSelector((state) => console.log(state));
 
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(indicator);
         dispatch(createJob(jobObject, true));
-        console.log(indicator);
     };
 
     let jobObject = {
@@ -66,85 +65,87 @@ const CreateJob = () => {
 
 
     return (
-        <React.Fragment>
-            <FormNav />
-            <div id='content-heading'>
-                <Typography gutterBottom variant="h5">
-                    Create New Job
-                </Typography>
-                <Typography gutterBottom variant="span">
-                    Please fill the job details
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                    *Required
-                </Typography>
+        <Container container component="main" className={classes.root}>
+            <React.Fragment>
+                {/* <FormNav /> */}
+                <div id='content-heading'>
+                    <Typography gutterBottom variant="h5">
+                        Create New Job
+                    </Typography>
+                    <Typography gutterBottom variant="span">
+                        Please fill the job details
+                    </Typography>
+                    <Typography variant="subtitle2" gutterBottom>
+                        *Required
+                    </Typography>
 
-            </div>
-            <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
-                <div id='fields'>
-                    <TextField
-                        /* error */
-                        required
-                        id="outlined-error-helper-text"
-                        label="Job Name"
-                        variant="outlined"
-                        onChange={e => setJobName(e.target.value)}
-                    />
-                    <TextField
-                        /*error*/
-                        id="outlined-error-helper-text"
-                        label="Description"
-                        variant="outlined"
-                        onChange={e => setDescription(e.target.value)}
-                    />
-                    <TextField
-                        required
-                        id="outlined-select-currency-native"
-                        select
-                        value={jobStatus}
-                        onChange={handleDropdownChange}
-                        SelectProps={{
-                            native: true,
-                        }}
-                        variant="outlined"
-                    >
-                        {status.map((option, key) => (
-                            <option key={key} value={option.name} id={option.id}>
-                                {option.name}
-                            </option>
-                        ))}
-                    </TextField>
-
-                    <TextField
-                        /*error*/
-                        required
-                        id="outlined-error-helper-text"
-                        label="Tradesperson Id"
-                        variant="outlined"
-                        onChange={e => setTradespersonId(e.target.value)}
-                    />
-
-                    <TextField
-                        /*error*/
-                        required
-                        id="outlined-error-helper-text"
-                        label="Customer Id"
-                        variant="outlined"
-                        onChange={e => setCustomerId(e.target.value)}
-                    />
                 </div>
-                <div id='buttons'>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSubmit}
-                    >
-                        Create
-                    </Button>
-                </div>
-            </form>
-            <SimpleBackdrop loading={indicator} />
-        </React.Fragment>
+                <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
+                    <div id='fields'>
+                        <TextField
+                            /* error */
+                            required
+                            id="outlined-error-helper-text"
+                            label="Job Name"
+                            variant="outlined"
+                            onChange={e => setJobName(e.target.value)}
+                        />
+                        <TextField
+                            /*error*/
+                            id="outlined-error-helper-text"
+                            label="Description"
+                            variant="outlined"
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                        <TextField
+                            required
+                            id="outlined-select-currency-native"
+                            select
+                            value={jobStatus}
+                            onChange={handleDropdownChange}
+                            SelectProps={{
+                                native: true,
+                            }}
+                            variant="outlined"
+                        >
+                            {status.map((option, key) => (
+                                <option key={key} value={option.name} id={option.id}>
+                                    {option.name}
+                                </option>
+                            ))}
+                        </TextField>
+
+                        <TextField
+                            /*error*/
+                            required
+                            id="outlined-error-helper-text"
+                            label="Tradesperson Id"
+                            variant="outlined"
+                            onChange={e => setTradespersonId(e.target.value)}
+                        />
+
+                        <TextField
+                            /*error*/
+                            required
+                            id="outlined-error-helper-text"
+                            label="Customer Id"
+                            variant="outlined"
+                            onChange={e => setCustomerId(e.target.value)}
+                        />
+                    </div>
+                    <div id='buttons'>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSubmit}
+                        >
+                            Create
+                        </Button>
+                    </div>
+                </form>
+                <SimpleBackdrop loading={indicator} /> {/**/}
+            </React.Fragment>
+        </Container>
     );
 }
 
