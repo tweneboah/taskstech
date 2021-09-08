@@ -57,31 +57,29 @@ export default function FullWidthTabs() {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = useState(0);
-    const { jobs } = useSelector((state) => state);
+    const { job } = useSelector((state) => state);
 
     const dispatch = useDispatch();
+    //console.log(job)
+    
 
-    let completedJobs = { payload: [] };
-    let activeJobs = { payload: [] };
-    let temp = jobs.payload ?? [];
-
-    completedJobs = {
-        payload: temp.filter(job => {
+    const completedJobs = {
+        payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
         })
     };
+    
+    
 
-    activeJobs = {
-        payload: temp.filter(job => {
+    const activeJobs = {
+        payload: job.payload.filter(job => {
             return job.job_status.name === 'In progress';
         })
-    };
-
+    };/**/
 
     useEffect(() => {
-        dispatch(getAllJobs(jobs?.loading));
+        dispatch(getAllJobs(job?.loading));
     }, []);
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -114,22 +112,22 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction} >
-                    <EnhancedTable jobs={jobs} title='All Jobs' />
+                    <EnhancedTable jobs={job} title='All Jobs' />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <EnhancedTable
+                     <EnhancedTable
                         jobs={completedJobs}
                         title='Completed Jobs'
-                    />
+                    /> 
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    <EnhancedTable
+                      <EnhancedTable
                         jobs={activeJobs}
                         title='Active Jobs'
-                    />
+                    />  {/**/}
                 </TabPanel>
             </SwipeableViews>
-            <SimpleBackdrop loading={jobs.loading} />
+             <SimpleBackdrop loading={job.loading} /> 
         </Container>
     );
 }
