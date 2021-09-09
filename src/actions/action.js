@@ -29,12 +29,12 @@ export const createJob = (job, loading) => async dispatch => {
 }
 
 
-export const getAllJobs = (page = 1, loading = true) => async dispatch => {
+export const getAllJobs = (loading = true) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        taskstechApi.get(`/job?${page}`, config)
+        taskstechApi.get(`/job`, config)
             .then(res => {
                 dispatch({
                     type: actions.GET_ALL_JOBS_STARTED,
@@ -43,7 +43,7 @@ export const getAllJobs = (page = 1, loading = true) => async dispatch => {
                 if (res.data) {
                     dispatch({
                         type: actions.GET_ALL_JOBS,
-                        payload: res.data.items,
+                        payload: res.data,
                         loading: false
                     });
                 }

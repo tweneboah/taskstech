@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import EnhancedTable from './EnhancedTable';
+import DataTable from './DataTable';
 import Box from '@material-ui/core/Box';
 import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,21 +61,22 @@ export default function FullWidthTabs() {
 
     const dispatch = useDispatch();
     //console.log(job)
-    
+
 
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
         })
     };
-    
-    
+    /**/
+
 
     const activeJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'In progress';
         })
-    };/**/
+    };
+    /**/
 
     useEffect(() => {
         dispatch(getAllJobs(job?.loading));
@@ -112,22 +113,22 @@ export default function FullWidthTabs() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction} >
-                    <EnhancedTable jobs={job} title='All Jobs' />
+                    <DataTable jobs={job} title='All Jobs' />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                     <EnhancedTable
+                    <DataTable
                         jobs={completedJobs}
                         title='Completed Jobs'
-                    /> 
+                    />  {/**/}
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                      <EnhancedTable
+                    <DataTable
                         jobs={activeJobs}
                         title='Active Jobs'
                     />  {/**/}
                 </TabPanel>
             </SwipeableViews>
-             <SimpleBackdrop loading={job.loading} /> 
+            <SimpleBackdrop loading={job.loading} />
         </Container>
     );
 }
