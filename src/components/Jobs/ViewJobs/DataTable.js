@@ -1,9 +1,28 @@
 import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import { makeStyles } from '@material-ui/core/styles';
 
 import './viewjobs.css';
+/**/
+const handleClick = (event, cellValues) => {
+  console.log(cellValues.row);
+};
 
+const renderReactElement = params => {
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={(event) => {
+        handleClick(event, params);
+      }}
+    >
+      <MenuBookIcon />
+    </Button>
+  );
+}
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -29,10 +48,11 @@ const columns = [
     }
   },
   {
-    field: 'action',
-    headerName: 'Action',
+    field: 'diary',
+    headerName: 'View Diary',
     sortable: false,
-    width: 120
+    width: 120,
+    renderCell: renderReactElement
   },
 ];
 
@@ -66,10 +86,10 @@ export default function DataTable(props) {
 
   const classes = useStyles();
   const rows = jobs.payload;
-  console.log(rows.length)
+
   return (
-    <div 
-      className={classes.root} 
+    <div
+      className={classes.root}
       style={{ height: 400, width: '100%' }}
     >
       <DataGrid
@@ -82,3 +102,4 @@ export default function DataTable(props) {
     </div>
   );
 }
+
