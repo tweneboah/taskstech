@@ -73,6 +73,7 @@ export default function NewInventory() {
         },
         [setQuantity]
         );
+
     const inputSupplier = useCallback(
     (event) => {
         setSupplier(event.target.value);
@@ -257,7 +258,7 @@ export default function NewInventory() {
                                 sm={12}
                                 // className={classes.notes}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity}/>
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
                                 
                             </Grid>
                         </Grid>

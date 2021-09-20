@@ -6,8 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
-import { createInventory } from "../../actions/action";
-import { useDispatch } from "react-redux";
+// import { createInventory } from "../../actions/action";
+// import { useDispatch } from "react-redux";
 import taskstechApi from '../../api/taskstechApi';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +58,7 @@ export default function InventoryDetail() {
     }
 
   const classes = useStyles();
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
   const inputName = useCallback(
     (event) => {
@@ -103,6 +103,11 @@ export default function InventoryDetail() {
     [setModel_no]
     );
 
+    useEffect(() =>{
+        setQuantity(serialNos.length)
+    },[serialNos]);
+
+
     useEffect(() => {
         if(iid !==""){
             const token = localStorage.getItem('token');
@@ -140,13 +145,13 @@ export default function InventoryDetail() {
 
 
 
-  const handleSubmit= () => {
-    if (name === "" || price === "" ){
-        alert ("Please fill in the form.")
-        return false
-    }
-    dispatch(createInventory(inventoryData))
-  }
+//   const handleSubmit= () => {
+//     if (name === "" || price === "" ){
+//         alert ("Please fill in the form.")
+//         return false
+//     }
+//     dispatch(createInventory(inventoryData))
+//   }
 
 
   return (
@@ -272,7 +277,7 @@ export default function InventoryDetail() {
                                 sm={12}
                                 // className={classes.notes}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity}/>
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
                                 
                             </Grid>
                         </Grid>
@@ -283,7 +288,6 @@ export default function InventoryDetail() {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
-                                    onClick={() => handleSubmit()}
                                 >
                                     ASSIGN TO JOB
                                 </Button>
@@ -294,7 +298,6 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="primary"
                                     className={classes.submit}
-                                    onClick={() => handleSubmit()}
                                 >
                                     UPDATE
                                 </Button>
@@ -305,7 +308,6 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="secondary"
                                     className={classes.submit}
-                                    onClick={() => handleSubmit()}
                                 >
                                     DELETE
                                 </Button>
