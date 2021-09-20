@@ -317,7 +317,7 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="secondary"
                                     className={classes.submit}
-                                    // onClick = {() => {if(window.confirm("Are you sure you wish delete this item?")) deleteInventory(iid)}}
+                                    // onClick={deleteInventory(iid)}
                                     onClick={()=>handleDelete()}
                                 >
                                     DELETE
