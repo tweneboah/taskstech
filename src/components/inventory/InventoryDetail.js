@@ -6,8 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
-// import { createInventory } from "../../actions/action";
-// import { useDispatch } from "react-redux";
+import { updateInventory, deleteInventory } from "../../actions/action";
+import { useDispatch } from "react-redux";
 import taskstechApi from '../../api/taskstechApi';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +58,7 @@ export default function InventoryDetail() {
     }
 
   const classes = useStyles();
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const inputName = useCallback(
     (event) => {
@@ -145,13 +145,13 @@ export default function InventoryDetail() {
 
 
 
-//   const handleSubmit= () => {
-//     if (name === "" || price === "" ){
-//         alert ("Please fill in the form.")
-//         return false
-//     }
-//     dispatch(createInventory(inventoryData))
-//   }
+  const handleUpdate= () => {
+    if (name === "" || price === "" ){
+        alert ("Please fill in the form.")
+        return false
+    }
+    dispatch(updateInventory(inventoryData, iid))
+  }
 
 
   return (
@@ -298,6 +298,8 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={() => handleUpdate()}
+
                                 >
                                     UPDATE
                                 </Button>
@@ -308,6 +310,7 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="secondary"
                                     className={classes.submit}
+                                    onClick = {() => {if(window.confirm("Are you sure you wish delete this item?")) deleteInventory(iid)}}
                                 >
                                     DELETE
                                 </Button>

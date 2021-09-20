@@ -124,6 +124,41 @@ export const createInventory = (inventoryData) => {
     }
 }
 
+export const updateInventory = (inventoryData, iid) => {
+    return async () => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.put(`/inventory/${iid}`, inventoryData, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    console.log(res)
+                    alert ("Update Item Successfully!")
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+export const deleteInventory = (iid) => {
+    return async () => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.delete(`/inventory/${iid}`, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    console.log(res)
+                    alert ("Delete Item Successfully!")
+                })
+        } catch (error) {
+            console.log(error.message)
+            alert ("Invalid Action")
+
+        }
+    }
+}
+
 
 
 
