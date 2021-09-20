@@ -19,7 +19,7 @@ function App() {
       <Header />
       <RightSideBar />
       <Switch>
-        <Route exact path='/login' component={TradieLogin} />
+        <Route exact path='/' component={TradieLogin} />
         <Route exact path='/view/jobs' component={ViewJobs} />
         <Route exact path='/create/job' component={CreateJob} />
         <Route exact path='/signup' component={TradieSignUp} />
