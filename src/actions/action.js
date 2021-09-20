@@ -116,7 +116,8 @@ export const createInventory = (inventoryData) => {
             })
                 .then(res => {
                     console.log(res)
-                    dispatch(push('/inventory/create'))
+                    alert ("Created Item Successfully")
+                    dispatch(push('/inventory/list'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -125,7 +126,7 @@ export const createInventory = (inventoryData) => {
 }
 
 export const updateInventory = (inventoryData, iid) => {
-    return async () => {
+    return async (dispatch) => {
         const token = localStorage.getItem('token');
         try {
             taskstechApi.put(`/inventory/${iid}`, inventoryData, {
@@ -134,6 +135,7 @@ export const updateInventory = (inventoryData, iid) => {
                 .then(res => {
                     console.log(res)
                     alert ("Update Item Successfully!")
+                    dispatch(push('/inventory/list'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -149,12 +151,12 @@ export const deleteInventory = (iid) => {
             })
                 .then(res => {
                     console.log(res)
-                    alert ("Delete Item Successfully!")
+                    // alert ("Delete Item Successfully!");
+                    // dispatch(push('/inventory/list'))
+
                 })
         } catch (error) {
             console.log(error.message)
-            alert ("Invalid Action")
-
         }
     }
 }
