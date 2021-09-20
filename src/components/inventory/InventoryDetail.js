@@ -9,6 +9,8 @@ import SetSerialNoArea from "./setSerialArea";
 import { updateInventory, deleteInventory } from "../../actions/action";
 import { useDispatch } from "react-redux";
 import taskstechApi from '../../api/taskstechApi';
+import { push } from 'connected-react-router';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -131,6 +133,7 @@ export default function InventoryDetail() {
         }
         }, [])
 
+
   let inventoryData = {
       name:name,
       description:description,
@@ -150,6 +153,11 @@ export default function InventoryDetail() {
         return false
     }
     dispatch(updateInventory(inventoryData, iid))
+  }
+  const handleDelete = () => {
+      deleteInventory(iid);
+      alert ("Delete Item Successfully!");
+      dispatch(push('/inventory/list'))
   }
 
 
@@ -309,7 +317,8 @@ export default function InventoryDetail() {
                                     variant="outlined"
                                     color="secondary"
                                     className={classes.submit}
-                                    onClick = {() => {if(window.confirm("Are you sure you wish delete this item?")) deleteInventory(iid)}}
+                                    // onClick = {() => {if(window.confirm("Are you sure you wish delete this item?")) deleteInventory(iid)}}
+                                    onClick={()=>handleDelete()}
                                 >
                                     DELETE
                                 </Button>
