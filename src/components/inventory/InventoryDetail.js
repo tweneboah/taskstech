@@ -124,13 +124,12 @@ export default function InventoryDetail() {
                     setPrice(res.data.price)
                     setNotes(res.data.notes)
                     setSerialNos(res.data.inventory_details)
-                    console.log(res)
                 })
         } catch (error) {
             console.log(error.message)
         }
         }
-        }, [iid])
+        }, [])
 
   let inventoryData = {
       name:name,

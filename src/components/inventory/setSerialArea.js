@@ -23,17 +23,17 @@ const SetSerialNoArea = (props) => {
     },[setSerialNo])
 
     const addSerialNo = (serialNo) => {
-        if (index === props.serialNos.length) {
+        // if (index === props.serialNos.length) {
             props.setSerialNos(prevState => [...prevState, {serial_no:serialNo}])
             setIndex(index + 1)
             setSerialNo("")
-        } else {
-            const newSerialNos = props.serialNos
-            newSerialNos[index] = {serial_no:serialNo}
-            props.setSerialNos(newSerialNos)
-            setIndex(newSerialNos.length)
-            setSerialNo("")
-        }
+        // } else {
+        //     const newSerialNos = props.serialNos
+        //     newSerialNos[index] = {serial_no:serialNo}
+        //     props.setSerialNos(newSerialNos)
+        //     setIndex(newSerialNos.length)
+        //     setSerialNo("")
+        // }
     };
 
     const editSerialNo = (index, serialNo) => {
