@@ -92,7 +92,7 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    const items = res.data.items
+                    const items = res.data
                     const inventoryList = []
                     items.forEach(item => {
                         const inventoryItem = item
