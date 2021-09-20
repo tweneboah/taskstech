@@ -12,6 +12,7 @@ import RightSideBar from "./components/rightSideBar/RightSideBar";
 import TradieLogin from "./components/Trader/TradieLogin";
 import TradieSignUp from "./components/Trader/TradieSignUp";
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
+import InventoryDetail from './components/inventory/InventoryDetail';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path='/create/job' component={CreateJob} /> 
           <Route exact={true} path='/inventory/create' component={NewInventory} />
           <Route exact={true} path='/inventory/list' component={InventoryList} />
+          <Route exact={true} path='/inventory/details/:id' component={InventoryDetail} />
           <Route exact path='/tradie/profile' component={TradieProfileForm} />
         </Auth>
       
