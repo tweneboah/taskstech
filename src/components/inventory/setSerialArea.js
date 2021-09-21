@@ -49,6 +49,22 @@ const SetSerialNoArea = (props) => {
     useEffect(()=>{
         setIndex(props.serialNos.length)
     },[props.serialNos])
+
+    // useEffect(()=>{
+    //     console.log(index)
+    // },[props.setQuantity])
+    useEffect(()=>{
+        props.setSerialNos([])
+        setIndex(0)
+        handleSerialNo();
+    },[props.quantity])
+
+
+    const handleSerialNo = () => {
+        for (let i=0; i < props.quantity; i++){
+            addSerialNo(i+1);
+        }
+    }
     return (
         <div>
             <TableContainer>
@@ -82,8 +98,9 @@ const SetSerialNoArea = (props) => {
                 </Table>
                 <div>
                     <TextInput
-                        fullWidth={true} label={"SerialNo"} multiline={false} required={true}
+                        fullWidth={true} label={"SerialNo"} multiline={false} required={false}
                         onChange={inputSerialNo} value={serialNo} type={"text"} row={1}
+                        variant={"outlined"}
                     />
                 </div>
                 <IconButton className={classes.checkIcon} onClick={() => addSerialNo(serialNo)}>
