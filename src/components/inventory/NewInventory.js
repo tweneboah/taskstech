@@ -184,7 +184,7 @@ export default function NewInventory() {
                                     onChange={inputDescription}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={8} sm={4}>
                                 <TextField
                                     autoComplete="description"
                                     name="quantity"
@@ -196,6 +196,14 @@ export default function NewInventory() {
                                     type="number"
                                     onChange={inputQuantity}
                                 />
+                            </Grid>
+                            <Grid item xs={2} sm={2}>
+                                <Button 
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={()=>setQuantity("")}>
+                                    Reset
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -258,7 +266,7 @@ export default function NewInventory() {
                                 sm={12}
                                 // className={classes.notes}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} setQuantity={setQuantity}/>
                                 
                             </Grid>
                         </Grid>
