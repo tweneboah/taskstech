@@ -145,7 +145,7 @@ export default function NewInventory() {
                         className={classes.form}
                     >
                         <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
+                            {/* <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="name"
                                     name="inventoryId"
@@ -158,7 +158,7 @@ export default function NewInventory() {
                                     // onChange={}
                                     disabled={true}
                                 />
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
