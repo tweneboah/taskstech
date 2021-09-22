@@ -1,7 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
 import { fetchInventoryAction } from './inventoryActions'
-// import {useSelector } from 'react-redux'
 import { signInAction, signOutAction, setTraderData } from './traderActions';
 import { push } from 'connected-react-router';
 

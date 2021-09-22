@@ -14,6 +14,8 @@ import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action';
 import JobDiary from '../JobDiary/JobDiary';
+import * as History from 'history';
+export const history = History.createBrowserHistory();
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,16 +62,21 @@ export default function FullWidthTabs() {
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
+   // const [reload, setReload] = useState(false);
     const [params, setParams] = useState({});
     const { job } = useSelector((state) => state);
 
     const dispatch = useDispatch();
 
-    const callback = ({ cellValues, isClicked }) => {
+    const callback = ({ cellValues, isClicked, history }) => {
         setIsClicked(isClicked);
         setParams(cellValues)
+        //history.listen(e => history.push(e.pathname))
+        history.push("/view/jobs/diary");
     };
 
+    
+    
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
@@ -83,6 +90,7 @@ export default function FullWidthTabs() {
         })
     };
 
+    
     useEffect(() => {
         dispatch(getAllJobs(job?.loading));
     }, []);

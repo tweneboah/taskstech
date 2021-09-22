@@ -3,7 +3,6 @@ import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import { makeStyles } from '@material-ui/core/styles';
-
 import * as History from 'history';
 export const history = History.createBrowserHistory();
 
@@ -46,9 +45,10 @@ export default function DataTable(props) {
   const handleClick = (event, cellValues) => {
     const params = {
       cellValues,
-      isClicked: true
+      isClicked: true,
+      history
     };
-    
+    //history.push("/view/jobs");
     parentCallback(params);
   };
 
