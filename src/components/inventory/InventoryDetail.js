@@ -105,11 +105,7 @@ export default function InventoryDetail() {
     [setModel_no]
     );
 
-    useEffect(() =>{
-        setQuantity(serialNos.length)
-    },[serialNos]);
-
-
+    
     useEffect(() => {
         if(iid !==""){
             const token = localStorage.getItem('token');
@@ -211,7 +207,7 @@ export default function InventoryDetail() {
                                     onChange={inputDescription}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={8} sm={4}>
                                 <TextField
                                     autoComplete="description"
                                     name="quantity"
@@ -223,6 +219,14 @@ export default function InventoryDetail() {
                                     type="number"
                                     onChange={inputQuantity}
                                 />
+                            </Grid>
+                            <Grid item xs={2} sm={2}>
+                                <Button 
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={()=>setQuantity("")}>
+                                    Reset
+                                </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
