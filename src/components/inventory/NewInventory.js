@@ -108,7 +108,6 @@ export default function NewInventory() {
       model_no:model_no,
       inventory_details:serialNos
   }
-  console.log(inventoryData)
 
 
 

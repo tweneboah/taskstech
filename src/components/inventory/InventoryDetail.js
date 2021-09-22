@@ -104,9 +104,12 @@ export default function InventoryDetail() {
     },
     [setModel_no]
     );
+    useEffect(()=>{
+        console.log(serialNos)
+    },[setSerialNos])
 
     
-    useEffect(() => {
+    useEffect(async () => {
         if(iid !==""){
             const token = localStorage.getItem('token');
         try {
@@ -130,16 +133,16 @@ export default function InventoryDetail() {
         }, [])
 
 
-  let inventoryData = {
-      name:name,
-      description:description,
-      supplier:supplier,
-      price:price,
-      notes:notes,
-      model_no:model_no,
-      inventory_details:serialNos
-  }
-  console.log(inventoryData)
+//   let inventoryData = {
+//       name:name,
+//       description:description,
+//       supplier:supplier,
+//       price:price,
+//       notes:notes,
+//       model_no:model_no,
+//       inventory_details:serialNos
+//   }
+//   console.log(inventoryData)
 
 
 
@@ -148,13 +151,23 @@ export default function InventoryDetail() {
         alert ("Please fill in the form.")
         return false
     }
+    let inventoryData = {
+        name:name,
+         description:description,
+         supplier:supplier,
+        price:price,
+        notes:notes,
+        model_no:model_no,
+        inventory_details:serialNos
+    }
     dispatch(updateInventory(inventoryData, iid))
   }
   
   const handleDelete = () => {
-      deleteInventory(iid);
-      alert ("Delete Item Successfully!");
+      dispatch(deleteInventory(iid));
       dispatch(push('/inventory/list'))
+      alert ("Delete Item Successfully!");
+
   }
 
 
