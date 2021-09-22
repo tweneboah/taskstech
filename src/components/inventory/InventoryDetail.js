@@ -173,9 +173,7 @@ export default function InventoryDetail() {
                 square={false}
             >
                 <div className={classes.header}>
-                    <h3>Create New Inventory</h3>
-                    <h4>Please fill the inventory details</h4>
-                    <span>*Required</span>
+                    <h3>Inventory Details</h3>
                 </div>
                 <div className={classes.paper}>
                     <div
