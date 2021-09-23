@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
 import { updateInventory, deleteInventory } from "../../actions/action";
-import { useDispatch } from "react-redux";
 import taskstechApi from '../../api/taskstechApi';
+import { useDispatch } from "react-redux";
 import { push } from 'connected-react-router';
 
 
@@ -52,7 +52,8 @@ export default function InventoryDetail() {
             [price, setPrice] = useState(""),
             [notes, setNotes] = useState(""),
             [model_no, setModel_no] = useState(""),
-            [serialNos, setSerialNos] = useState([]);
+            [serialNos, setSerialNos] = useState([]),
+            [prevSerialNos, setPrevSerialNos] = useState([]);
 
     let iid = window.location.pathname.split('/inventory/details')[1];
     if(iid !== ""){
@@ -106,7 +107,7 @@ export default function InventoryDetail() {
     );
     useEffect(()=>{
         console.log(serialNos)
-    },[setSerialNos])
+    },[serialNos])
 
     
     useEffect(async () => {
@@ -117,6 +118,7 @@ export default function InventoryDetail() {
                 headers: { authorization: `Bearer ${token}` }
             })
                 .then(res => {
+                    console.log(res)
                     setName(res.data.name)
                     setDescription(res.data.description)
                     setQuantity(res.data.inventory_details.length)
@@ -125,6 +127,7 @@ export default function InventoryDetail() {
                     setPrice(res.data.price)
                     setNotes(res.data.notes)
                     setSerialNos(res.data.inventory_details)
+                    setPrevSerialNos(res.data.inventory_details)
                 })
         } catch (error) {
             console.log(error.message)
@@ -142,7 +145,6 @@ export default function InventoryDetail() {
 //       model_no:model_no,
 //       inventory_details:serialNos
 //   }
-//   console.log(inventoryData)
 
 
 
@@ -299,7 +301,7 @@ export default function InventoryDetail() {
                                 xs={12}
                                 sm={12}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} prevSerialNos={prevSerialNos} iid={iid}/>
                                 
                             </Grid>
                         </Grid>

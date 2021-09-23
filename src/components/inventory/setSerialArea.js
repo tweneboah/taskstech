@@ -2,6 +2,11 @@ import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, IconB
 import { CheckCircle, Delete, Edit} from '@material-ui/icons'
 import React, {useState, useCallback, useEffect} from 'react'
 import  TextInput  from './TextInput'
+import taskstechApi from '../../api/taskstechApi';
+// import { useDispatch } from "react-redux";
+// import { push } from 'connected-react-router';
+
+
 
 const useStyles = makeStyles({
     checkIcon:{
@@ -17,6 +22,9 @@ const SetSerialNoArea = (props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0)
      const [serialNo, setSerialNo] = useState("");
+
+    // const dispatch = useDispatch();
+
 
     const inputSerialNo = useCallback((event) => {
         setSerialNo(event.target.value)
@@ -41,9 +49,23 @@ const SetSerialNoArea = (props) => {
         setSerialNo(serialNo);
     }
 
-    const deleteSerialNo = (deleteIndex) => {
-        const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
-        props.setSerialNos(newSerialNos)
+    const deleteSerialNo = async (deleteIndex) => {
+        let diid = props.prevSerialNos[deleteIndex].id
+        const token = localStorage.getItem('token');
+        try {
+            await taskstechApi.delete(`/inventory_details/${diid}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    console.log(res)
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+        // const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
+        // props.setSerialNos(newSerialNos)
+        // dispatch(push('/inventory/details/' + props.iid))
+        window.location.reload(false)
     }
 
     useEffect(()=>{
@@ -62,7 +84,7 @@ const SetSerialNoArea = (props) => {
 
     const handleSerialNo = () => {
         for (let i=0; i < props.quantity; i++){
-            addSerialNo(i+1);
+            addSerialNo((i+1).toString());
         }
     }
     return (
