@@ -62,7 +62,6 @@ export default function FullWidthTabs() {
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
-   // const [reload, setReload] = useState(false);
     const [params, setParams] = useState({});
     const { job } = useSelector((state) => state);
 
@@ -71,11 +70,8 @@ export default function FullWidthTabs() {
     const callback = ({ cellValues, isClicked, history }) => {
         setIsClicked(isClicked);
         setParams(cellValues)
-        //history.listen(e => history.push(e.pathname))
         history.push("/view/jobs/diary");
     };
-
-    
     
     const completedJobs = {
         payload: job.payload.filter(job => {
@@ -131,18 +127,24 @@ export default function FullWidthTabs() {
                         onChangeIndex={handleChangeIndex}
                     >
                         <TabPanel value={value} index={0} dir={theme.direction} >
-                            <DataTable jobs={job} title='All Jobs' parentCallback={callback} />
+                            <DataTable 
+                                jobs={job} 
+                                title='All Jobs' 
+                                parentCallback={callback} 
+                            />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <DataTable
                                 jobs={completedJobs}
                                 title='Completed Jobs'
+                                parentCallback={callback} 
                             /> 
                         </TabPanel>
                         <TabPanel value={value} index={2} dir={theme.direction}>
                             <DataTable
                                 jobs={activeJobs}
                                 title='Active Jobs'
+                                parentCallback={callback} 
                             />  
                         </TabPanel>
                     </SwipeableViews>

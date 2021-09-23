@@ -29,9 +29,10 @@ const diaryColumns = [
 export default function JobDiaryDataTable({ diary }) {
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
-  
+  const id = diary === undefined ? 0 : diary.id; // fixes the undefined issue temporarilly
+
   useEffect(() => {
-    dispatch(getActivities(true, diary.id));
+    dispatch(getActivities(true, id));
   }, []);
 
   return (

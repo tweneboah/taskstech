@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function JobDiary({ rows }) {
   const classes = useStyles();
-  //console.log(history)
-
 
   return (
     <Container maxWidth="lg" className={classes.root}>
