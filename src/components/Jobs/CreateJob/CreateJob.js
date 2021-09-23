@@ -32,7 +32,6 @@ const CreateJob = () => {
 
     const status = useSelector((state) => state.status.job);
     const indicator = useSelector((state) => state.job.loading); // state.jobs.loading
-    useSelector((state) => console.log(state));
 
     const dispatch = useDispatch();
 

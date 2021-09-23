@@ -14,6 +14,8 @@ import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action';
 import JobDiary from '../JobDiary/JobDiary';
+import * as History from 'history';
+export const history = History.createBrowserHistory();
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -65,11 +67,12 @@ export default function FullWidthTabs() {
 
     const dispatch = useDispatch();
 
-    const callback = ({ cellValues, isClicked }) => {
+    const callback = ({ cellValues, isClicked, history }) => {
         setIsClicked(isClicked);
         setParams(cellValues)
+        history.push("/view/jobs/diary");
     };
-
+    
     const completedJobs = {
         payload: job.payload.filter(job => {
             return job.job_status.name === 'Completed';
@@ -83,6 +86,7 @@ export default function FullWidthTabs() {
         })
     };
 
+    
     useEffect(() => {
         dispatch(getAllJobs(job?.loading));
     }, []);
@@ -123,18 +127,24 @@ export default function FullWidthTabs() {
                         onChangeIndex={handleChangeIndex}
                     >
                         <TabPanel value={value} index={0} dir={theme.direction} >
-                            <DataTable jobs={job} title='All Jobs' parentCallback={callback} />
+                            <DataTable 
+                                jobs={job} 
+                                title='All Jobs' 
+                                parentCallback={callback} 
+                            />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <DataTable
                                 jobs={completedJobs}
                                 title='Completed Jobs'
+                                parentCallback={callback} 
                             /> 
                         </TabPanel>
                         <TabPanel value={value} index={2} dir={theme.direction}>
                             <DataTable
                                 jobs={activeJobs}
                                 title='Active Jobs'
+                                parentCallback={callback} 
                             />  
                         </TabPanel>
                     </SwipeableViews>

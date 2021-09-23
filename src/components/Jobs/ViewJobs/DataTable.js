@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import { makeStyles } from '@material-ui/core/styles';
-
 import * as History from 'history';
 export const history = History.createBrowserHistory();
 
@@ -39,26 +38,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DataTable(props) {
   const { jobs, parentCallback } = props;
-
   const classes = useStyles();
   const rows = jobs.payload;
 
   const handleClick = (event, cellValues) => {
     const params = {
       cellValues,
-      isClicked: true
+      isClicked: true,
+      history
     };
-    
     parentCallback(params);
   };
 
-  
+
   const renderReactElement = params => {
     return (
       <Button
         variant="contained"
         color="primary"
-        onClick={(event) =>  {
+        onClick={(event) => {
           handleClick(event, params);
         }}
       >
@@ -99,21 +97,25 @@ export default function DataTable(props) {
     },
   ];
 
+  useEffect(() => {
+    window.onpopstate = e => {
+      if (e.type === 'popstate') window.location.reload();
+    }
+  }, [])
 
   return (
     <div
-        className={classes.root}
-        style={{ height: 400, width: '100%' }}
-      >
-        
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          checkboxSelection
-          disableSelectionOnClick
-        />
-      </div>
+      className={classes.root}
+      style={{ height: 400, width: '100%' }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        checkboxSelection
+        disableSelectionOnClick
+      />
+    </div>
   );
 }
 
