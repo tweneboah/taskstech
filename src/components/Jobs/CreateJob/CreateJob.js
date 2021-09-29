@@ -32,7 +32,6 @@ const CreateJob = () => {
 
     const status = useSelector((state) => state.status.job);
     const indicator = useSelector((state) => state.job.loading);
-    useSelector((state) => console.log(state.job));
     const matches = useMediaQuery('(max-width:600px)');
     const dispatch = useDispatch();
 
