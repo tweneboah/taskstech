@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import SimpleBackdrop from '../../Loading/SimpleBackdrop';
 
-
-//import FormNav from '../../Navigation/FormNav';
 import { getStatus, createJob } from '../../../actions/action';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,6 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const CreateJob = () => {
+    const [throwError, setThrowError] = useState(false);
     const [jobName, setJobName] = useState('');
     const [description, setDescription] = useState('');
     const [tradespersonId, setTradespersonId] = useState(0);
@@ -32,13 +31,25 @@ const CreateJob = () => {
     const [jobStatusId, setJobStatusId] = useState(1);
 
     const status = useSelector((state) => state.status.job);
-    const indicator = useSelector((state) => state.job.loading); // state.jobs.loading
+    const indicator = useSelector((state) => state.job.loading);
+    useSelector((state) => console.log(state.job));
     const matches = useMediaQuery('(max-width:600px)');
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(createJob(jobObject, true));
+        handleFields();
+        if (throwError === false) {
+            dispatch(createJob(jobObject, true));
+        }
+    };
+
+    const handleFields = () => {
+        if (jobName === "" && description === "" && tradespersonId === "" && customerId === "") {
+            setThrowError(true);
+        } else {
+            setThrowError(false);
+        }
     };
 
     let jobObject = {
@@ -94,8 +105,7 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <TextField
-                             error={false}
-
+                            error={throwError}
                             required
                             id="outlined-error-helper-text"
                             label="Job Name"
@@ -105,7 +115,7 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            /*error*/
+                            error={throwError}
                             id="outlined-error-helper-text"
                             label="Description"
                             variant="outlined"
@@ -133,7 +143,7 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            /*error*/
+                            error={throwError}
                             required
                             id="outlined-error-helper-text"
                             label="Tradesperson Id"
@@ -143,7 +153,7 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            /*error*/
+                            error={throwError}
                             required
                             id="outlined-error-helper-text"
                             label="Customer Id"
