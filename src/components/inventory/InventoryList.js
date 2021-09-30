@@ -10,6 +10,8 @@ const InventoryList = () => {
     const dispatch = useDispatch()
     const selector = useSelector(state => state);
     const items = getInventory(selector)
+    
+
 
     useEffect(() => {
         dispatch(fetchInventory())
