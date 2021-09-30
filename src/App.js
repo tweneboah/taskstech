@@ -14,7 +14,6 @@ import TradieSignUp from "./components/Trader/TradieSignUp";
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import JobDiary from './components/Jobs/JobDiary/JobDiary';
 import InventoryDetail from './components/inventory/InventoryDetail';
-import NewInventoryList from './components/inventory/NewInventoryList';
 
 function App() {
   return (
@@ -31,7 +30,6 @@ function App() {
           <Route exact path='/create/job' component={CreateJob} /> 
           <Route exact={true} path='/inventory/create' component={NewInventory} />
           <Route exact={true} path='/inventory/list' component={InventoryList} />
-          <Route exact={true} path='/inventory/list/new' component={NewInventoryList} />
           <Route exact={true} path='/inventory/details/:id' component={InventoryDetail} />
           <Route exact path='/tradie/profile' component={TradieProfileForm} />
           <Route exact path='/view/jobs/diary' component={JobDiary} />

@@ -94,7 +94,17 @@ export const fetchInventory = () => {
                     const items = res.data
                     const inventoryList = []
                     items.forEach(item => {
-                        const inventoryItem = item
+                        const inventoryItem = {
+                            name:item.name,
+                            description:item.description,
+                            supplier:item.supplier,
+                            model_no:item.model_no,
+                            price:item.price,
+                            id:item.id,
+                            notes:item.notes,
+                            inventory_details:item.inventory_details,
+                            quantity:item.inventory_details.length
+                        }
                         inventoryList.push(inventoryItem)
                     })
                     dispatch(fetchInventoryAction(inventoryList))
