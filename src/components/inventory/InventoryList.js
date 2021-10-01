@@ -3,13 +3,38 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInventory } from "../../actions/action";
 import { getInventory } from "../../selector/inventorySelector";
-// import {push} from 'connected-react-router';
+import Button from '@material-ui/core/Button';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import {push} from 'connected-react-router';
 
 
 export default function InventoryList() {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const items = getInventory(selector);
+
+
+    const handleClick = (cellValues) => {
+        cellValues
+      };
+
+
+    const viewDetail = params => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+                handleClick(params)
+                 let id = params.row.id
+                console.log(id)
+                dispatch(push('/inventory/details/' + id))
+            }}
+          >
+            <MenuBookIcon />
+          </Button>
+        );
+      }
 
 
     const columns = [
@@ -30,6 +55,13 @@ export default function InventoryList() {
             headerName: "Supplier",
             width: 130,
         },
+        {
+            field: 'link',
+            headerName: 'View Detail',
+            sortable: false,
+            width: 140,
+            renderCell: viewDetail
+          },
     ];
 
     useEffect(() => {
