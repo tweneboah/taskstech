@@ -69,7 +69,7 @@ export default function InventoryList() {
     }, []);
 
     return (
-        <div style={{ height: 400, width: "90%", margin:"auto"}}>
+        <div style={{ height: 400, width: "90%", margin:"auto", maxWidth:600}}>
             <DataGrid
                 rows={items}
                 columns={columns}
