@@ -38,7 +38,7 @@ export default function InventoryList() {
 
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90, headerAlign: 'center', },
+        { field: "id", headerName: "ID", width: 90 },
         {
             field: "name",
             headerName: "Item Name",
@@ -69,7 +69,7 @@ export default function InventoryList() {
     }, []);
 
     return (
-        <div style={{ height: 400, width: "90%", margin:"auto", maxWidth:"6800px"}}>
+        <div style={{ height: 400, width: "90%", margin:"auto"}}>
             <DataGrid
                 rows={items}
                 columns={columns}
