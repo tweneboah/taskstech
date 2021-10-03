@@ -54,7 +54,7 @@ export default function InventoryDetail() {
             [model_no, setModel_no] = useState(""),
             [serialNos, setSerialNos] = useState([]);
 
-    let iid = window.location.pathname.split('/inventory/details')[1];
+    let iid = window.location.pathname.split('/detail/inventory')[1];
     if(iid !== ""){
         iid = iid.split('/')[1];
     }
@@ -158,7 +158,7 @@ export default function InventoryDetail() {
   const handleDelete = () => {
       deleteInventory(iid);
       alert ("Delete Item Successfully!");
-      dispatch(push('/inventory/list'))
+      dispatch(push('/list/inventory'))
   }
 
 

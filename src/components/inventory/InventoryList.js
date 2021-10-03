@@ -28,7 +28,7 @@ export default function InventoryList() {
                 handleClick(params)
                  let id = params.row.id
                 console.log(id)
-                dispatch(push('/inventory/details/' + id))
+                dispatch(push('/detail/inventory/' + id))
             }}
           >
             <MenuBookIcon />
@@ -46,9 +46,9 @@ export default function InventoryList() {
         },
         {
             field: "quantity",
-            headerName: "Quantity",
+            headerName: "Qty",
             //   type: 'number',
-            width: 130,
+            width: 100,
         },
         {
             field: "supplier",

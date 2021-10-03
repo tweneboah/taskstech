@@ -126,7 +126,7 @@ export const createInventory = (inventoryData) => {
                 .then(res => {
                     console.log(res)
                     alert ("Created Item Successfully")
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -144,7 +144,7 @@ export const updateInventory = (inventoryData, iid) => {
                 .then(res => {
                     console.log(res)
                     alert ("Update Item Successfully!")
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -218,7 +218,7 @@ export const signIn = (email, password) => {
                         id: res.data.user_id,
                     }))
                     getTraderData()
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)

@@ -30,17 +30,17 @@ function App() {
                     <Route exact path="/create/job" component={CreateJob} />
                     <Route
                         exact={true}
-                        path="/inventory/create"
+                        path="/create/inventory"
                         component={NewInventory}
                     />
                     <Route
                         exact={true}
-                        path="/inventory/list"
+                        path="/list/inventory"
                         component={InventoryList}
                     />
                     <Route
                         exact={true}
-                        path="/inventory/details/:id"
+                        path="/detail/inventory/:id"
                         component={InventoryDetail}
                     />
                     <Route
