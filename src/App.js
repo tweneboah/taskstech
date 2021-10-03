@@ -9,8 +9,6 @@ import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from './components/inventory/InventoryList';
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 
-// import TradieLogin from "./components/Trader/TradieLogin";
-// import TradieSignUp from "./components/Trader/TradieSignUp";
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import JobDiary from './components/Jobs/JobDiary/JobDiary';
 
