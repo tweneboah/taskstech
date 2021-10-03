@@ -17,7 +17,8 @@ export const createJob = (job, loading) => async dispatch => {
                 console.log(res)
                 dispatch({ type: actions.CREATE_JOB, payload: job, loading: false });
             }).catch(e => {
-                console.log(e)
+                dispatch({ type: actions.CREATE_JOB_FAILED, loading: false });
+                console.log(e.message)
             });
     } catch (error) {
         console.log(error.message)
