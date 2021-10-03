@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,8 +8,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Logo from "./Logo";
-import {signUp} from "../../actions/action"
+import Logo from "../../components/logo/Logo";
+import { signUp } from "../../actions/action";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,46 +56,74 @@ export default function TradieSignUp() {
     );
 
     const inputLastname = useCallback(
-      (event) => {
-          setLastname(event.target.value);
-      },[setLastname]);
+        (event) => {
+            setLastname(event.target.value);
+        },
+        [setLastname]
+    );
 
     const inputPhone = useCallback(
         (event) => {
             setPhone(event.target.value);
-        },[setPhone]);
+        },
+        [setPhone]
+    );
 
     const inputEmail = useCallback(
         (event) => {
             setEmail(event.target.value);
-        },[setEmail]);
+        },
+        [setEmail]
+    );
 
     const inputPassword = useCallback(
         (event) => {
             setPassword(event.target.value);
-        },[setPassword]);
+        },
+        [setPassword]
+    );
 
     const inputConfirmPassword = useCallback(
         (event) => {
             setConfirmPassword(event.target.value);
-        },[setConfirmPassword]);
+        },
+        [setConfirmPassword]
+    );
 
-        const inputDescription = useCallback(
-          (event) => {
-              setDescription(event.target.value);
-          },[setDescription]);
+    const inputDescription = useCallback(
+        (event) => {
+            setDescription(event.target.value);
+        },
+        [setDescription]
+    );
 
-          const handleSubmit= () => {
-            if (firstname === "" || lastname === "" ||email === "" || password === "" || confirmPassword === "" ){
-                alert ("Please fill in the form.")
-                return false
-            }
-            if(password !== confirmPassword){
-                alert ("Your password and confirm password do not match.")
-                return false
-            }
-            dispatch(signUp(firstname, lastname,  email, password, confirmPassword, description, phone))
-          }
+    const handleSubmit = () => {
+        if (
+            firstname === "" ||
+            lastname === "" ||
+            email === "" ||
+            password === "" ||
+            confirmPassword === ""
+        ) {
+            alert("Please fill in the form.");
+            return false;
+        }
+        if (password !== confirmPassword) {
+            alert("Your password and confirm password do not match.");
+            return false;
+        }
+        dispatch(
+            signUp(
+                firstname,
+                lastname,
+                email,
+                password,
+                confirmPassword,
+                description,
+                phone
+            )
+        );
+    };
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -114,8 +142,8 @@ export default function TradieSignUp() {
                         Tradies Sign up
                     </Typography>
                     <div className={classes.form}>
-                      {/* <form className={classes.form} > */}
-                      <Grid container spacing={3}>
+                        {/* <form className={classes.form} > */}
+                        <Grid container spacing={3}>
                             <Grid container>
                                 <Grid item>
                                     <Link href="login" variant="body2">
@@ -243,9 +271,8 @@ export default function TradieSignUp() {
                                 </Button>
                             </Grid>
                         </Grid>
-                    {/* </form> */}
+                        {/* </form> */}
                     </div>
-                    
                 </div>
             </Grid>
         </Grid>
