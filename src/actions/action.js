@@ -17,8 +17,7 @@ export const createJob = (job, loading) => async dispatch => {
                 console.log(res)
                 dispatch({ type: actions.CREATE_JOB, payload: job, loading: false });
             }).catch(e => {
-                dispatch({ type: actions.CREATE_JOB_FAILED, loading: false });
-                console.log(e.message)
+                console.log(e)
             });
     } catch (error) {
         console.log(error.message)
@@ -92,13 +91,14 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
+                    if (res.data.items){
                     const items = res.data.items
                     const inventoryList = []
                     items.forEach(item => {
                         const inventoryItem = item
                         inventoryList.push(inventoryItem)
                     })
-                    dispatch(fetchInventoryAction(inventoryList))
+                    dispatch(fetchInventoryAction(inventoryList))}
                 })
         } catch (error) {
             console.log(error.message)
