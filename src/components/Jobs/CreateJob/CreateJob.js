@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-//import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { styled } from '@material-ui/styles';
+import Box from "@material-ui/core/Box"
+import Paper from '@material-ui/core/Paper';
+import { useMediaQuery } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -175,7 +174,7 @@ const CreateJob = () => {
             </Paper>
 
             <SimpleBackdrop loading={indicator} /> {/**/}
-        </Box >
+        </Box>
     );
 }
 
