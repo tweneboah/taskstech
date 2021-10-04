@@ -9,22 +9,22 @@ import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from "./components/inventory/InventoryList";
 import RightSideBar from "./components/rightSideBar/RightSideBar";
 
-import TradieLogin from "./components/Trader/TradieLogin";
-import TradieSignUp from "./components/Trader/TradieSignUp";
 import TradieProfileForm from "./components/Trader/TradieProfileForm";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import InventoryDetail from "./components/inventory/InventoryDetail";
 
+import * as Pages from "../src/pages/Pages"
+
 function App() {
-    return (
-        <div className="App">
-            <Header />
-            <RightSideBar />
-            <Switch>
-                <Route exact path="/login" component={TradieLogin} />
-                <Route exact path="/view/jobs" component={ViewJobs} />
-                <Route exact path="/create/job" component={CreateJob} />
-                <Route exact path="/signup" component={TradieSignUp} />
+  return (
+    <div className='App'>
+      <Header />
+      <RightSideBar />
+      <Switch>
+        <Route exact path='/login' component={Pages.Login} />
+        <Route exact path='/view/jobs' component={ViewJobs} />
+        <Route exact path='/create/job' component={CreateJob} />
+        <Route exact path='/signup' component={Pages.SignUp} />
 
                 <Auth>
                     <Route exact path="/create/job" component={CreateJob} />

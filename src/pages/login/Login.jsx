@@ -1,5 +1,5 @@
-import React, {useState, useCallback} from "react";
-import { useDispatch } from 'react-redux'
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -9,8 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Logo from "./Logo";
-import {signIn} from "../../actions/action"
+import Logo from "../../components/logo/Logo";
+import { signIn } from "../../actions/action";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,12 +60,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TradieLogin = () => {
+const Login = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState(""),
-              [password, setPassword] = useState("");
+        [password, setPassword] = useState("");
 
     const inputEmail = useCallback(
         (event) => {
@@ -81,12 +81,12 @@ const TradieLogin = () => {
         [setPassword]
     );
     const handleSubmit = () => {
-        if (email === "" || password === ""){
-            alert ("Please fill in the form.")
-            return false
+        if (email === "" || password === "") {
+            alert("Please fill in the form.");
+            return false;
         }
-        dispatch(signIn(email, password))
-    }
+        dispatch(signIn(email, password));
+    };
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -110,9 +110,7 @@ const TradieLogin = () => {
                             Login to TasksTech
                         </Typography>
                         <p>*Required</p>
-                        <div
-                            className={classes.form}
-                        >
+                        <div className={classes.form}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -154,7 +152,7 @@ const TradieLogin = () => {
                                 fullWidth
                                 variant="contained"
                                 className={classes.submit}
-                                onClick={()=> handleSubmit()}
+                                onClick={() => handleSubmit()}
                             >
                                 Next
                             </Button>
@@ -166,4 +164,4 @@ const TradieLogin = () => {
     );
 };
 
-export default TradieLogin;
+export default Login;

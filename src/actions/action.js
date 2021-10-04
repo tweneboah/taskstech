@@ -91,7 +91,8 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    const items = res.data
+                    if (res.data.items){
+                    const items = res.data.items
                     const inventoryList = []
                     items.forEach(item => {
                         const inventoryItem = {
@@ -107,7 +108,7 @@ export const fetchInventory = () => {
                         }
                         inventoryList.push(inventoryItem)
                     })
-                    dispatch(fetchInventoryAction(inventoryList))
+                    dispatch(fetchInventoryAction(inventoryList))}
                 })
         } catch (error) {
             console.log(error.message)
