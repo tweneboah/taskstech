@@ -292,16 +292,6 @@ export default function InventoryDetail() {
                             <Grid item xs={4}>
                                 <Button
                                     type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                >
-                                    ASSIGN TO JOB
-                                </Button>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Button
-                                    type="submit"
                                     variant="outlined"
                                     color="primary"
                                     className={classes.submit}
