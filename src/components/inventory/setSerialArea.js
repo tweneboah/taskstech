@@ -2,9 +2,7 @@ import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, IconB
 import { CheckCircle, Delete, Edit} from '@material-ui/icons'
 import React, {useState, useCallback, useEffect} from 'react'
 import  TextInput  from './TextInput'
-import taskstechApi from '../../api/taskstechApi';
-// import { useDispatch } from "react-redux";
-// import { push } from 'connected-react-router';
+
 
 
 
@@ -23,7 +21,6 @@ const SetSerialNoArea = (props) => {
     const [index, setIndex] = useState(0)
      const [serialNo, setSerialNo] = useState("");
 
-    // const dispatch = useDispatch();
 
 
     const inputSerialNo = useCallback((event) => {
@@ -50,31 +47,14 @@ const SetSerialNoArea = (props) => {
     }
 
     const deleteSerialNo = async (deleteIndex) => {
-        let diid = props.prevSerialNos[deleteIndex].id
-        const token = localStorage.getItem('token');
-        try {
-            await taskstechApi.delete(`/inventory_details/${diid}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-                .then(res => {
-                    console.log(res)
-                })
-        } catch (error) {
-            console.log(error.message)
-        }
-        // const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
-        // props.setSerialNos(newSerialNos)
-        // dispatch(push('/inventory/details/' + props.iid))
-        window.location.reload(false)
+        const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
+        props.setSerialNos(newSerialNos)
     }
 
     useEffect(()=>{
         setIndex(props.serialNos.length)
     },[props.serialNos])
 
-    // useEffect(()=>{
-    //     console.log(index)
-    // },[props.setQuantity])
     useEffect(()=>{
         props.setSerialNos([])
         setIndex(0)
