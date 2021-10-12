@@ -1,26 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createJob } from '../actions/action';
-/*
-    let jobObject = {
-        name: jobName,
-        description: description,
-        job_status_id: jobStatusId,
-        tradesperson_id: tradespersonId,
-        customer_id: customerId
-    }
 
-
-    
-    */
 
 export const useFormControl = () => {
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
     const [jobStatus, setJobStatus] = useState('Not yet started');
     const [jobStatusId, setJobStatusId] = useState(1);
-    const nameLimitRegex = /^.{29,30}$/; // limit up to 30
-    const descriptionLimitRegex = /^.{99,100}$/ // limit up to 100
+    const nameLimitRegex = /^.{29,30}$/; 
+    const descriptionLimitRegex = /^.{99,100}$/ 
     const dispatch = useDispatch();
     
     let jobObject = {
@@ -82,10 +71,7 @@ export const useFormControl = () => {
                     : '';
             }
         }
-        if ("customer_id" in fieldValues) {
-            //console.log(`customer_id: ${customer_id}`)
-        }
-        
+
         setErrors(temp);
         
     };
