@@ -6,11 +6,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux"; //
+import { useDispatch, useSelector } from "react-redux"; 
 
 import { useFormControl } from "../../../common/useFormControl";
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
-import { getStatus } from "../../../actions/action"; //, createJob
+import { getStatus } from "../../../actions/action";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -21,9 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const CreateJob = () => {
-    //const [inventoryId, setInventory] = useState([]);
-    
-    
     const status = useSelector((state) => state.status.job);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
@@ -164,7 +161,7 @@ const CreateJob = () => {
             </Paper>
 
             <SimpleBackdrop loading={indicator} /> {/**/}
-        </Box >
+        </Box>
     );
 }
 

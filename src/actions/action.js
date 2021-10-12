@@ -17,8 +17,7 @@ export const createJob = (job, loading) => async dispatch => {
                 console.log(res)
                 dispatch({ type: actions.CREATE_JOB, payload: job, loading: false });
             }).catch(e => {
-                dispatch({ type: actions.CREATE_JOB_FAILED, loading: false });
-                console.log(e.message)
+                console.log(e)
             });
     } catch (error) {
         console.log(error.message)
@@ -92,13 +91,24 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
+                    if (res.data.items){
                     const items = res.data.items
                     const inventoryList = []
                     items.forEach(item => {
-                        const inventoryItem = item
+                        const inventoryItem = {
+                            name:item.name,
+                            description:item.description,
+                            supplier:item.supplier,
+                            model_no:item.model_no,
+                            price:item.price,
+                            id:item.id,
+                            notes:item.notes,
+                            inventory_details:item.inventory_details,
+                            quantity:item.inventory_details.length
+                        }
                         inventoryList.push(inventoryItem)
                     })
-                    dispatch(fetchInventoryAction(inventoryList))
+                    dispatch(fetchInventoryAction(inventoryList))}
                 })
         } catch (error) {
             console.log(error.message)
@@ -116,7 +126,44 @@ export const createInventory = (inventoryData) => {
             })
                 .then(res => {
                     console.log(res)
-                    dispatch(push('/inventory/create'))
+                    alert ("Created Item Successfully")
+                    dispatch(push('/list/inventory'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+export const updateInventory = (inventoryData, iid) => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.put(`/inventory/${iid}`, inventoryData, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    console.log(res)
+                    alert ("Update Item Successfully!")
+                    dispatch(push('/list/inventory'))
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+export const deleteInventory = (iid) => {
+    return async () => {
+        const token = localStorage.getItem('token');
+        try {
+            taskstechApi.delete(`/inventory/${iid}`, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    console.log(res)
+                    // alert ("Delete Item Successfully!");
+                    // dispatch(push('/inventory/list'))
+
                 })
         } catch (error) {
             console.log(error.message)
@@ -172,7 +219,7 @@ export const signIn = (email, password) => {
                         id: res.data.user_id,
                     }))
                     getTraderData()
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)

@@ -83,7 +83,7 @@ function RightSideBar({history}) {
         {
             text: "Viewn All Inventory",
             icon: <WorkIcon />,
-            onClick: () => history.push("/view/inventory"),
+            onClick: () => history.push("/list/inventory"),
         },
         {
             text: "Logout",

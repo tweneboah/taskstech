@@ -47,6 +47,7 @@ export default function DataTable(props) {
       isClicked: true,
       history
     };
+    console.log(params)
     parentCallback(params);
   };
 

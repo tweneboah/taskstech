@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -6,9 +6,11 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
-import { createInventory } from "../../actions/action";
+import { updateInventory, deleteInventory } from "../../actions/action";
 import { useDispatch } from "react-redux";
-// import taskstechApi from '../../api/taskstechApi';
+import taskstechApi from '../../api/taskstechApi';
+import { push } from 'connected-react-router';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewInventory() {
+export default function InventoryDetail() {
   const [name, setName] = useState(""),
             [description, setDescription] = useState(""),
             [quantity, setQuantity] = useState(""),
@@ -51,6 +53,11 @@ export default function NewInventory() {
             [notes, setNotes] = useState(""),
             [model_no, setModel_no] = useState(""),
             [serialNos, setSerialNos] = useState([]);
+
+    let iid = window.location.pathname.split('/detail/inventory')[1];
+    if(iid !== ""){
+        iid = iid.split('/')[1];
+    }
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -73,7 +80,6 @@ export default function NewInventory() {
         },
         [setQuantity]
         );
-
     const inputSupplier = useCallback(
     (event) => {
         setSupplier(event.target.value);
@@ -98,7 +104,36 @@ export default function NewInventory() {
     },
     [setModel_no]
     );
-    
+
+    useEffect(() =>{
+        setQuantity(serialNos.length)
+    },[serialNos]);
+
+
+    useEffect(() => {
+        if(iid !==""){
+            const token = localStorage.getItem('token');
+        try {
+            taskstechApi.get(`/inventory/${iid}`, {
+                headers: { authorization: `Bearer ${token}` }
+            })
+                .then(res => {
+                    setName(res.data.name)
+                    setDescription(res.data.description)
+                    setQuantity(res.data.inventory_details.length)
+                    setSupplier(res.data.supplier)
+                    setModel_no(res.data.model_no)
+                    setPrice(res.data.price)
+                    setNotes(res.data.notes)
+                    setSerialNos(res.data.inventory_details)
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+        }
+        }, [])
+
+
   let inventoryData = {
       name:name,
       description:description,
@@ -112,12 +147,18 @@ export default function NewInventory() {
 
 
 
-  const handleSubmit= () => {
+  const handleUpdate= () => {
     if (name === "" || price === "" ){
         alert ("Please fill in the form.")
         return false
     }
-    dispatch(createInventory(inventoryData))
+    dispatch(updateInventory(inventoryData, iid))
+  }
+  
+  const handleDelete = () => {
+      deleteInventory(iid);
+      alert ("Delete Item Successfully!");
+      dispatch(push('/list/inventory'))
   }
 
 
@@ -145,20 +186,6 @@ export default function NewInventory() {
                         className={classes.form}
                     >
                         <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="name"
-                                    name="inventoryId"
-                                    variant="outlined"
-                                    fullWidth
-                                    id="inventoryId"
-                                    label="Inventory ID"
-                                    autoFocus
-                                    // value={}
-                                    // onChange={}
-                                    disabled={true}
-                                />
-                            </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
@@ -256,7 +283,6 @@ export default function NewInventory() {
                                 item
                                 xs={12}
                                 sm={12}
-                                // className={classes.notes}
                             >
                               <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
                                 
@@ -266,25 +292,28 @@ export default function NewInventory() {
                             <Grid item xs={4}>
                                 <Button
                                     type="submit"
-                                    variant="contained"
+                                    variant="outlined"
                                     color="primary"
                                     className={classes.submit}
-                                    onClick={() => handleSubmit()}
+                                    onClick={() => handleUpdate()}
+
                                 >
-                                    CONFIRM
+                                    UPDATE
                                 </Button>
                             </Grid>
                             <Grid item xs={4}>
                                 <Button
-                                    type="cancel"
+                                    type="submit"
                                     variant="outlined"
-                                    color="primary"
+                                    color="secondary"
                                     className={classes.submit}
-                                    onClick={() => handleSubmit()}
+                                    // onClick={deleteInventory(iid)}
+                                    onClick={()=>handleDelete()}
                                 >
-                                    Cancel
+                                    DELETE
                                 </Button>
                             </Grid>
+                            
                         </Grid>
                     </div>
                 </div>

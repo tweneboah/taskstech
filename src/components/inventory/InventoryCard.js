@@ -33,7 +33,7 @@ export default function InventoryCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardContent onClick={()=> dispatch(push('/inventory/details/' + props.id))}>
+      <CardContent onClick={()=> dispatch(push('/detail/inventory/' + props.id))}>
         <Typography variant="h5" component="h2">
             {props.name}
         </Typography>
