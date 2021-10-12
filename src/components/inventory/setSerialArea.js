@@ -1,6 +1,6 @@
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, IconButton,  makeStyles } from '@material-ui/core'
 import { CheckCircle, Delete, Edit} from '@material-ui/icons'
-import React, {useState, useCallback} from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 import  TextInput  from './TextInput'
 
 const useStyles = makeStyles({
@@ -45,6 +45,10 @@ const SetSerialNoArea = (props) => {
         const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
         props.setSerialNos(newSerialNos)
     }
+
+    useEffect(()=>{
+        setIndex(props.serialNos.length)
+    },[props.serialNos])
     return (
         <div>
             <TableContainer>
