@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { styled } from '@material-ui/styles';
-import Box from "@material-ui/core/Box"
-import Paper from '@material-ui/core/Paper';
-import { useMediaQuery } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import SimpleBackdrop from '../../Loading/SimpleBackdrop';
+import React, { useEffect } from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux"; 
 
-import { getStatus, createJob } from '../../../actions/action';
+import { useFormControl } from "../../../common/useFormControl";
+import SimpleBackdrop from "../../Loading/SimpleBackdrop";
+import { getStatus } from "../../../actions/action";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -20,62 +21,37 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const CreateJob = () => {
-    const [throwError, setThrowError] = useState(false);
-    const [jobName, setJobName] = useState('');
-    const [description, setDescription] = useState('');
-    const [tradespersonId, setTradespersonId] = useState(0);
-    const [customerId, setCustomerId] = useState(0);
-    //const [inventoryId, setInventory] = useState([]);
-    const [jobStatus, setJobStatus] = useState('Not yet started');
-    const [jobStatusId, setJobStatusId] = useState(1);
-
     const status = useSelector((state) => state.status.job);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
     const dispatch = useDispatch();
+    const { 
+        handleUserInput, 
+        handleDropdownChange, 
+        handleSubmit, 
+        jobStatus, 
+        errors, 
+        formIsValid 
+    } = useFormControl();
+    
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        handleFields();
-        if (throwError === false) {
-            dispatch(createJob(jobObject, true));
-        }
-    };
-
-    const handleFields = () => {
-        if (jobName === "" && description === "" && tradespersonId === "" && customerId === "") {
-            setThrowError(true);
-        } else {
-            setThrowError(false);
-        }
-    };
-
-    let jobObject = {
-        name: jobName,
-        description: description,
-        job_status_id: jobStatusId,
-        tradesperson_id: tradespersonId,
-        customer_id: customerId
-    }
-
+    //console.log(formIsValid())
+    
     useEffect(() => {
         dispatch(getStatus());
     }, [indicator]);
-
-    const handleDropdownChange = event => {
-        event.preventDefault();
-        const index = event.target.selectedIndex;
-        const el = event.target.childNodes[index]
-        const option = el.getAttribute('id');
-
-        setJobStatus(event.target.value)
-        setJobStatusId(option)
-    };
+    
+    
 
     return (
         <Box
             sx={{
-                '& .MuiTextField-root': { m: 1, width: matches === false ? '35vw' : '70vw !important' },
+                '& .MuiTextField-root': { 
+                    m: 1, 
+                    width: matches === false 
+                        ? '35vw' 
+                        : '70vw !important' 
+                },
             }}
         >
             {/* <FormNav /> */}
@@ -103,21 +79,27 @@ const CreateJob = () => {
                 <Item>
                     <div>
                         <TextField
-                            error={throwError}
+                            error={!formIsValid()} 
+                            helperText={ errors.helperText }
+                            name='jobName'
                             required
                             id="outlined-error-helper-text"
                             label="Job Name"
                             variant="outlined"
-                            onChange={e => setJobName(e.target.value)}
+                            onBlur={handleUserInput} 
+                            onChange={handleUserInput}
                         />
                     </div>
                     <div>
                         <TextField
-                            error={throwError}
+                            error={!formIsValid()}
+                            helperText={ errors.helperText }
+                            name='description'
                             id="outlined-error-helper-text"
                             label="Description"
                             variant="outlined"
-                            onChange={e => setDescription(e.target.value)}
+                            onBlur={handleUserInput}
+                            onChange={handleUserInput}
                         />
                     </div>
                     <div>
@@ -125,6 +107,7 @@ const CreateJob = () => {
                             required
                             id="outlined-select-currency-native"
                             select
+                            name='job_status_id'
                             value={jobStatus}
                             onChange={handleDropdownChange}
                             SelectProps={{
@@ -141,28 +124,32 @@ const CreateJob = () => {
                     </div>
                     <div>
                         <TextField
-                            error={throwError}
+                            error={false}
+                            name='tradesperson_id'
                             required
                             id="outlined-error-helper-text"
                             label="Tradesperson Id"
                             variant="outlined"
-                            onChange={e => setTradespersonId(e.target.value)}
+                            onChange={handleUserInput}
                         />
                     </div>
                     <div>
                         <TextField
-                            error={throwError}
+                            error={false}
                             required
+                            name='customer_id'
+                            //type="number"
                             id="outlined-error-helper-text"
                             label="Customer Id"
                             variant="outlined"
-                            onChange={e => setCustomerId(e.target.value)}
+                            onChange={handleUserInput}
                         />
                     </div>
                 </Item>
                 <Item>
                     <div>
                         <Button
+                            disabled={!formIsValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}
