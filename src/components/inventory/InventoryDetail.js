@@ -206,7 +206,7 @@ export default function InventoryDetail() {
                                     onChange={inputDescription}
                                 />
                             </Grid>
-                            <Grid item xs={8} sm={4}>
+                            <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="description"
                                     name="quantity"
@@ -217,16 +217,17 @@ export default function InventoryDetail() {
                                     value={quantity}
                                     type="number"
                                     onChange={inputQuantity}
+                                    disabled="true"
                                 />
                             </Grid>
-                            <Grid item xs={2} sm={2}>
+                            {/* <Grid item xs={2} sm={2}>
                                 <Button 
                                     variant="outlined"
                                     color="primary"
                                     onClick={()=>setQuantity("")}>
                                     Reset
                                 </Button>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="supplier"
