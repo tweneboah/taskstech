@@ -105,9 +105,10 @@ export default function InventoryDetail() {
     },
     [setModel_no]
     );
-    useEffect(()=>{
-        setQuantity(serialNos.length)
-    },[serialNos])
+    // useEffect(()=>{
+    //     console.log(serialNos)
+    //     setQuantity(serialNos.length)
+    // },[serialNos])
 
     
     useEffect(async () => {

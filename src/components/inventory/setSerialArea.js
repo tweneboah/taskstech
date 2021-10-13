@@ -58,11 +58,16 @@ const SetSerialNoArea = (props) => {
         setIndex(props.serialNos.length)
     },[props.serialNos])
 
+
+    
     useEffect(()=>{
         props.setSerialNos([])
         setIndex(0)
         handleSerialNo();
-    },[props.setQuantity])
+    },[props.quantity])
+
+
+    
 
 
     const handleSerialNo = () => {

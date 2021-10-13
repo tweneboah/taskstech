@@ -78,12 +78,12 @@ function RightSideBar({history}) {
         {
             text: "Create New Inventory",
             icon: <PostAddIcon />,
-            onClick: () => history.push("/inventory/create"),
+            onClick: () => history.push("/create/inventory"),
         },
         {
             text: "Viewn All Inventory",
             icon: <WorkIcon />,
-            onClick: () => history.push("/inventory/list"),
+            onClick: () => history.push("/list/inventory"),
         },
         {
             text: "Logout",
