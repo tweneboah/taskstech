@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import SetSerialNoArea from "./setSerialArea";
 import { updateInventory, deleteInventory } from "../../actions/action";
-import { useDispatch } from "react-redux";
 import taskstechApi from '../../api/taskstechApi';
+import { useDispatch } from "react-redux";
 import { push } from 'connected-react-router';
 
 
@@ -80,6 +80,7 @@ export default function InventoryDetail() {
         },
         [setQuantity]
         );
+        
     const inputSupplier = useCallback(
     (event) => {
         setSupplier(event.target.value);
@@ -104,13 +105,13 @@ export default function InventoryDetail() {
     },
     [setModel_no]
     );
+    // useEffect(()=>{
+    //     console.log(serialNos)
+    //     setQuantity(serialNos.length)
+    // },[serialNos])
 
-    useEffect(() =>{
-        setQuantity(serialNos.length)
-    },[serialNos]);
-
-
-    useEffect(() => {
+    
+    useEffect(async () => {
         if(iid !==""){
             const token = localStorage.getItem('token');
         try {
@@ -133,30 +134,26 @@ export default function InventoryDetail() {
         }
         }, [])
 
-
-  let inventoryData = {
-      name:name,
-      description:description,
-      supplier:supplier,
-      price:price,
-      notes:notes,
-      model_no:model_no,
-      inventory_details:serialNos
-  }
-  console.log(inventoryData)
-
-
-
   const handleUpdate= () => {
     if (name === "" || price === "" ){
         alert ("Please fill in the form.")
         return false
     }
+    let inventoryData = {
+        name:name,
+         description:description,
+         supplier:supplier,
+        price:price,
+        notes:notes,
+        model_no:model_no,
+        inventory_details:serialNos
+    }
+    console.log(serialNos)
     dispatch(updateInventory(inventoryData, iid))
   }
   
   const handleDelete = () => {
-      deleteInventory(iid);
+      dispatch(deleteInventory(iid));
       alert ("Delete Item Successfully!");
       dispatch(push('/list/inventory'))
   }
@@ -177,9 +174,7 @@ export default function InventoryDetail() {
                 square={false}
             >
                 <div className={classes.header}>
-                    <h3>Create New Inventory</h3>
-                    <h4>Please fill the inventory details</h4>
-                    <span>*Required</span>
+                    <h3>Inventory Details</h3>
                 </div>
                 <div className={classes.paper}>
                     <div
@@ -222,8 +217,17 @@ export default function InventoryDetail() {
                                     value={quantity}
                                     type="number"
                                     onChange={inputQuantity}
+                                    disabled="true"
                                 />
                             </Grid>
+                            {/* <Grid item xs={2} sm={2}>
+                                <Button 
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={()=>setQuantity("")}>
+                                    Reset
+                                </Button>
+                            </Grid> */}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="supplier"
@@ -284,7 +288,7 @@ export default function InventoryDetail() {
                                 xs={12}
                                 sm={12}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} />
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} iid={iid} />
                                 
                             </Grid>
                         </Grid>

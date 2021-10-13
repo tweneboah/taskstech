@@ -3,6 +3,9 @@ import { CheckCircle, Delete, Edit} from '@material-ui/icons'
 import React, {useState, useCallback, useEffect} from 'react'
 import  TextInput  from './TextInput'
 
+
+
+
 const useStyles = makeStyles({
     checkIcon:{
         float:'right'
@@ -16,7 +19,10 @@ const useStyles = makeStyles({
 const SetSerialNoArea = (props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0)
+    const [id, setId] = useState("")
      const [serialNo, setSerialNo] = useState("");
+
+
 
     const inputSerialNo = useCallback((event) => {
         setSerialNo(event.target.value)
@@ -24,24 +30,26 @@ const SetSerialNoArea = (props) => {
 
     const addSerialNo = (serialNo) => {
         if (index === props.serialNos.length) {
-            props.setSerialNos(prevState => [...prevState, {serial_no:serialNo}])
+            props.setSerialNos(prevState => [...prevState,  {serial_no:serialNo}])
             setIndex(index + 1)
             setSerialNo("")
         } else {
             const newSerialNos = props.serialNos
-            newSerialNos[index] = {serial_no:serialNo}
+            newSerialNos[index] = {serial_no:serialNo, id:id}
             props.setSerialNos(newSerialNos)
             setIndex(newSerialNos.length)
             setSerialNo("")
         }
     };
 
-    const editSerialNo = (index, serialNo) => {
+    const editSerialNo = (index, serialNo, id) => {
         setIndex(index);
         setSerialNo(serialNo);
+        setId(id);
+        console.log(props.serialNos)
     }
 
-    const deleteSerialNo = (deleteIndex) => {
+    const deleteSerialNo = async (deleteIndex) => {
         const newSerialNos = props.serialNos.filter((item, i) => i !== deleteIndex);
         props.setSerialNos(newSerialNos)
     }
@@ -49,6 +57,24 @@ const SetSerialNoArea = (props) => {
     useEffect(()=>{
         setIndex(props.serialNos.length)
     },[props.serialNos])
+
+
+    
+    useEffect(()=>{
+        props.setSerialNos([])
+        setIndex(0)
+        handleSerialNo();
+    },[props.quantity])
+
+
+    
+
+
+    const handleSerialNo = () => {
+        for (let i=0; i < props.quantity; i++){
+            addSerialNo((i+1).toString());
+        }
+    }
     return (
         <div>
             <TableContainer>
@@ -66,7 +92,7 @@ const SetSerialNoArea = (props) => {
                                 <TableRow key={i}>
                                     <TableCell>{item.serial_no}</TableCell>
                                     <TableCell>
-                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.serial_no)}>
+                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.serial_no, item.id)}>
                                             <Edit />
                                         </IconButton>
                                     </TableCell>
@@ -82,8 +108,9 @@ const SetSerialNoArea = (props) => {
                 </Table>
                 <div>
                     <TextInput
-                        fullWidth={true} label={"SerialNo"} multiline={false} required={true}
+                        fullWidth={true} label={"SerialNo"} multiline={false} required={false}
                         onChange={inputSerialNo} value={serialNo} type={"text"} row={1}
+                        variant={"outlined"}
                     />
                 </div>
                 <IconButton className={classes.checkIcon} onClick={() => addSerialNo(serialNo)}>

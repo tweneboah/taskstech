@@ -91,8 +91,8 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    if (res.data.items){
-                    const items = res.data.items
+                    if (res.data){
+                    const items = res.data
                     const inventoryList = []
                     items.forEach(item => {
                         const inventoryItem = {
@@ -122,7 +122,7 @@ export const createInventory = (inventoryData) => {
         const token = localStorage.getItem('token');
         try {
             taskstechApi.post(`/inventory`, inventoryData, {
-                headers: { authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => {
                     console.log(res)
@@ -140,7 +140,7 @@ export const updateInventory = (inventoryData, iid) => {
         const token = localStorage.getItem('token');
         try {
             taskstechApi.put(`/inventory/${iid}`, inventoryData, {
-                headers: { authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => {
                     console.log(res)
@@ -157,7 +157,7 @@ export const deleteInventory = (iid) => {
         const token = localStorage.getItem('token');
         try {
             taskstechApi.delete(`/inventory/${iid}`, {
-                headers: { authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => {
                     console.log(res)
