@@ -91,8 +91,8 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    if (res.data.items){
-                    const items = res.data.items
+                    if (res.data){
+                    const items = res.data
                     const inventoryList = []
                     items.forEach(item => {
                         const inventoryItem = {
