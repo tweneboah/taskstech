@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "2rem",
   },
   paper: {
-      margin: theme.spacing(2, 4),
+      margin: theme.spacing(2, 2),
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -128,11 +128,11 @@ export default function NewInventory() {
             <Grid
                 item
                 xs={12}
-                sm={8}
+                sm={12}
                 md={8}
                 component={Paper}
                 elevation={6}
-                square
+                square={false}
             >
                 <div className={classes.header}>
                     <h3>Create New Inventory</h3>

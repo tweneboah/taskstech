@@ -55,7 +55,7 @@ export default function InventoryDetail() {
             [serialNos, setSerialNos] = useState([]),
             [prevSerialNos, setPrevSerialNos] = useState([]);
 
-    let iid = window.location.pathname.split('/inventory/details')[1];
+    let iid = window.location.pathname.split('/detail/inventory')[1];
     if(iid !== ""){
         iid = iid.split('/')[1];
     }
@@ -166,10 +166,9 @@ export default function InventoryDetail() {
   }
   
   const handleDelete = () => {
-      dispatch(deleteInventory(iid));
-      dispatch(push('/inventory/list'))
+      deleteInventory(iid);
       alert ("Delete Item Successfully!");
-
+      dispatch(push('/list/inventory'))
   }
 
 
@@ -306,16 +305,6 @@ export default function InventoryDetail() {
                             </Grid>
                         </Grid>
                         <Grid container className={classes.buttonContainer}>
-                            <Grid item xs={4}>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                >
-                                    ASSIGN TO JOB
-                                </Button>
-                            </Grid>
                             <Grid item xs={4}>
                                 <Button
                                     type="submit"

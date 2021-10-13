@@ -21,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JobDiary(props) {
+export default function JobDiary({ rows }) {
   const classes = useStyles();
-  console.log(props)
-
 
   return (
     <Container maxWidth="lg" className={classes.root}>
@@ -33,7 +31,7 @@ export default function JobDiary(props) {
           Job Diary
         </Typography>
 
-        <JobDiaryDataTable /> {/**/}
+        <JobDiaryDataTable diary={rows} /> {/**/}
       </div>
 
     </Container>

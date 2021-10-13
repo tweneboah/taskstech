@@ -1,7 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
 import { fetchInventoryAction } from './inventoryActions'
-// import {useSelector } from 'react-redux'
 import { signInAction, signOutAction, setTraderData } from './traderActions';
 import { push } from 'connected-react-router';
 
@@ -92,13 +91,24 @@ export const fetchInventory = () => {
             })
                 .then(res => {
                     console.log(res)
-                    const items = res.data
+                    if (res.data.items){
+                    const items = res.data.items
                     const inventoryList = []
                     items.forEach(item => {
-                        const inventoryItem = item
+                        const inventoryItem = {
+                            name:item.name,
+                            description:item.description,
+                            supplier:item.supplier,
+                            model_no:item.model_no,
+                            price:item.price,
+                            id:item.id,
+                            notes:item.notes,
+                            inventory_details:item.inventory_details,
+                            quantity:item.inventory_details.length
+                        }
                         inventoryList.push(inventoryItem)
                     })
-                    dispatch(fetchInventoryAction(inventoryList))
+                    dispatch(fetchInventoryAction(inventoryList))}
                 })
         } catch (error) {
             console.log(error.message)
@@ -117,7 +127,7 @@ export const createInventory = (inventoryData) => {
                 .then(res => {
                     console.log(res)
                     alert ("Created Item Successfully")
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -135,7 +145,7 @@ export const updateInventory = (inventoryData, iid) => {
                 .then(res => {
                     console.log(res)
                     alert ("Update Item Successfully!")
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)
@@ -209,7 +219,7 @@ export const signIn = (email, password) => {
                         id: res.data.user_id,
                     }))
                     getTraderData()
-                    dispatch(push('/inventory/list'))
+                    dispatch(push('/list/inventory'))
                 })
         } catch (error) {
             console.log(error.message)

@@ -1,106 +1,113 @@
-import React, { useEffect, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import SimpleBackdrop from '../../Loading/SimpleBackdrop';
-import Container from '@material-ui/core/Container';
+import React, { useEffect } from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux"; 
 
-//import FormNav from '../../Navigation/FormNav';
-import { getStatus, createJob } from '../../../actions/action';
+import { useFormControl } from "../../../common/useFormControl";
+import SimpleBackdrop from "../../Loading/SimpleBackdrop";
+import { getStatus } from "../../../actions/action";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '80vw !important',
-        },
-    },
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
 }));
 
 
 const CreateJob = () => {
-    const classes = useStyles();
-    const [jobName, setJobName] = useState('');
-    const [description, setDescription] = useState('');
-    const [tradespersonId, setTradespersonId] = useState(0);
-    const [customerId, setCustomerId] = useState(0);
-    //const [inventoryId, setInventory] = useState([]);
-    const [jobStatus, setJobStatus] = useState('Not yet started');
-    const [jobStatusId, setJobStatusId] = useState(1);
-
     const status = useSelector((state) => state.status.job);
-    const indicator = useSelector((state) => state.job.loading); // state.jobs.loading
-    useSelector((state) => console.log(state));
-
+    const indicator = useSelector((state) => state.job.loading);
+    const matches = useMediaQuery('(max-width:600px)');
     const dispatch = useDispatch();
+    const { 
+        handleUserInput, 
+        handleDropdownChange, 
+        handleSubmit, 
+        jobStatus, 
+        errors, 
+        formIsValid 
+    } = useFormControl();
+    
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        dispatch(createJob(jobObject, true));
-    };
-
-    let jobObject = {
-        name: jobName,
-        description: description,
-        job_status_id: jobStatusId,
-        tradesperson_id: tradespersonId,
-        customer_id: customerId
-    }
-
+    //console.log(formIsValid())
+    
     useEffect(() => {
         dispatch(getStatus());
     }, [indicator]);
-
-    const handleDropdownChange = event => {
-        event.preventDefault();
-        const index = event.target.selectedIndex;
-        const el = event.target.childNodes[index]
-        const option = el.getAttribute('id');
-
-        setJobStatus(event.target.value)
-        setJobStatusId(option)
-    };
-
+    
+    
 
     return (
-        <Container container component="main" className={classes.root}>
-            <React.Fragment>
-                {/* <FormNav /> */}
-                <div id='content-heading'>
-                    <Typography gutterBottom variant="h5">
+        <Box
+            sx={{
+                '& .MuiTextField-root': { 
+                    m: 1, 
+                    width: matches === false 
+                        ? '35vw' 
+                        : '70vw !important' 
+                },
+            }}
+        >
+            {/* <FormNav /> */}
+            <Paper
+                elevation={3}
+                component="form"
+                sx={{
+                    width: matches === false ? '40vw' : '80vw',
+                    margin: '0 auto',
+                    padding: '10px'
+                }}
+                onSubmit={handleSubmit}
+            >
+                <Item>
+                    <Typography component="div" variant="h4">
                         Create New Job
                     </Typography>
-                    <Typography gutterBottom variant="span">
+                    <Typography sx={{ margin: '0' }} gutterBottom variant="span">
                         Please fill the job details
                     </Typography>
                     <Typography variant="subtitle2" gutterBottom>
                         *Required
                     </Typography>
-
-                </div>
-                <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
-                    <div id='fields'>
+                </Item>
+                <Item>
+                    <div>
                         <TextField
-                            /* error */
+                            error={!formIsValid()} 
+                            helperText={ errors.helperText }
+                            name='jobName'
                             required
                             id="outlined-error-helper-text"
                             label="Job Name"
                             variant="outlined"
-                            onChange={e => setJobName(e.target.value)}
+                            onBlur={handleUserInput} 
+                            onChange={handleUserInput}
                         />
+                    </div>
+                    <div>
                         <TextField
-                            /*error*/
+                            error={!formIsValid()}
+                            helperText={ errors.helperText }
+                            name='description'
                             id="outlined-error-helper-text"
                             label="Description"
                             variant="outlined"
-                            onChange={e => setDescription(e.target.value)}
+                            onBlur={handleUserInput}
+                            onChange={handleUserInput}
                         />
+                    </div>
+                    <div>
                         <TextField
                             required
                             id="outlined-select-currency-native"
                             select
+                            name='job_status_id'
                             value={jobStatus}
                             onChange={handleDropdownChange}
                             SelectProps={{
@@ -114,27 +121,35 @@ const CreateJob = () => {
                                 </option>
                             ))}
                         </TextField>
-
+                    </div>
+                    <div>
                         <TextField
-                            /*error*/
+                            error={false}
+                            name='tradesperson_id'
                             required
                             id="outlined-error-helper-text"
                             label="Tradesperson Id"
                             variant="outlined"
-                            onChange={e => setTradespersonId(e.target.value)}
+                            onChange={handleUserInput}
                         />
-
+                    </div>
+                    <div>
                         <TextField
-                            /*error*/
+                            error={false}
                             required
+                            name='customer_id'
+                            //type="number"
                             id="outlined-error-helper-text"
                             label="Customer Id"
                             variant="outlined"
-                            onChange={e => setCustomerId(e.target.value)}
+                            onChange={handleUserInput}
                         />
                     </div>
-                    <div id='buttons'>
+                </Item>
+                <Item>
+                    <div>
                         <Button
+                            disabled={!formIsValid()}
                             variant="contained"
                             color="primary"
                             onClick={handleSubmit}
@@ -142,10 +157,11 @@ const CreateJob = () => {
                             Create
                         </Button>
                     </div>
-                </form>
-                <SimpleBackdrop loading={indicator} /> {/**/}
-            </React.Fragment>
-        </Container>
+                </Item>
+            </Paper>
+
+            <SimpleBackdrop loading={indicator} /> {/**/}
+        </Box>
     );
 }
 
