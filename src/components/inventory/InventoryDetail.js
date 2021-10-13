@@ -52,8 +52,7 @@ export default function InventoryDetail() {
             [price, setPrice] = useState(""),
             [notes, setNotes] = useState(""),
             [model_no, setModel_no] = useState(""),
-            [serialNos, setSerialNos] = useState([]),
-            [prevSerialNos, setPrevSerialNos] = useState([]);
+            [serialNos, setSerialNos] = useState([]);
 
     let iid = window.location.pathname.split('/detail/inventory')[1];
     if(iid !== ""){
@@ -81,6 +80,7 @@ export default function InventoryDetail() {
         },
         [setQuantity]
         );
+        
     const inputSupplier = useCallback(
     (event) => {
         setSupplier(event.target.value);
@@ -106,7 +106,7 @@ export default function InventoryDetail() {
     [setModel_no]
     );
     useEffect(()=>{
-        console.log(serialNos)
+        setQuantity(serialNos.length)
     },[serialNos])
 
     
@@ -118,7 +118,6 @@ export default function InventoryDetail() {
                 headers: { authorization: `Bearer ${token}` }
             })
                 .then(res => {
-                    console.log(res)
                     setName(res.data.name)
                     setDescription(res.data.description)
                     setQuantity(res.data.inventory_details.length)
@@ -127,26 +126,12 @@ export default function InventoryDetail() {
                     setPrice(res.data.price)
                     setNotes(res.data.notes)
                     setSerialNos(res.data.inventory_details)
-                    setPrevSerialNos(res.data.inventory_details)
                 })
         } catch (error) {
             console.log(error.message)
         }
         }
         }, [])
-
-
-//   let inventoryData = {
-//       name:name,
-//       description:description,
-//       supplier:supplier,
-//       price:price,
-//       notes:notes,
-//       model_no:model_no,
-//       inventory_details:serialNos
-//   }
-
-
 
   const handleUpdate= () => {
     if (name === "" || price === "" ){
@@ -162,11 +147,12 @@ export default function InventoryDetail() {
         model_no:model_no,
         inventory_details:serialNos
     }
+    console.log(serialNos)
     dispatch(updateInventory(inventoryData, iid))
   }
   
   const handleDelete = () => {
-      deleteInventory(iid);
+      dispatch(deleteInventory(iid));
       alert ("Delete Item Successfully!");
       dispatch(push('/list/inventory'))
   }
@@ -300,7 +286,7 @@ export default function InventoryDetail() {
                                 xs={12}
                                 sm={12}
                             >
-                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} prevSerialNos={prevSerialNos} iid={iid}/>
+                              <SetSerialNoArea serialNos={serialNos} setSerialNos={setSerialNos} quantity={quantity} iid={iid} />
                                 
                             </Grid>
                         </Grid>

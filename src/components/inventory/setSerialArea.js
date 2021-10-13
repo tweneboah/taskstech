@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 const SetSerialNoArea = (props) => {
     const classes = useStyles();
     const [index, setIndex] = useState(0)
+    const [id, setId] = useState("")
      const [serialNo, setSerialNo] = useState("");
 
 
@@ -29,21 +30,23 @@ const SetSerialNoArea = (props) => {
 
     const addSerialNo = (serialNo) => {
         if (index === props.serialNos.length) {
-            props.setSerialNos(prevState => [...prevState, {serial_no:serialNo}])
+            props.setSerialNos(prevState => [...prevState,  {serial_no:serialNo}])
             setIndex(index + 1)
             setSerialNo("")
         } else {
             const newSerialNos = props.serialNos
-            newSerialNos[index] = {serial_no:serialNo}
+            newSerialNos[index] = {serial_no:serialNo, id:id}
             props.setSerialNos(newSerialNos)
             setIndex(newSerialNos.length)
             setSerialNo("")
         }
     };
 
-    const editSerialNo = (index, serialNo) => {
+    const editSerialNo = (index, serialNo, id) => {
         setIndex(index);
         setSerialNo(serialNo);
+        setId(id);
+        console.log(props.serialNos)
     }
 
     const deleteSerialNo = async (deleteIndex) => {
@@ -59,7 +62,7 @@ const SetSerialNoArea = (props) => {
         props.setSerialNos([])
         setIndex(0)
         handleSerialNo();
-    },[props.quantity])
+    },[props.setQuantity])
 
 
     const handleSerialNo = () => {
@@ -84,7 +87,7 @@ const SetSerialNoArea = (props) => {
                                 <TableRow key={i}>
                                     <TableCell>{item.serial_no}</TableCell>
                                     <TableCell>
-                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.serial_no)}>
+                                        <IconButton className={classes.iconCell} onClick={()=> editSerialNo(i, item.serial_no, item.id)}>
                                             <Edit />
                                         </IconButton>
                                     </TableCell>
