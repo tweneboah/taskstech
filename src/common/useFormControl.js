@@ -8,10 +8,10 @@ export const useFormControl = () => {
     const [errors, setErrors] = useState({});
     const [jobStatus, setJobStatus] = useState('Not yet started');
     const [jobStatusId, setJobStatusId] = useState(1);
-    const nameLimitRegex = /^.{29,30}$/; 
-    const descriptionLimitRegex = /^.{99,100}$/ 
+    const nameLimitRegex = /^.{29,30}$/;
+    const descriptionLimitRegex = /^.{99,100}$/
     const dispatch = useDispatch();
-    
+
     let jobObject = {
         name: fields.jobName,
         description: fields.description,
@@ -23,7 +23,7 @@ export const useFormControl = () => {
     const handleUserInput = event => {
         const { name, value } = event.target
         setFields({ ...fields, [name]: value });
-        validate({ [name]: value });
+        validate(fields); // { [name]: value }
     };
 
     const handleDropdownChange = event => {
@@ -34,15 +34,26 @@ export const useFormControl = () => {
         const option = el.getAttribute('id');
 
         setJobStatus(event.target.value)
-        setJobStatusId(Number(option))//
+        setJobStatusId(Number(option))
         setFields({ ...fields, [name]: Number(jobStatusId) });
     };
-   
+
     const handleSubmit = event => {
         event.preventDefault();
-        
+
         dispatch(createJob(jobObject, true));
+        resetFields();
     };
+
+    const resetFields = () => {
+        setFields({
+            customer_id: '',
+            description: '',
+            jobName: '',
+            job_status_id: 1,
+            tradesperson_id: ''
+        })
+    }
 
     const validate = (fieldValues = fields) => {
         let temp = { ...errors }
@@ -73,7 +84,7 @@ export const useFormControl = () => {
         }
 
         setErrors(temp);
-        
+
     };
 
     const formIsValid = () => {
@@ -94,6 +105,7 @@ export const useFormControl = () => {
         jobStatus,
         jobStatusId,
         formIsValid,
-        errors
+        errors,
+        fields
     }
 }

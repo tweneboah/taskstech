@@ -31,11 +31,10 @@ const CreateJob = () => {
         handleSubmit, 
         jobStatus, 
         errors, 
-        formIsValid 
+        formIsValid,
+        fields 
     } = useFormControl();
     
-
-    //console.log(formIsValid())
     
     useEffect(() => {
         dispatch(getStatus());
@@ -81,6 +80,7 @@ const CreateJob = () => {
                         <TextField
                             error={!formIsValid()} 
                             helperText={ errors.helperText }
+                            value={fields.jobName}
                             name='jobName'
                             required
                             id="outlined-error-helper-text"
@@ -94,6 +94,7 @@ const CreateJob = () => {
                         <TextField
                             error={!formIsValid()}
                             helperText={ errors.helperText }
+                            value={fields.description}
                             name='description'
                             id="outlined-error-helper-text"
                             label="Description"
@@ -125,6 +126,7 @@ const CreateJob = () => {
                     <div>
                         <TextField
                             error={false}
+                            value={fields.tradesperson_id}
                             name='tradesperson_id'
                             required
                             id="outlined-error-helper-text"
@@ -137,6 +139,7 @@ const CreateJob = () => {
                         <TextField
                             error={false}
                             required
+                            value={fields.customer_id}
                             name='customer_id'
                             //type="number"
                             id="outlined-error-helper-text"
